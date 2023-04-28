@@ -101,5 +101,13 @@ def menu():
 def carrito():
     return render_template('clienteTemplates/carrito.html')
 
+@app.route('/metodoPago', methods=['GET'])
+def metodoPago():
+    return render_template('clienteTemplates/metodoPago.html')
+
+@app.route('/listaPedidos', methods=['GET'])
+def listaPedidos():
+    return render_template('clienteTemplates/listaPedidos.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

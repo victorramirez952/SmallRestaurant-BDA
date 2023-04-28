@@ -52,3 +52,13 @@
   <button type="button">Pagar $400.00 MXN</button>
 </div>
 {% endmacro %}
+
+{% macro ContenedorPedido(Fecha, Estado) %}
+<div class="containerPedido">
+  <div class="left"></div>
+  <div class="right">
+    <p>Fecha: {{ Fecha }}</p>
+    <p>Estado: {{ Estado }}</p>
+  </div>
+</div>
+{% endmacro %}

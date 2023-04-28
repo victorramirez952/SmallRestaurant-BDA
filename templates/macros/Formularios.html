@@ -35,3 +35,30 @@
   </button>
 </form>
 {% endmacro %}
+
+{% macro Pedido() %}
+  <div class="pedido">
+    <div class="left">
+
+    </div>
+    <div class="right">
+      <p>Pedido</p>
+      <button type="button">Ver pedido</button>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro FormularioPedidos() %}
+<form id="formularioPedido">
+  {{ Pedido() }}
+  <label for="tarjeta">No. de tarjeta</label>
+  <input type="text" name="tarjeta">
+  <label for="titular">Titular</label>
+  <input type="text" name="titular">
+  <p>*Por el momento solo aceptamos pagos con tarjeta de crédito o débito</p>
+  <div class="containerCancelPagar">
+    <button type="button" class="btnCancel">Cancelar</button>
+    <button type="button">Pagar $400.00 MXN</button>
+  </div>
+</form>
+{% endmacro %}

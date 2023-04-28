@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link  rel="stylesheet" href="{{ url_for('static', filename='css/estilosCliente.css')}}">
+		<title>Metodo Pago</title>
+	</head>
+	<body>
+        {% import "macros/Navbar.html" as macroNavbar %}
+	{% import "macros/Formularios.html" as macroFormularios %}
+        {% import "macros/Contenedores.html" as macroContenedores %}
+        {{ macroNavbar.NavbarCliente() }}		
+       <h2 style="text-align: center;">Método de pago</h2>
+        {{ macroContenedores.ContenedorUbicacion() }}
+	{{ macroFormularios.FormularioPedidos() }}
+	</body>
+</html>
+

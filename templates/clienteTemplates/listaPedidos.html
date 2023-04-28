@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link  rel="stylesheet" href="{{ url_for('static', filename='css/estilosCliente.css')}}">
+		<title>Index - Cliente</title>
+	</head>
+	<body>
+        {% import "macros/Navbar.html" as macroNavbar %}
+        {% import "macros/Contenedores.html" as macroContenedores %}	
+        {{ macroNavbar.NavbarCliente() }}		
+       <h2>Pedidos</h2>
+        <p>En proceso</p>
+        {{ macroContenedores.ContenedorPedido('2023-03-18', 'En camino') }}
+       <hr>
+        <h2>Entregados</h2>
+        {{ macroContenedores.ContenedorPedido('2023-03-04', 'Entregado') }}
+       <hr>
+        {{ macroContenedores.ContenedorPedido('2023-02-14', 'Entregado') }}       
+	</body>
+</html>
+
