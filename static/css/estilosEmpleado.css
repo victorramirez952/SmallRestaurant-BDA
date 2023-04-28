@@ -1,0 +1,247 @@
+/* Formulario confirmar reserva */
+#formConfirmarReserva {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50px;
+    padding: 30px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+#formConfirmarReserva label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#formConfirmarReserva input[type="date"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+#formConfirmarReserva input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#formConfirmarReserva input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Input correo */
+.email-search {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    /* width: 300px; */
+    border: 2px solid #ccc;
+    /* border-radius: 5px; */
+}
+
+.email-search input[type="email"] {
+    /* flex: 1; */
+    width: 90%;
+    height: 100%;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.email-search button[type="button"] {
+    background-color: #ccc;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 0 5px 5px 0;
+    width: 10%;
+}
+
+.email-search button[type="button"] i {
+    font-size: 16px;
+}
+
+/* btnConfirmarReserva */
+#btnConfirmarReserva{
+    margin-top: 50px;
+}
+
+/* Navbar */
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    background-color: #D9D9D9;
+}
+
+#navbarLeft {
+    flex: 1;
+}
+
+#navbarRight {
+    display: flex;
+    align-items: center;
+}
+
+#navbarLeft .profile {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 10px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+#Navbar h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Foto de perfil */
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px; /* Modificar después */
+}
+
+.profile img {
+    width: auto;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.profile h2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+
+/*Contenedor index*/
+.container {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+.element {
+    width: calc(45% - 10px);
+    margin-right: 10px;
+}
+
+.box {
+    background-color: #d9d9dd;
+    padding: 20px;
+    margin-bottom: 20px;
+    height: 100px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.element p {
+    margin-bottom: 5;
+    font-size: 16px;
+}
+
+/*Contenedor pedidos*/
+#containerPedidos .container {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.product-container {
+    width: calc(15% - 10px);
+    height: 100px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.product-image {
+    width: 50%;
+    height: auto;
+    margin-right: 20px;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.product-name {
+    font-size: 24px;
+    margin: 0 0 10px 0;
+}
+
+.product-price {
+    font-size: 18px;
+    margin: 0;
+}
+
+
+/* Tabla */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+}
+th, td {
+    text-align: left;
+    padding: 12px;
+}
+th {
+    background-color: #2c3e50;
+    color: white;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+tr:hover {
+    background-color: #ddd;
+}
+
+.btn {
+    margin: 50px auto;
+}
+
+#containerPedidos {
+    display: flex;
+    flex-direction: column;
+}
+
+select {
+    width: 100%;
+    padding: 0.5em;
+    border: none;
+    border-radius: 0.25em;
+    background-color: #f1f1f1;
+    font-size: 1em;
+    color: #333;
+}
+
+select:focus {
+    outline: none;
+    box-shadow: 0 0 0.1em #aaa;
+    background-color: #eee;
+}

@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link  rel="stylesheet" href="{{ url_for('static', filename='css/estilosEmpleado.css')}}">
+		<title>Registrar pedido</title>
+	</head>
+	<body>
+        {% import "macros/Navbar.html" as macroNavbar %}
+        {{ macroNavbar.Navbar() }}
+       <h1>Registrar Pedido</h1>
+        {% import "macros/Contenedores.html" as macroContenedores %}
+        {{ macroContenedores.ContenedorRegistroPedidos() }}
+</body>
+</html>
+

@@ -1,0 +1,30 @@
+{% macro ProductoCarrito() %}
+<div class="productoCarrito">
+  <div class="left">
+    <div class="productoImagen">
+      <img src="../../static/images/taco.png">
+    </div>
+    <div class="textoProducto">
+      <p>Nombre platillo</p>
+      <p>$104.50 MXN</p>
+    </div>
+  </div>
+  <div class="right">
+    <img src="../../static/images/borrar.png">
+    <input type="number" value="1" name="cantidadProducto">
+    <p>U</p>
+    <button type="button" class="btn">+</button>
+    <button type="button" class="btn">-</button>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro Carrito() %}
+{% import "macros/Contenedores.html" as macroContenedores %}
+<div class="containerCarrito">
+	{{ ProductoCarrito() }}
+	{{ ProductoCarrito() }}
+	{{ ProductoCarrito() }}
+</div>
+{{ macroContenedores.ContenedorPagar() }}
+{% endmacro %}

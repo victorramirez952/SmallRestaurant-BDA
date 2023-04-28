@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link  rel="stylesheet" href="{{ url_for('static', filename='css/estilosCliente.css')}}">
+		<title>Menu</title>
+	</head>
+	<body>
+        {% import "macros/Navbar.html" as macroNavbar %}
+        {{ macroNavbar.NavbarCliente() }}
+	<h2>Menu</h2>
+        <div>
+            <a href="#">Platillos</a>
+            <a href="#">Bebidas</a>
+        </div>
+        {% import "macros/Contenedores.html" as macroContenedores %}
+        {{ macroContenedores.ContenedorPlatillos() }}
+	</body>
+</html>
+

@@ -1,0 +1,37 @@
+{% macro ConfirmarReserva() %}
+<form id="formConfirmarReserva">
+  <label for="correo">Correo:</label>
+  <div class="email-search">
+    <input type="email" id="correo" name="correo" placeholder="Enter your email">
+    <button type="button">
+      <i class="fa fa-search">Search</i>
+    </button>
+  </div>
+  <label for="fechaReserva">Fecha de la reserva:</label>
+  <input type="date" name="fechaReservas" id="fechaReservas" />
+ <h2>Resultado</h2>
+ {% import "macros/Tablas.html" as macroTablas %}
+ {{ macroTablas.TablaResultado() }}
+ <button type="button" id="btnConfirmarReserva">
+    Confirmar reserva
+  </button>
+</form>
+{% endmacro %}
+
+{% macro ActDisponibilidadMesa() %}
+<form id="formActDispMesa">
+  <label for="numeroMesa">Numero de mesa:</label>
+  <input type="number" name="numeroMesa" id="numeroMesas" />
+  <div class="radios">
+    <input type="radio" id="radio1" name="disponible" value="true">
+    <label for="radio1">Disponible</label>
+  </div>
+  <div class="radios">
+    <input type="radio" id="radio2" name="disponible" value="false">
+    <label for="radio2">No disponible</label>
+  </div>
+  <button type="button" id="btnActDisMesa">
+    Actualizar
+  </button>
+</form>
+{% endmacro %}

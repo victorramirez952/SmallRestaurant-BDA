@@ -1,0 +1,50 @@
+/* * Formulario confirmar reserva */
+#formActDispMesa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50px;
+    padding: 30px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+#formActDispMesa label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#formActDispMesa input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+#formActDispMesa input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#formActDispMesa input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.radios{
+    display: flex;
+    width: 25%;
+    justify-content: space-between;
+}
+
+/* btnActDisMesa */
+#btnActDisMesa{
+    margin-top: 50px;
+}
+

@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link  rel="stylesheet" href="{{ url_for('static', filename='css/estilosCliente.css')}}">
+		<title>Index - Cliente</title>
+	</head>
+	<body>
+        {% import "macros/Navbar.html" as macroNavbar %}
+        {{ macroNavbar.NavbarCliente() }}
+       <div class="containerIndexCliente">
+            <div class="left-div"></div>
+            <button class="right-button">Button</button>
+        </div>
+        <div class="containerIndexCliente">
+            <button class="left-button">Button</button>
+            <div class="right-div"></div>
+        </div>
+	</body>
+</html>
+

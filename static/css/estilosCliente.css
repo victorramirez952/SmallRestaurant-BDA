@@ -1,0 +1,265 @@
+/* Navbar */
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    background-color: #D9D9D9;
+}
+
+#navbarLeft {
+    /* flex: 1; */
+    width: 50%;
+}
+
+#navbarRight {
+    display: flex;
+    width: 25%;
+    max-height: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Carrito */
+.carrito {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px; /* Modificar después */
+}
+
+.carrito img {
+    width: auto;
+    height: 50%;
+    object-fit: cover;
+}
+
+.carrito h2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+
+
+#Navbar h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Foto de perfil */
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px; /* Modificar después */
+}
+
+.profile img {
+    width: auto;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.profile h2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+
+/* Container Index Cliente */
+.containerIndexCliente {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    width: 100%;
+}
+
+.left-div {
+    height: 150px;
+    width: 50%;
+    background-color: lightblue;
+}
+
+.right-button {
+    height: 50px;
+    width: 100px;
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-left: 20px;
+}
+
+.left-button {
+    height: 50px;
+    width: 100px;
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.right-div {
+    height: 150px;
+    width: 50%;
+    background-color: lightgreen;
+}
+
+/* Contenedor Platillos */
+
+.containerPlatillos{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.containerPlatillo{
+    display: flex;
+    margin: 25px 5px;
+    width: 35%;
+    justify-content: space-between;
+    background-color: #D9D9D9;
+    border: 1px solid gray;
+    padding: 5px;
+}
+
+.containerPlatillo .left{
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+}
+
+.containerPlatillo .left .containerButtons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.containerButtons input[type="number"]{
+    width: 25%;
+    height: 50%;
+}
+
+.containerButtons button{
+    width: 10%;
+}
+
+.containerPlatillo .right{
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+    justify-content: space-between;
+    padding: 2% 0;
+}
+
+.containerPlatillo .right .imagenPlatillo{
+    width: 100%;
+    height: 75%;
+    background-color: #D9D9D9;
+    border: 1px solid black;
+}
+
+/* Container ubicacion actual */
+.containerUbicacion {
+    margin: 10px auto;
+    height: 40px;
+    display: flex;
+    width: 30%;
+    justify-content: space-between;
+}
+
+
+/* Container carrito */
+.containerCarrito {
+    margin: 30px 0;
+}
+
+
+/* Container producto carrito */
+.productoCarrito{
+    height: 125px;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    border: 2px solid gray;
+    background-color: #D9D9D9;
+}
+
+.productoCarrito .left{
+    display: flex;
+    width: 50%;
+    padding: 10px;
+    gap: 0 10px;
+    align-items: center;
+}
+
+.productoCarrito .left .productoImagen{
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.productoCarrito .left .productoImagen img{
+    width: auto;
+    height: 50%;
+}
+
+.productoCarrito .left .textoProducto{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.productoCarrito .right{
+    display: flex;
+    width: 50%;
+    padding: 10px;
+    gap: 0 25px;
+    justify-content: end;
+    align-items: center;
+}
+
+.productoCarrito .left .containerButtons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.productoCarrito input[type="number"]{
+    width: 10%;
+    text-align: center;
+    height: 25%;
+}
+
+.productoCarrito button{
+    width: 10%;
+    height: 25%;
+}
+
+/* Container pagar */
+.containerPagar {
+    display: flex;
+    width: auto;
+    padding: 10px;
+    justify-content: space-around;
+    background-color: #D9D9D9;
+}
+
+.containerPagar button{
+    width: 25%;
+}

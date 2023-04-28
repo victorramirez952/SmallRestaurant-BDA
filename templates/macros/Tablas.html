@@ -1,0 +1,281 @@
+{% macro TablaClientesIndex(Clientes) %}
+<table>
+  <thead>
+          <tr>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Correo</th>
+                  <th>TelefonoContacto</th>
+          </tr>
+  </thead>
+  <tbody>
+          {% for cliente in Clientes %}
+          <tr>
+                  <td>{{cliente[0]}}</td>
+                  <td>{{cliente[1]}}</td>
+                  <td>{{cliente[2]}}</td>
+                  <td>{{cliente[3]}}</td>
+          </tr>
+          {% endfor %}
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro TablaPersonal() %}
+<table>
+  <thead>
+          <tr>
+                  <th>Id</th>
+                  <th>RFC</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Salario</th>
+                  <th>Acciones</th>
+          </tr>
+  </thead>
+  <tbody>
+          <tr>
+<td>Sample</td>
+<td>Sample</td>
+<td>Sample</td>
+<td>Sample</td>
+<td>Sample</td>
+                  <td>
+                          <button type="button">Editar</button>
+                          <button type="button">Eliminar</button>
+                  </td>
+          </tr>
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro TablaIngredientesProductos() %}
+<table>
+  <thead>
+          <tr>
+                  <th>Ingrediente</th>
+                  <th>Stock</th>
+                  <th>Acciones</th>
+          </tr>
+  </thead>
+  <tbody>
+          <tr>
+<td>Sample</td>
+<td>Sample</td>
+                  <td>
+                          <button type="button">Editar</button>
+                          <button type="button">Eliminar</button>
+                  </td>
+          </tr>
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro TablaMesas() %}
+<table>
+  <thead>
+          <tr>
+                  <th>Numero</th>
+                  <th>Capacidad</th>
+                  <th>Disponibilidad</th>
+                  <th>Acciones</th>
+          </tr>
+  </thead>
+  <tbody>
+          <tr>
+<td>Sample</td>
+<td>Sample</td>
+<td>Sample</td>
+                  <td>
+                          <button type="button">Editar</button>
+                          <button type="button">Eliminar</button>
+                  </td>
+          </tr>
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro TablaIngredientes() %}
+<table>
+  <thead>
+          <tr>
+                  <th>Ingrediente</th>
+                  <th>Stock</th>
+                  <th>Acciones</th>
+          </tr>
+  </thead>
+  <tbody>
+          <tr>
+<td>Sample</td>
+<td>Sample</td>
+                  <td>
+                          <button type="button">Editar</button>
+                          <button type="button">Eliminar</button>
+                  </td>
+          </tr>
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro TablaProductos() %}
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Tipo</th>
+      <th>Precio</th>
+      <th>Ingredientes</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>
+        <button type="button">Más</button>
+      </td>
+      <td>
+        <button type="button">Editar</button>
+        <button type="button">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endmacro %}
+
+
+{% macro TablaReservas() %}
+<table>
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Hora</th>
+      <th>Cantidad de personas</th>
+      <th>Comentarios</th>
+      <th>Correo cliente</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>
+        <button type="button">Editar</button>
+        <button type="button">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro TablaClientes() %}
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Correo</th>
+      <th>Teléfono</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>
+        <button type="button">Editar</button>
+        <button type="button">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro TablaVentas() %}
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Fecha</th>
+      <th>Hora</th>
+      <th>Total</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>
+        <button type="button">Editar</button>
+        <button type="button">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endmacro %}
+
+
+{% macro TablaResultado() %}
+<table>
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Hora</th>
+      <th>No. Personas</th>
+      <th>Comentarios</th>
+      <th>Correo</th>
+      <th>Confirmado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>Sin confirmar</td>
+    </tr>
+  </tbody>
+</table>
+{% endmacro %}
+
+{% macro TablaPedidosOnline() %}
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Fecha</th>
+      <th>Hora</th>
+      <th>Estado de la orden</th>
+      <th>Estado de la entrega</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>Sample</td>
+      <td>
+        <button type="button">Editar</button>
+        <button type="button">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endmacro %}

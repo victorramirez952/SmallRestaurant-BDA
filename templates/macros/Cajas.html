@@ -1,0 +1,30 @@
+{% macro ProductoRegistrar() %}
+<div class="product-container">
+    <img src="../../static/images/Producto.png" alt="Product Image" class="product-image">
+    <div class="product-details">
+        <h2 class="product-name">Nombre del Producto</h2>
+        <h3 class="product-price">$99.99</h3>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro Platillo() %}
+<div class="containerPlatillo">
+  <div class="left">
+    <p><b>Platillo</b></p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sagittis tincidunt odio. Vestibulum eget commodo
+      nisl, id scelerisque est.</p>
+    <div class="containerButtons">
+      <p>$505.50</p>
+      <input type="number" name="cantidad">
+      <p>U</p>
+      <button type="button" class="btn">+</button>
+      <button type="button" class="btn">-</button>
+    </div>
+  </div>
+  <div class="right">
+    <div class="imagenPlatillo"></div>
+    <button type="button">Agregar al carrito</button>
+  </div>
+</div>
+{% endmacro %}

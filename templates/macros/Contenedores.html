@@ -1,0 +1,54 @@
+{% macro ContenedorRegistroPedidos() %}
+{% import "macros/Cajas.html" as macroCajas %}
+<div id="containerPedidos">
+  <p>Fecha: 26-04-2023</p>
+  <p>Hora: 07:00 pm</p>
+  <p>Productos: </p>
+  <div class="container">
+	  {{ macroCajas.ProductoRegistrar() }}
+	  {{ macroCajas.ProductoRegistrar() }}
+	  {{ macroCajas.ProductoRegistrar() }}
+ </div>
+  <button type="button" class="btn">
+      Agregar
+  </button>
+  <p>Total: $666.66 MXN</p>
+  <p>Metodo pago</p>
+  <select name="metodoPago" id="metodoPago">
+      <option value="debito">Tarjeta de debito</option>
+      <option value="credito">Tarjeta de credito</option>
+      <option value="Efectivo">Efectivo</option>
+  </select>
+  <button type="button" class="btn">
+      Guardar
+  </button>
+</div>
+{% endmacro %}
+
+{% macro ContenedorPlatillos() %}
+{% import "macros/Cajas.html" as macroCajas %}
+<div class="containerPlatillos">
+          {{ macroCajas.Platillo() }}
+	  {{ macroCajas.Platillo() }}
+	  {{ macroCajas.Platillo() }}
+	  {{ macroCajas.Platillo() }}
+	  {{ macroCajas.Platillo() }}
+	  {{ macroCajas.Platillo() }}
+</div>
+{% endmacro %}
+
+
+{% macro ContenedorUbicacion() %}
+<div class="containerUbicacion">
+  <img src="../../static/images/location.png">
+  <p>Ubicación actual</p>
+  <button type="button">Cambiar ubicación</button>
+</div>
+{% endmacro %}
+
+{% macro ContenedorPagar() %}
+<div class="containerPagar">
+  <img src="../../static/images/borrar.png">
+  <button type="button">Pagar $400.00 MXN</button>
+</div>
+{% endmacro %}
