@@ -62,3 +62,41 @@
   </div>
 </form>
 {% endmacro %}
+
+{% macro FormularioReservacion() %}
+<form id="formularioReservacion">
+    <div class="upperInputs">
+        <div class="element">
+            <label for="noPersonas">No. de personas</label>
+            <select value="2" name="noPersonas" id="noPersonas">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div class="element">
+            <label for="fecha">Fecha</label>
+            <input type="date" name="fecha" id="fecha">
+        </div>
+        <div class="element">
+            <label for="horario">Horario</label>
+            <select value="07:30 pm" name="horario" id="horario">
+                <option value="08:30 am">08:30 am</option>
+                <option value="10:00 am">10:00 am</option>
+                <option value="11:30 am">11:30 am</option>
+                <option value="13:00 pm">13:00 pm</option>
+                <option value="14:30 pm">14:30 pm</option>
+                <option value="16:00 pm">16:00 pm</option>
+                <option value="17:30 pm">17:30 pm</option>
+                <option value="19:00 pm">19:00 pm</option>
+                <option value="19:30 pm">19:30 pm</option>
+                <option value="20:30 pm">20:30 pm</option>
+                <option value="22:00 pm">22:00 pm</option>
+            </select>
+        </div>
+    </div>
+    <button type="button" class="btnBuscarMesas">Buscar mesas</button>
+</form>
+{% endmacro %}

@@ -429,3 +429,27 @@ hr {
     font-size: 20px;
 }
 
+/* Contenedor Resultados Horarios */
+#containerResultadosHorarios{
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px auto;
+    height: 100px;
+    padding: 30px;
+}
+
+#containerResultadosHorarios h2{
+    margin: 0;
+}
+
+#containerResultadosHorarios .results {
+    display: flex;
+    justify-content: space-between;
+}
+
+#containerResultadosHorarios .results button {
+    height: 40px;
+    font-weight: bold;
+}

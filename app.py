@@ -113,5 +113,9 @@ def listaPedidos():
 def mesasDisponibles():
     return render_template('clienteTemplates/mesasDisponibles.html')
 
+@app.route('/reservar', methods=['GET'])
+def reservar():
+    return render_template('clienteTemplates/reservar.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
