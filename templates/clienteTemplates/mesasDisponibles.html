@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<link  rel="stylesheet" href="{{ url_for('static', filename='css/estilosCliente.css')}}">
+        <title>Mesas disponibles</title>
+    </head>
+    <body>
+        {% import "macros/Contenedores.html" as macroContenedores %}
+        {% import "macros/Navbar.html" as macroNavbar %}
+        {{ macroNavbar.NavbarCliente() }}
+       <h2 style="text-align:center;">Reservación</h2>
+        <button type="button" class="btnContinuar">Continuar</button>
+        <h3 style="width: 75%; margin: 0 auto;">Mesas disponibles</h3>
+	{{ macroContenedores.ContenedorMesas(20) }}
+    </body>
+</html>
+

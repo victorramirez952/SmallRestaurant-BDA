@@ -109,5 +109,9 @@ def metodoPago():
 def listaPedidos():
     return render_template('clienteTemplates/listaPedidos.html')
 
+@app.route('/mesasDisponibles', methods=['GET'])
+def mesasDisponibles():
+    return render_template('clienteTemplates/mesasDisponibles.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

@@ -377,3 +377,55 @@ hr {
     margin: 0;
 }
 
+/* Boton continuar */
+.btnContinuar {
+    width: 8%;
+    text-align: center;
+    height: 30px;
+    margin: 10px auto;
+    position: relative;
+    left: 80%;
+}
+
+/* Contenedor Mesas Disponibles */
+
+.containerMesas {
+    display: flex;
+    flex-wrap: wrap;
+    width: 75%;
+    gap: 0 5%;
+    margin: 10px auto;
+    justify-content: space-between;
+}
+
+
+/* Contenedor Mesa */
+.containerMesa {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    height: 150px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.containerMesa .imagenMesa {
+    height: 85%;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #D9D9D9;
+}
+
+.containerMesa .imagenMesa img {
+    width: auto;
+    height: 75%;
+}
+
+.containerMesa p {
+    height: 15%;
+    font-weight: bold;
+    font-size: 20px;
+}
+

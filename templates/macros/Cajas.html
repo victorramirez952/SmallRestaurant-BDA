@@ -28,3 +28,12 @@
   </div>
 </div>
 {% endmacro %}
+
+{% macro MesaDisponible(nMesa) %}
+<div class="containerMesa">
+  <div class="imagenMesa">
+    <img src="../../static/images/mesa.png">
+  </div>
+  <p>Mesa {{ nMesa + 1 }}</p>
+</div>
+{% endmacro %}
