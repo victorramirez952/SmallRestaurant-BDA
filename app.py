@@ -117,5 +117,13 @@ def mesasDisponibles():
 def reservar():
     return render_template('clienteTemplates/reservar.html')
 
+@app.route('/formularioReservar', methods=['GET'])
+def formularioReservar():
+    return render_template('clienteTemplates/formularioReservar.html')
+
+@app.route('/consultarReserva', methods=['GET'])
+def consultarReserva():
+    return render_template('clienteTemplates/consultarReserva.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

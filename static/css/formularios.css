@@ -88,3 +88,78 @@
     height: 40px;
     font-weight: bold;
 }
+
+/* Formulario cliente reservacion */
+#formularioClienteReservacion {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    gap: 20px 0;
+    margin: 25px auto;
+    padding: 30px;
+}
+
+#formularioClienteReservacion label{
+    font-weight: bold;
+}
+
+#formularioClienteReservacion input[type="text"],
+#formularioClienteReservacion input[type="tel"],
+#formularioClienteReservacion input[type="email"],
+#formularioClienteReservacion textarea{
+    height: 40%;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #d9d9d9;
+    resize: none;
+}
+
+#formularioClienteReservacion .btnReservar {
+    width: 20%;
+    height: 40px;
+    text-align: center;
+    margin: 10px auto;
+    font-weight: bold;
+}
+
+/* Formulario consultar reserva */
+
+#formularioConsultarReserva {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    gap: 20px 0;
+    margin: 25px auto;
+    padding: 30px;
+}
+
+#formularioConsultarReserva label{
+    font-weight: bold;
+}
+
+#formularioConsultarReserva input[type="text"],
+#formularioConsultarReserva input[type="date"],
+#formularioConsultarReserva input[type="time"],
+#formularioConsultarReserva input[type="number"],
+#formularioConsultarReserva textarea{
+    height: 40%;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #d9d9d9;
+    resize: none;
+    display: flex;
+}
+
+#formularioConsultarReserva .btnReservar {
+    width: 20%;
+    height: 40px;
+    text-align: center;
+    margin: 10px auto;
+    font-weight: bold;
+}

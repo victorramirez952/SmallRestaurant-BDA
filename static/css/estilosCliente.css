@@ -314,8 +314,8 @@
 }
 
 #formularioPedido input[type="text"],
-input[type="email"],
-textarea {
+#formularioPedido input[type="email"],
+#formularioPedido textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -452,4 +452,13 @@ hr {
 #containerResultadosHorarios .results button {
     height: 40px;
     font-weight: bold;
+}
+
+/* Contenedor mesas reservadas */
+.containerMesasReservadas {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 0 5%;
+    margin: 10px auto;
 }

@@ -100,3 +100,39 @@
     <button type="button" class="btnBuscarMesas">Buscar mesas</button>
 </form>
 {% endmacro %}
+
+{% macro FormularioClienteReservacion() %}
+<form action="" id="formularioClienteReservacion">
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" id="nombre" />
+    <label for="apellido">Apellido:</label>
+    <input type="text" name="apellido" id="apellido" />
+    <label for="telefono">Telefono:</label>
+    <input type="tel" name="telefono" id="telefono" />
+    <label for="correo">Correo:</label>
+    <input type="email" name="correo" id="correo" />
+    <label for="solicitud especial">Solicitud especial:</label>
+    <textarea name="solicitud" id="solicitud" cols="30" rows="10"></textarea>
+    <button type="button" class="btnReservar">
+        Reservar
+    </button>
+</form>
+{% endmacro %}
+
+{% macro FormularioConsultarReserva() %}
+<form action="" id="formularioConsultarReserva">
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" id="nombre" value="Benito" disabled />
+    <label for="apellido">Apellido:</label>
+    <input type="text" name="apellido" id="apellido" value="Juarez" disabled />
+    <label for="fecha">Fecha:</label>
+    <input type="date" name="fecha" id="fecha" value="2023-03-23" disabled />
+    <label for="hora">Hora:</label>
+    <input type="time" name="hora" id="hora" value="07:00" disabled />
+    <label for="noPersonas">No. Personas:</label>
+    <input type="number" name="noPersonas" id="noPersonas" value="2" disabled />
+    <label for="mesas">Mesas:</label>
+     {% import "macros/Contenedores.html" as macroContenedores %}
+     {{ macroContenedores.ContenedorMesasReservadas(2) }}
+</form>
+{% endmacro %}

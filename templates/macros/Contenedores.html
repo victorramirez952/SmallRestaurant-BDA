@@ -86,3 +86,13 @@
     </div>
 </div>
 {% endmacro %}
+
+
+{% macro ContenedorMesasReservadas(nMesas) %}
+{% import "macros/Cajas.html" as macroCajas %}
+<div class="containerMesasReservadas">
+  {% for i in range(nMesas) %}
+  {{ macroCajas.MesaDisponible(i) }}
+  {% endfor %}
+</div>
+{% endmacro %}

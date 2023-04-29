@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link  rel="stylesheet" href="{{ url_for('static', filename='css/estilosCliente.css')}}">
+        <link  rel="stylesheet" href="{{ url_for('static', filename='css/formularios.css')}}">
+        <title>Formulario reservar</title>
+    </head>
+    <body>
+        {% import "macros/Navbar.html" as macroNavbar %}
+	{% import "macros/Formularios.html" as macroFormularios %}
+        {{ macroNavbar.NavbarCliente() }}
+        {{ macroFormularios.FormularioClienteReservacion() }}
+   </body>
+</html>
+
