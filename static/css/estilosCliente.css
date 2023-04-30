@@ -462,3 +462,21 @@ hr {
     gap: 0 5%;
     margin: 10px auto;
 }
+
+/* Contenedor Pefil */
+.containerPerfil {
+    display: flex;
+    width: 50%;
+    margin: 10px auto;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+.containerPerfil hr {
+    width: 100%;
+}
+
+.containerPerfil button {
+    width: 20%;
+    height: 40px;
+}

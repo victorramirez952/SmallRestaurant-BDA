@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link  rel="stylesheet" href="{{ url_for('static', filename='css/estilosCliente.css')}}">
+		<title>Cliente - perfil</title>
+	</head>
+	<body>
+        {% import "macros/Navbar.html" as macroNavbar %}
+        {% import "macros/Contenedores.html" as macroContenedores %}
+        {{ macroNavbar.NavbarCliente() }}
+       <h1 style="text-align: center;">Mi perfil</h1>
+        {{ macroContenedores.ContenedorPerfil() }}
+       </body>
+</html>
+

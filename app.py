@@ -125,5 +125,9 @@ def formularioReservar():
 def consultarReserva():
     return render_template('clienteTemplates/consultarReserva.html')
 
+@app.route('/clientePerfil', methods=['GET'])
+def clientePerfil():
+    return render_template('clienteTemplates/clientePerfil.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
