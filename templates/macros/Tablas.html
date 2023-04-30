@@ -362,54 +362,59 @@
 
 
 {% macro TablaResultado() %}
-<table>
-  <thead>
-    <tr>
-      <th>Fecha</th>
-      <th>Hora</th>
-      <th>No. Personas</th>
-      <th>Comentarios</th>
-      <th>Correo</th>
-      <th>Confirmado</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>Sin confirmar</td>
-    </tr>
-  </tbody>
+<table class="table-auto w-full text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
+    <thead class="bg-gray-300 text-black">
+        <tr>
+            <th class="px-6 py-3 border border-gray-500">Fecha</th>
+            <th class="px-6 py-3 border border-gray-500">Hora</th>
+            <th class="px-6 py-3 border border-gray-500">No. Personas</th>
+            <th class="px-6 py-3 border border-gray-500">Comentarios</th>
+            <th class="px-6 py-3 border border-gray-500">Correo</th>
+            <th class="px-6 py-3 border border-gray-500">Confirmado</th>
+        </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-300">
+        <tr class="bg-gray-100 hover:bg-gray-200">
+            <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+            <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+            <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+            <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+            <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+            <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sin confirmar</td>
+        </tr>
+    </tbody>
 </table>
 {% endmacro %}
 
 {% macro TablaPedidosOnline() %}
-<table>
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Fecha</th>
-      <th>Hora</th>
-      <th>Estado de la orden</th>
-      <th>Estado de la entrega</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>
-        <button type="button">Editar</button>
-        <button type="button">Eliminar</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="overflow-x-auto">
+    <table
+        class="table-auto w-full sm:w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
+        <thead class="bg-gray-300 text-black">
+            <tr>
+                <th class="px-6 py-3 border border-gray-500">Id</th>
+                <th class="px-6 py-3 border border-gray-500">Fecha</th>
+                <th class="px-6 py-3 border border-gray-500">Hora</th>
+                <th class="px-6 py-3 border border-gray-500">Estado de la orden</th>
+                <th class="px-6 py-3 border border-gray-500">Estado de la entrega</th>
+                <th class="px-6 py-3 border border-gray-500">Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-300">
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button"
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 {% endmacro %}

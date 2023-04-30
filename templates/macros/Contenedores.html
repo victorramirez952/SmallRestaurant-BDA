@@ -1,27 +1,28 @@
 {% macro ContenedorRegistroPedidos() %}
 {% import "macros/Cajas.html" as macroCajas %}
-<div id="containerPedidos">
-  <p>Fecha: 26-04-2023</p>
-  <p>Hora: 07:00 pm</p>
-  <p>Productos: </p>
-  <div class="container">
-	  {{ macroCajas.ProductoRegistrar() }}
-	  {{ macroCajas.ProductoRegistrar() }}
-	  {{ macroCajas.ProductoRegistrar() }}
- </div>
-  <button type="button" class="btn">
-      Agregar
-  </button>
-  <p>Total: $666.66 MXN</p>
-  <p>Metodo pago</p>
-  <select name="metodoPago" id="metodoPago">
-      <option value="debito">Tarjeta de debito</option>
-      <option value="credito">Tarjeta de credito</option>
-      <option value="Efectivo">Efectivo</option>
-  </select>
-  <button type="button" class="btn">
-      Guardar
-  </button>
+<div id="containerPedidos" class="grid w-full md:w-7/12 border mx-auto grid-rows-9 gap-y-4 py-4">
+    <p class="w-full text-base mx-auto">Fecha: 26-04-2023</p>
+    <p class="w-full text-base mx-auto">Hora: 07:00 pm</p>
+    <p class="w-full text-base mx-auto">Productos: </p>
+    <div class="container grid grid-cols-1 sm:grid-cols-3 row-span-2 w-full gap-4 mx-auto">
+        {{ macroCajas.ProductoRegistrar() }}
+        {{ macroCajas.ProductoRegistrar() }}
+        {{ macroCajas.ProductoRegistrar() }}
+    </div>
+    <button type="button" class="bg-blue-500 text-white mx-auto flex hover:bg-blue-700 my-8 px-4 py-2 rounded">
+        Agregar
+    </button>
+    <p class="w-full text-base mx-auto">Total: $666.66 MXN</p>
+    <p class="w-full text-base mx-auto">Metodo pago</p>
+    <select name="metodoPago" id="metodoPago"
+        class="h-11 shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue">
+        <option value="debito">Tarjeta de debito</option>
+        <option value="credito">Tarjeta de credito</option>
+        <option value="Efectivo">Efectivo</option>
+    </select>
+    <button type="button" class="bg-blue-500 text-white mx-auto flex hover:bg-blue-700 my-8 px-4 py-2 rounded">
+        Guardar
+    </button>
 </div>
 {% endmacro %}
 

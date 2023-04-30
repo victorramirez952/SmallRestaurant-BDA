@@ -1,9 +1,10 @@
 {% macro ProductoRegistrar() %}
-<div class="product-container">
-    <img src="../../static/images/Producto.png" alt="Product Image" class="product-image">
-    <div class="product-details">
-        <h2 class="product-name">Nombre del Producto</h2>
-        <h3 class="product-price">$99.99</h3>
+<div class="container grid grid-cols-2 grid-rows-2 h-40 bg-gray-300">
+    <img src="../../static/images/producto.png" alt="Product Image"
+        class="w-2/3 mx-auto self-center row-span-2 border border-gray-700 max-h-32">
+    <div class="row-span-2 p-4 flex flex-col justify-between">
+        <h2 class="font-bold text-xs">Nombre del Producto</h2>
+        <h3 class="font-medium text-sm">$99.99 MXN</h3>
     </div>
 </div>
 {% endmacro %}

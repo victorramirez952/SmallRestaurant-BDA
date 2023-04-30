@@ -1,38 +1,47 @@
 {% macro ConfirmarReserva() %}
-<form id="formConfirmarReserva">
-  <label for="correo">Correo:</label>
-  <div class="email-search">
-    <input type="email" id="correo" name="correo" placeholder="Enter your email">
-    <button type="button">
-      <i class="fa fa-search">Search</i>
-    </button>
-  </div>
-  <label for="fechaReserva">Fecha de la reserva:</label>
-  <input type="date" name="fechaReservas" id="fechaReservas" />
- <h2>Resultado</h2>
- {% import "macros/Tablas.html" as macroTablas %}
- {{ macroTablas.TablaResultado() }}
- <button type="button" id="btnConfirmarReserva">
-    Confirmar reserva
-  </button>
+<form id="formConfirmarReserva" class="w-full md:w-7/12 mx-auto p-2">
+    <label for="correo" class="block text-green-500 font-bold my-2">Correo:</label>
+    <div class="flex">
+        <input type="email" id="correo" name="correo" placeholder="Enter your email"
+            class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green">
+        <button type="button"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-green">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+    <label for="fechaReserva" class="block text-green-500 font-bold mt-8 mb-2">Fecha de la reserva:</label>
+    <input type="date" name="fechaReservas" id="fechaReservas"
+        class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green" />
+    <h2 class="text-md font-bold w-full mx-auto border mt-8 mb-4">Resultado</h2>
+    <div class="overflow-x-auto">
+        {% import "macros/Tablas.html" as macroTablas %}
+        {{ macroTablas.TablaResultado() }}
+        <button type="button" class="bg-blue-500 text-white mx-auto flex hover:bg-blue-700 my-8 px-4 py-2 rounded">
+            Confirmar reserva
+        </button>
+    </div>
 </form>
 {% endmacro %}
 
 {% macro ActDisponibilidadMesa() %}
-<form id="formActDispMesa">
-  <label for="numeroMesa">Numero de mesa:</label>
-  <input type="number" name="numeroMesa" id="numeroMesas" />
-  <div class="radios">
-    <input type="radio" id="radio1" name="disponible" value="true">
-    <label for="radio1">Disponible</label>
-  </div>
-  <div class="radios">
-    <input type="radio" id="radio2" name="disponible" value="false">
-    <label for="radio2">No disponible</label>
-  </div>
-  <button type="button" id="btnActDisMesa">
-    Actualizar
-  </button>
+<form id="formActDispMesa" class="w-full md:w-7/12 mx-auto rounded-md p-6">
+    <label for="numeroMesa" class="block text-green-500 font-bold my-2">Numero de mesa:</label>
+    <input type="number" name="numeroMesa" id="numeroMesas" min="1"
+        class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green" />
+    <div class="grid grid-rows-2 gap-4 my-6">
+        <div class="grid grid-cols-12 grid-rows-1">
+            <input type="radio" id="radio1" name="disponible" value="true" class="col-span-1 w-4/12">
+            <label for="radio1" class="col-span-11">Disponible</label>
+        </div>
+        <div class="grid grid-cols-12 grid-rows-1">
+            <input type="radio" id="radio2" name="disponible" value="false" class="col-span-1 w-4/12">
+            <label for="radio2" class="col-span-11">No disponible</label>
+        </div>
+    </div>
+    <button type="button" id="btnActDisMesa"
+        class="bg-blue-500 text-white mx-auto flex hover:bg-blue-700 my-8 px-4 py-2 rounded">
+        Actualizar
+    </button>
 </form>
 {% endmacro %}
 
