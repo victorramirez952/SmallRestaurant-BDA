@@ -3,17 +3,18 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-		<link  rel="stylesheet" href="{{ url_for('static', filename='css/estilosAdmin.css')}}">
-		<title>Admin - Personal</title>
+                <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
+		<title>Admin - ProductosIngredientes</title>
 	</head>
 	<body>
         {% import "macros/Navbar.html" as macroNavbar %}
+        {% import "macros/Botones.html" as macroBotones %}
         {{ macroNavbar.Navbar() }}
-        <h1>Ingredientes</h1>
-        <h2>Nombre producto</h2>
+	<h1 class="text-lg text-center font-bold my-4">Ingredientes</h1>
+	<h1 class="text-lg text-center font-bold my-4">Producto</h1>
         {% import "macros/Tablas.html" as macroTablas %}
-        {{ macroTablas.TablaPersonal() }}
-	<button type="button">Agregar</button>
+        {{ macroTablas.TablaIngredientesProductos() }}
+        {{ macroBotones.BotonAgregar() }}
 	</body>
 </html>
 

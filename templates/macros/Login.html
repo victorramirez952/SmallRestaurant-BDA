@@ -1,14 +1,23 @@
 {% macro Login() %}
-<div>
-<h1>Iniciar sesión</h1>
-<form id="formLogin">
-  <label for="correo">Correo:</label>
-  <input type="email" name="correo" id="correo" />
-  <label for="password">Contraseña:</label>
-  <input type="text" name="password" id="password" />
-  <button type="button">
-    Iniciar sesion
-  </button>
-</form>
+<h1 class="text-3xl text-center font-bold my-10">Iniciar sesión</h1>
+<div class="flex flex-col items-center border border-gray-600 w-full sm:w-3/4 md:w-5/12 mx-auto py-20 rounded-sm">
+    <form id="formLogin" class="w-full max-w-md">
+        <div class="mb-4">
+            <label for="correo" class="block text-green-500 font-bold mb-2">Correo:</label>
+            <input type="email" name="correo" id="correo"
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green" />
+        </div>
+        <div class="mb-6">
+            <label for="password" class="block text-green-500 font-bold mb-2">Contraseña:</label>
+            <input type="text" name="password" id="password"
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green" />
+        </div>
+        <div class="flex justify-center">
+            <button type="button"
+                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-green">
+                Iniciar sesión
+            </button>
+        </div>
+    </form>
 </div>
 {% endmacro %}

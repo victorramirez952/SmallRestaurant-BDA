@@ -24,208 +24,340 @@
 {% endmacro %}
 
 {% macro TablaPersonal() %}
-<table>
-  <thead>
-          <tr>
-                  <th>Id</th>
-                  <th>RFC</th>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Salario</th>
-                  <th>Acciones</th>
-          </tr>
-  </thead>
-  <tbody>
-          <tr>
-<td>Sample</td>
-<td>Sample</td>
-<td>Sample</td>
-<td>Sample</td>
-<td>Sample</td>
-                  <td>
-                          <button type="button">Editar</button>
-                          <button type="button">Eliminar</button>
-                  </td>
-          </tr>
-  </tbody>
-</table>
+<div class="overflow-x-auto">
+    <table
+        class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
+        <thead class="bg-gray-300 text-black">
+            <tr>
+                <th class="px-6 py-3 border border-gray-500">Id</th>
+                <th class="px-6 py-3 border border-gray-500">RFC</th>
+                <th class="px-6 py-3 border border-gray-500">Nombre</th>
+                <th class="px-6 py-3 border border-gray-500">Apellido</th>
+                <th class="px-6 py-3 border border-gray-500">Salario</th>
+                <th class="px-6 py-3 border border-gray-500">Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-300">
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button"
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button"
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 {% endmacro %}
 
 {% macro TablaIngredientesProductos() %}
-<table>
-  <thead>
-          <tr>
-                  <th>Ingrediente</th>
-                  <th>Stock</th>
-                  <th>Acciones</th>
-          </tr>
-  </thead>
-  <tbody>
-          <tr>
-<td>Sample</td>
-<td>Sample</td>
-                  <td>
-                          <button type="button">Editar</button>
-                          <button type="button">Eliminar</button>
-                  </td>
-          </tr>
-  </tbody>
-</table>
+<div class="overflow-x-auto">
+    <table
+        class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
+        <thead class="bg-gray-300 text-black">
+            <tr>
+                <th class="px-6 py-3 border border-gray-500">Ingredientes</th>
+                <th class="px-6 py-3 border border-gray-500">Stock</th>
+                <th class="px-6 py-3 border border-gray-500">Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-300">
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button"
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button"
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 {% endmacro %}
 
 {% macro TablaMesas() %}
-<table>
-  <thead>
-          <tr>
-                  <th>Numero</th>
-                  <th>Capacidad</th>
-                  <th>Disponibilidad</th>
-                  <th>Acciones</th>
-          </tr>
-  </thead>
-  <tbody>
-          <tr>
-<td>Sample</td>
-<td>Sample</td>
-<td>Sample</td>
-                  <td>
-                          <button type="button">Editar</button>
-                          <button type="button">Eliminar</button>
-                  </td>
-          </tr>
-  </tbody>
-</table>
+<div class="overflow-x-auto">
+    <table
+        class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
+        <thead class="bg-gray-300 text-black">
+            <tr>
+                <th class="px-6 py-3 border border-gray-500">Número</th>
+                <th class="px-6 py-3 border border-gray-500">Capacidad</th>
+                <th class="px-6 py-3 border border-gray-500">Disponibilidad</th>
+                <th class="px-6 py-3 border border-gray-500">Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-300">
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button"
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button"
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 {% endmacro %}
 
 {% macro TablaIngredientes() %}
-<table>
-  <thead>
-          <tr>
-                  <th>Ingrediente</th>
-                  <th>Stock</th>
-                  <th>Acciones</th>
-          </tr>
-  </thead>
-  <tbody>
-          <tr>
-<td>Sample</td>
-<td>Sample</td>
-                  <td>
-                          <button type="button">Editar</button>
-                          <button type="button">Eliminar</button>
-                  </td>
-          </tr>
-  </tbody>
-</table>
+<div class="overflow-x-auto">
+    <table class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
+        <thead class="bg-gray-300 text-black">
+            <tr>
+                <th class="px-6 py-3 border border-gray-500">Ingredientes</th>
+                <th class="px-6 py-3 border border-gray-500">Stock</th>
+                <th class="px-6 py-3 border border-gray-500">Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-300">
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button" class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button" class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 {% endmacro %}
 
 {% macro TablaProductos() %}
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Tipo</th>
-      <th>Precio</th>
-      <th>Ingredientes</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>
-        <button type="button">Más</button>
-      </td>
-      <td>
-        <button type="button">Editar</button>
-        <button type="button">Eliminar</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="overflow-x-auto">
+    <table
+        class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
+        <thead class="bg-gray-300 text-black">
+            <tr>
+                <th class="px-6 py-3 border border-gray-500">Nombre</th>
+                <th class="px-6 py-3 border border-gray-500">Tipo</th>
+                <th class="px-6 py-3 border border-gray-500">Precio</th>
+                <th class="px-6 py-3 border border-gray-500">Ingredientes</th>
+                <th class="px-6 py-3 border border-gray-500">Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-300">
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:shadow-outline-blue">Más</button>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button"
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:shadow-outline-blue">Más</button>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button"
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 {% endmacro %}
 
 
 {% macro TablaReservas() %}
-<table>
-  <thead>
-    <tr>
-      <th>Fecha</th>
-      <th>Hora</th>
-      <th>Cantidad de personas</th>
-      <th>Comentarios</th>
-      <th>Correo cliente</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>
-        <button type="button">Editar</button>
-        <button type="button">Eliminar</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="overflow-x-auto">
+    <table
+        class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
+        <thead class="bg-gray-300 text-black">
+            <tr>
+                <th class="px-6 py-3 border border-gray-500">Fecha</th>
+                <th class="px-6 py-3 border border-gray-500">Hora</th>
+                <th class="px-6 py-3 border border-gray-500">Cantidad de personas</th>
+                <th class="px-6 py-3 border border-gray-500">Comentarios</th>
+                <th class="px-6 py-3 border border-gray-500">Correo cliente</th>
+                <th class="px-6 py-3 border border-gray-500">Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-300">
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button"
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button"
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 {% endmacro %}
 
 {% macro TablaClientes() %}
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Apellido</th>
-      <th>Correo</th>
-      <th>Teléfono</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>
-        <button type="button">Editar</button>
-        <button type="button">Eliminar</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="overflow-x-auto">
+    <table
+        class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
+        <thead class="bg-gray-300 text-black">
+            <tr>
+                <th class="px-6 py-3 border border-gray-500">Nombre</th>
+                <th class="px-6 py-3 border border-gray-500">Apellido</th>
+                <th class="px-6 py-3 border border-gray-500">Correo</th>
+                <th class="px-6 py-3 border border-gray-500">Telefono</th>
+                <th class="px-6 py-3 border border-gray-500">Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-300">
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button"
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button"
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 {% endmacro %}
 
 {% macro TablaVentas() %}
-<table>
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Fecha</th>
-      <th>Hora</th>
-      <th>Total</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>Sample</td>
-      <td>
-        <button type="button">Editar</button>
-        <button type="button">Eliminar</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="overflow-x-auto">
+    <table
+        class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
+        <thead class="bg-gray-300 text-black">
+            <tr>
+                <th class="px-6 py-3 border border-gray-500">Id</th>
+                <th class="px-6 py-3 border border-gray-500">Fecha</th>
+                <th class="px-6 py-3 border border-gray-500">Hora</th>
+                <th class="px-6 py-3 border border-gray-500">Total</th>
+                <th class="px-6 py-3 border border-gray-500">Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-300">
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button"
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                    <button type="button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                    <button type="button"
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 {% endmacro %}
 
 
