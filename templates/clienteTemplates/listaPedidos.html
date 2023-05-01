@@ -3,21 +3,24 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-		<link  rel="stylesheet" href="{{ url_for('static', filename='css/estilosCliente.css')}}">
-		<title>Index - Cliente</title>
+                <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
+                <script src="{{url_for('static',filename='js/all.min.js')}}"></script>
+		<title>Lista pedidos</title>
 	</head>
 	<body>
         {% import "macros/Navbar.html" as macroNavbar %}
         {% import "macros/Contenedores.html" as macroContenedores %}	
         {{ macroNavbar.NavbarCliente() }}		
-       <h2>Pedidos</h2>
-        <p>En proceso</p>
-        {{ macroContenedores.ContenedorPedido('2023-03-18', 'En camino') }}
-       <hr>
-        <h2>Entregados</h2>
-        {{ macroContenedores.ContenedorPedido('2023-03-04', 'Entregado') }}
-       <hr>
-        {{ macroContenedores.ContenedorPedido('2023-02-14', 'Entregado') }}       
+        <h2 class="text-lg text-center font-bold my-4">Pedidos</h2>
+	<div class="container w-full md:w-3/5 my-4 mx-auto flex flex-col">
+	    <p class="w-full font-medium text-base">En proceso</p>
+	    {{ macroContenedores.ContenedorPedido('2023-03-18', 'En camino') }}
+	</div>
+	<div class="container w-full md:w-3/5 my-4 mx-auto flex flex-col">
+	    <p class="w-full font-medium text-base">Entregados</p>
+	    {{ macroContenedores.ContenedorPedido('2023-03-04', 'Entregado') }}
+	    {{ macroContenedores.ContenedorPedido('2023-02-14', 'Entregado') }}
+	</div>
 	</body>
 </html>
 

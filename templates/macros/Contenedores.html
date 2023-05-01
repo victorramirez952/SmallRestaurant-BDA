@@ -28,62 +28,68 @@
 
 {% macro ContenedorPlatillos() %}
 {% import "macros/Cajas.html" as macroCajas %}
-<div class="containerPlatillos">
-          {{ macroCajas.Platillo() }}
-	  {{ macroCajas.Platillo() }}
-	  {{ macroCajas.Platillo() }}
-	  {{ macroCajas.Platillo() }}
-	  {{ macroCajas.Platillo() }}
-	  {{ macroCajas.Platillo() }}
+<div id="containerPlatillos"
+    class="w-full lg:w-3/4 mx-auto my-5 container grid grid-cols-1 sm:grid-cols-2 gap-y-64 md:gap-4">
+    {{ macroCajas.Platillo() }}
+    {{ macroCajas.Platillo() }}
+    {{ macroCajas.Platillo() }}
+    {{ macroCajas.Platillo() }}
+    {{ macroCajas.Platillo() }}
+    {{ macroCajas.Platillo() }}
 </div>
 {% endmacro %}
 
 
 {% macro ContenedorUbicacion() %}
-<div class="containerUbicacion">
-  <img src="../../static/images/location.png">
-  <p>Ubicación actual</p>
-  <button type="button">Cambiar ubicación</button>
+<div class="w-full sm:w-1/3 h-16 mx-auto grid grid-cols-12 items-center">
+    <i class="fa-solid fa-location-dot h-10 col-span-2"></i>
+    <p class="col-span-4">Ubicación actual</p>
+    <button type="button"
+        class="bg-blue-500 text-white flex hover:bg-blue-700 px-2 py-1 rounded col-span-6 justify-center">Cambiar
+        ubicación</button>
 </div>
 {% endmacro %}
 
 {% macro ContenedorPagar() %}
-<div class="containerPagar">
-  <img src="../../static/images/borrar.png">
-  <button type="button">Pagar $400.00 MXN</button>
+<div class="container h-24 w-full sm:w-3/4 flex justify-between items-center px-4 py-2 mx-auto my-8 border border-gray-600 bg-gray-400"
+    id="containerPagar">
+    <i class="fa-solid fa-trash-can h-10 hover:text-blue-400"></i>
+    <button type="button"
+        class="h-5/6 w-3/5 sm:w-2/5 bg-blue-500 text-white flex items-center justify-center hover:bg-blue-700 my-8 px-4 py-2 rounded text-xl font-bold">Pagar
+        $400.00 MXN</button>
 </div>
 {% endmacro %}
 
 {% macro ContenedorPedido(Fecha, Estado) %}
-<div class="containerPedido">
-  <div class="left"></div>
-  <div class="right">
-    <p>Fecha: {{ Fecha }}</p>
-    <p>Estado: {{ Estado }}</p>
-  </div>
+<div class="w-full py-4 container grid grid-cols-3 sm:grid-cols-5 gap-x-2 border border-b-gray-600">
+    <div class="col-span-1 h-32 bg-gray-300"></div>
+    <div class="col-span-2 sm:col-span-4 flex flex-col justify-between">
+        <p>Fecha: {{ Fecha }}</p>
+        <p>Estado: {{ Estado }}</p>
+    </div>
 </div>
 {% endmacro %}
 
 {% macro ContenedorMesas(nMesas) %}
 {% import "macros/Cajas.html" as macroCajas %}
-<div class="containerMesas">
-  {% for i in range(nMesas) %}
-  {{ macroCajas.MesaDisponible(i) }}
-  {% endfor %}
+<div class="container w-full sm:w-3/4 my-8 mx-auto grid grid-cols-2 sm:grid-cols-5 gap-x-4 gap-y-10">
+    {% for i in range(nMesas) %}
+    {{ macroCajas.MesaDisponible(i) }}
+    {% endfor %}
 </div>
 {% endmacro %}
 
 {% macro ContenedorResultadosHorarios() %}
-<div id="containerResultadosHorarios">
-    <div class="headerResultados">
-        <h2>Resultados</h2>
-    </div>
-    <div class="results">
-        <button type="button">06:30 pm</button>
-        <button type="button">07:00 pm</button>
-        <button type="button">07:30 pm</button>
-        <button type="button">08:00 pm</button>
-        <button type="button">08:30 pm</button>
+<div
+    class="containerResultadosHorarios container w-full md:w-3/5 my-10 mx-auto grid grid-rows-7 md:grid-rows-2 gap-y-6 md:gap-y-2">
+    <h2 class="row-span-2 md:row-span-1 text-lg font-bold">Resultados</h2>
+    <div
+        class="container row-span-5 md:row-span-1 grid grid-cols-1 md:grid-cols-5 gap-x-4 gap-y-4 md:gap-y-0 content-start md:content-between">
+        <button type="button" class="bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded">06:30 pm</button>
+        <button type="button" class="bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded">07:00 pm</button>
+        <button type="button" class="bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded">07:30 pm</button>
+        <button type="button" class="bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded">08:00 pm</button>
+        <button type="button" class="bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded">08:30 pm</button>
     </div>
 </div>
 {% endmacro %}
@@ -91,19 +97,21 @@
 
 {% macro ContenedorMesasReservadas(nMesas) %}
 {% import "macros/Cajas.html" as macroCajas %}
-<div class="containerMesasReservadas">
-  {% for i in range(nMesas) %}
-  {{ macroCajas.MesaDisponible(i) }}
-  {% endfor %}
+<div id="containerMesasReservadas" class="container grid grid-cols-2 sm:grid-cols-5 gap-4">
+    {% for i in range(nMesas) %}
+    {{ macroCajas.MesaDisponible(i) }}
+    {% endfor %}
 </div>
 {% endmacro %}
 
 {% macro ContenedorPerfil() %}
-<div class="containerPerfil">
-    <hr>
-    <p>Mis pedidos</p>
-    <hr>
-    <button type="button">Cerrar sesión</button>
-    <hr>
+<div class="w-full sm:w-3/5 my-10 mx-auto flex flex-col gap-y-10">
+    <hr class="border border-gray-600">
+    <p class="text-base font-bold">Mis pedidos</p>
+    <hr class="border border-gray-600">
+    <button type="button"
+        class="w-full sm:w-3/12 h-16 sm:h-auto bg-red-400 text-white hover:bg-red-700 my-4 px-4 py-2 rounded">Cerrar
+        sesión</button>
+    <hr class="border border-gray-600">
 </div>
 {% endmacro %}

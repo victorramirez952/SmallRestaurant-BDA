@@ -3,14 +3,15 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-		<link  rel="stylesheet" href="{{ url_for('static', filename='css/estilosCliente.css')}}">
+                <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
+                <script src="{{url_for('static',filename='js/all.min.js')}}"></script>
 		<title>Carrito</title>
 	</head>
 	<body>
 	{% import "macros/Contenedores.html" as macroContenedores %}
         {% import "macros/Navbar.html" as macroNavbar %}
         {{ macroNavbar.NavbarCliente() }}
-        <h2 style="text-align: center;">Carrito</h2>
+        <h2 class="text-lg text-center font-bold my-4">Carrito</h2>
 	{{ macroContenedores.ContenedorUbicacion() }}
  	{% import "macros/Carrito.html" as macroCarrito %}
 	{{ macroCarrito.Carrito() }}

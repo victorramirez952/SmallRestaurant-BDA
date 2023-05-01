@@ -3,15 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <link  rel="stylesheet" href="{{ url_for('static', filename='css/estilosCliente.css')}}">
-        <link  rel="stylesheet" href="{{ url_for('static', filename='css/formularios.css')}}">
+        <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
+	<script src="{{url_for('static',filename='js/all.min.js')}}"></script>
         <title>Constular reserva</title>
     </head>
     <body>
         {% import "macros/Navbar.html" as macroNavbar %}
         {% import "macros/Formularios.html" as macroFormularios %}
         {{ macroNavbar.NavbarCliente() }}
-       <h2 style="text-align: center;">Reservación</h2>
+        <h2 class="text-lg text-center font-bold my-4">Reservación</h2>
         {{ macroFormularios.FormularioConsultarReserva() }}
    </body>
 </html>
