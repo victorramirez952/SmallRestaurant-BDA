@@ -9,23 +9,22 @@
 </div>
 {% endmacro %}
 
-{% macro Platillo() %}
+{% macro Platillo(platillo, precio) %}
 <div
-    class="containerPlatillo h-auto lg:h-60 px-0 sm:px-4 py-2 container border border-gray-600 bg-gray-300 grid grid-cols-1 lg:grid-cols-2 grid-rows-2 lg:grid-rows-1">
+    class="containerPlatillo h-auto px-0 sm:px-4 py-2 container border border-gray-600 bg-gray-300 grid grid-cols-1 lg:grid-cols-2 grid-rows-2 lg:grid-rows-1 platillo">
     <!-- Contenedor izquierdo -->
-    <div class="container grid grid-rows-5">
-        <p class="font-medium text-base">Platillo</p>
-        <p class="row-span-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sagittis tincidunt odio.
-            Vestibulum eget commodo nisl, id scelerisque est.</p>
+    <div class="container max-h-full grid grid-rows-5">
+        <p class="font-medium text-base nombrePlatillo">{{ platillo }}</p>
+        <p class="row-span-3 descripcionPlatillo text-sm text-ellipsis p-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sagittis tincidunt odio. Vestibulum eget commodo nisl, id scelerisque est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sagittis tincidunt odio. Vestibulum eget commodo nisl, id scelerisque est.</p>
         <!-- Contenedor de opciones inferiores -->
-        <div class="containerButtons container grid grid-cols-7 items-center text-center">
-            <p class="font-medium col-span-2 text-start">$505.50</p>
-            <input type="number" name="cantidad" class="col-span-2 text-center" min="1">
+        <div class="containerButtons container grid grid-cols-7 mt-2 items-center text-center">
+            <p class="font-medium text-sm col-span-2 text-start precioPlatillo">${{ precio }} MXN</p>
+            <input type="number" name="cantidad" class="col-span-2 text-center" min="0" value="0">
             <p class="text-center font-medium">U</p>
-            <button class="flex hover:text-blue-400 items-center justify-center font-medium rounded-md">
+            <button class="flex hover:text-blue-400 items-center justify-center font-medium rounded-md btnMasProducto">
                 <i class="h-7 fa-solid fa-circle-plus"></i>
             </button>
-            <button class="flex hover:text-blue-400 items-center justify-center font-medium rounded-md">
+            <button class="flex hover:text-blue-400 items-center justify-center font-medium rounded-md btnMenosProducto">
                 <i class="h-7  fa-solid fa-circle-minus"></i>
             </button>
         </div>
@@ -34,7 +33,7 @@
     <div class="container grid grid-rows-6 gap-y-0 sm:gap-y-4">
         <div class="border border-gray-600 row-span-5 "></div>
         <button type="button"
-            class="row-span-2 w-full bg-blue-500 place-self-end text-white hover:bg-blue-700 px-4 py-2">Agregar al
+            class="row-span-2 w-full bg-blue-500 place-self-end text-white hover:bg-blue-700 px-4 py-2 btnAgregarCarrito">Agregar al
             carrito</button>
     </div>
 </div>

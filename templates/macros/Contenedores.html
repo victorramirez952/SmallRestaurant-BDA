@@ -29,13 +29,13 @@
 {% macro ContenedorPlatillos() %}
 {% import "macros/Cajas.html" as macroCajas %}
 <div id="containerPlatillos"
-    class="w-full lg:w-3/4 mx-auto my-5 container grid grid-cols-1 sm:grid-cols-2 gap-y-64 md:gap-4">
-    {{ macroCajas.Platillo() }}
-    {{ macroCajas.Platillo() }}
-    {{ macroCajas.Platillo() }}
-    {{ macroCajas.Platillo() }}
-    {{ macroCajas.Platillo() }}
-    {{ macroCajas.Platillo() }}
+    class="w-full lg:w-10/12 mx-auto my-5 container grid grid-cols-1 sm:grid-cols-2 gap-y-64 md:gap-4">
+    {{ macroCajas.Platillo('Enchiladas', 100.00) }}
+    {{ macroCajas.Platillo('Flautas', 150.50) }}
+    {{ macroCajas.Platillo('Quesadillas', 69.99) }}
+    {{ macroCajas.Platillo('Torta', 79.99) }}
+    {{ macroCajas.Platillo('Tamales', 99.99) }}
+    {{ macroCajas.Platillo('Quesadillas sin queso', 100.00) }}
 </div>
 {% endmacro %}
 
