@@ -106,3 +106,56 @@
     </div>
 </div>
 {% endmacro %}
+
+{% macro ModalAgregarPedido() %}
+{% import "macros/Contenedores.html" as macroContenedores %}
+<!-- Main modal -->
+<div id="modalAgregarPedido" tabindex="-1" aria-hidden="true"
+    class="fixed top-0 left-0 right-0 z-50 flex w-full p-2 overflow-x-hidden overflow-y-auto md:inset-0 h-screen max-h-full bg-gray-600/50 justify-center items-center">
+    <div class="relative mx-auto my-4 w-full md:w-6/12 max-h-full bg-green-600">
+        <!-- Modal content -->
+        <div class="flex flex-col py-4 rounded-lg shadow bg-gray-600 max-h-full">
+            <button type="button"
+                class="w-1/12 mr-2 self-end text-gray-400 bg-transparent hover:bg-gray-200 rounded-lg text-sm p-1.5 inline-flex items-center justify-center dark:hover:bg-gray-800 dark:hover:text-white btnCloseModalAgregarPedido">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="py-4 lg:px-8 flex flex-col gap-4">
+                <div class="flex">
+                    <input type="email" id="correo" name="correo" placeholder="Enter your email"
+                        class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green">
+                    <button type="button"
+                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-green">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                {{ macroContenedores.ContenedorResultadosProductos() }}
+                <button type="button" class="w-full bg-blue-500 text-white mx-auto hover:bg-blue-700 mt-4 px-4 py-2 rounded btnCloseModalTablaAgregar">Agregar al carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro ModalEditarEdoPedidoOnline() %}
+<!-- Main modal -->
+<div id="modalEditarEdoPedidoOnline" tabindex="-1" aria-hidden="true"
+    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen max-h-full bg-gray-600/50 justify-center items-center">
+    <div class="relative mx-auto my-4 w-full md:w-4/12 max-h-full bg-green-600">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button"
+                class="w-1/12 absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 rounded-lg text-sm p-1.5 inline-flex items-center justify-center dark:hover:bg-gray-800 dark:hover:text-white btnCloseModalEditarEdoPedidoOnline">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="px-6 py-6 lg:px-8">
+                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white text-center">Editar estado del pedido</h3>
+                <form class="flex flex-col justify-between" action="#">
+                    <div id="modalEditarEdoPedidoOnlineContent"></div>
+                    <button type="button"
+                        class="w-full bg-blue-500 text-white mx-auto hover:bg-blue-700 mt-8 px-4 py-2 rounded btnCloseModalEditarEdoPedidoOnline">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}

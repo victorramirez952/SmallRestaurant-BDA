@@ -4,12 +4,12 @@
     <p class="w-full text-base mx-auto">Fecha: 26-04-2023</p>
     <p class="w-full text-base mx-auto">Hora: 07:00 pm</p>
     <p class="w-full text-base mx-auto">Productos: </p>
-    <div class="container grid grid-cols-1 sm:grid-cols-3 row-span-2 w-full gap-4 mx-auto">
+    <div class="container grid grid-cols-1 sm:grid-cols-3 row-span-2 w-full h-40 gap-4 mx-auto">
         {{ macroCajas.ProductoRegistrar() }}
         {{ macroCajas.ProductoRegistrar() }}
         {{ macroCajas.ProductoRegistrar() }}
     </div>
-    <button type="button" class="bg-blue-500 text-white mx-auto flex hover:bg-blue-700 my-8 px-4 py-2 rounded">
+    <button type="button" class="bg-blue-500 text-white mx-auto flex hover:bg-blue-700 my-8 px-4 py-2 rounded btnModalAgregarPedido">
         Agregar
     </button>
     <p class="w-full text-base mx-auto">Total: $666.66 MXN</p>
@@ -113,5 +113,15 @@
         class="w-full sm:w-3/12 h-16 sm:h-auto bg-red-400 text-white hover:bg-red-700 my-4 px-4 py-2 rounded" onclick="location.href='/'">Cerrar
         sesión</button>
     <hr class="border border-gray-600">
+</div>
+{% endmacro %}
+
+{% macro ContenedorResultadosProductos() %}
+{% import "macros/Cajas.html" as macroCajas %}
+<h2 class="font-medium text-base">Resultados</h2>
+<div class="resultados border border-gray-600 grid grid-cols-2 gap-4">
+    {% for i in range(2) %}
+    {{ macroCajas.ProductoRegistrarModal() }}
+    {% endfor %}
 </div>
 {% endmacro %}

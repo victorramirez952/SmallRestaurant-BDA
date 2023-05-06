@@ -19,7 +19,7 @@ $(document).ready(function () {
     });
 
     for (i = 0; i < data.length; i++) {
-      $("#modalTablaEditarContent").append(genInput(headers[i], data[i]));
+      $("#modalTablaEditarContent").append(genInput(headers[i], data[i].trim()));
     }
 
     // Show the modal
@@ -83,6 +83,40 @@ $(document).ready(function () {
   $(".btnCloseModalTablaAgregar").click(function () {
     $("#modalTablaAgregarContent").empty();
     $("#modalTablaAgregar").hide();
+  });
+
+  // ***********************************************
+  // *******************************************
+  $("tr").on("click", "button.btnModalEditarEdoPedidoOnline", function () {
+    var fila = $(this).closest("tr");
+    var celdas = fila.find("td");
+    var header = $(this).closest("table").find("thead tr th");
+
+    var data = [];
+    var headers = [];
+
+    let i = 0;
+    header.each(function (index, celda) {
+      var valor = $(celda).text();
+      let excludedHeaders = ["Id", "Fecha", "Hora", "Ubicación", "Acciones"];
+      if (!excludedHeaders.includes(valor)) {
+        headers.push(valor);
+        data.push(celdas[i].innerHTML);
+      }
+      i++;
+    });
+
+    for (i = 0; i < data.length; i++) {
+      $("#modalEditarEdoPedidoOnlineContent").append(genInput(headers[i], data[i]));
+    }
+
+    // Show the modal
+    $("#modalEditarEdoPedidoOnline").css("display", "flex");
+  });
+
+  $(".btnCloseModalEditarEdoPedidoOnline").click(function () {
+    $("#modalEditarEdoPedidoOnlineContent").empty();
+    $("#modalEditarEdoPedidoOnline").hide();
   });
 
 });

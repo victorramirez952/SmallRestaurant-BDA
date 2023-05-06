@@ -8,14 +8,14 @@ function genInput(header, valor) {
     "Cantidad de personas",
     "Total",
   ];
-  let selects = ["Disponibilidad", "Ingredientes"];
+  let selects = ["Disponibilidad", "Ingredientes", "Estado de la orden", "Estado de la entrega"];
   let dates = ["Fecha"];
   let times = ["Hora"];
   let tels = ["Telefono"];
   let emails = ["Correo"];
 
   if (nums.includes(header)) return inputNumber(header, valor);
-  if (selects.includes(header)) return select(header, valor);
+  if (selects.includes(header)) return genSelect(header, valor);
   if (dates.includes(header)) return inputDate(header, valor);
   if (times.includes(header)) return inputTime(header, valor);
   if (tels.includes(header)) return inputTel(header, valor);
@@ -43,18 +43,59 @@ function inputNumber(header, valor) {
             </div>`;
 }
 
-function select(header, valor) {
+function genSelect(header, valor) {
   if (header == "Disponibilidad") {
-    return `
+    let select = `
           <div class="mt-4">
           <label for="${header}" class="block text-green-500 font-bold mb-2">${header}</label>
-          <select value="${valor}" name="${header}" id="input-${header}"
+          <select name="${header}" id="input-${header}"
               class="shadow border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue">
               <option value="Disponible">Disponible</option>
-              <option value="NoDisponible">No disponible</option>
+              <option value="No Disponible">No disponible</option>
           </select>
       </div>`;
+    return setSelected(select, valor)
   }
+
+  if (header == "Estado de la orden") {
+    let select = `
+    <div class="mt-4">
+        <label for="${header}" class="block text-green-500 font-bold mb-2">${header}</label>
+        <select value="${valor}" name="${header}" id="input-${header}"
+            class="shadow border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue">
+            <option value="En preparación">En preparación</option>
+            <option value="Listo">Listo</option>
+        </select>
+    </div>`;
+    return setSelected(select, valor)
+  }
+
+  if (header == "Estado de la entrega") {
+    let select = `
+    <div class="mt-4">
+        <label for="${header}" class="block text-green-500 font-bold mb-2">${header}</label>
+        <select name="${header}" id="input-${header}"
+            class="shadow border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue">
+            <option value="En preparación">En preparación</option>
+            <option value="Procesando">Procesando</option>
+            <option value="En camino">En camino</option>
+        </select>
+    </div>`;
+    return setSelected(select, valor)
+  }
+}
+
+// Función utilizada en la función select
+function setSelected(select, valor){
+  let selectElement = document.createElement("div");
+  selectElement.innerHTML = select;
+  let selectOptions = selectElement.querySelectorAll("option");
+  for (let i = 0; i < selectOptions.length; i++) {
+    if (selectOptions[i].value == valor) {
+      selectOptions[i].setAttribute("selected", "");
+    }
+  }
+  return selectElement.innerHTML;
 }
 
 function inputPassword(header, valor) {

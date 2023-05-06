@@ -45,6 +45,16 @@ $(document).ready(function () {
         $("#modalProducto").css("display", "flex");
       }
       });
+
+      //   ***************************************
+      //   ***************************************
+      $(".btnModalAgregarPedido").click(function() {
+        $("#modalAgregarPedido").css("display", "flex");
+      });
+
+      $(".btnCloseModalAgregarPedido").click(function() {
+        $("#modalAgregarPedido").hide();
+      });
   
   });
   
