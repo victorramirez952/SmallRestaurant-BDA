@@ -1,16 +1,25 @@
-from flask import Flask, render_template
-# from flask_mysqldb import MySQL
+from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_mysqldb import MySQL
+from flask_wtf.csrf import CSRFProtect
+from flask_login import LoginManager, login_user, logout_user, login_required
+
+from config import config
 
 app = Flask(__name__)
 
-# app.config['MYSQL_HOST'] = 'localhost'
-# app.config['MYSQL_USER'] = 'alfaUser'
-# app.config['MYSQL_PASSWORD'] = 'omegalambda'
-# app.config['MYSQL_DB'] = 'small_restaurant'
+# Models:
+from models.ModelUser import ModelUser
 
-# mysql = MySQL(app)
+# Entities:
+from models.entities.User import User
 
-print("Conexión exitosa")
+csrf = CSRFProtect()
+db = MySQL(app)
+login_manager_app = LoginManager(app)
+
+@login_manager_app.user_loader
+def load_user(id):
+    return ModelUser.get_by_id(db, id)
 
 @app.route('/', methods=['GET'])
 def inicio():
@@ -23,7 +32,31 @@ def inicio():
 def loginAdmin():
     return render_template('login.html')
 
+@app.route('/loginAdmin', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        user = User(0, request.form['correo'], request.form['password'])
+        logged_user = ModelUser.login(db, user)
+        if logged_user != None:
+            if logged_user.password:
+                login_user(logged_user)
+                return redirect(url_for('indexAdmin'))
+            else:
+                flash("Invalid password...")
+                return render_template('login.html')
+        else:
+            flash("User not found...")
+            return render_template('login.html')
+    else:
+        return render_template('login.html')
+
+@app.route('/logoutAdmin')
+def logout():
+    logout_user()
+    return redirect(url_for('loginAdmin'))
+
 @app.route('/indexAdmin', methods=['GET'])
+@login_required
 def indexAdmin():
     return render_template('adminTemplates/indexAdmin.html')
 
@@ -129,5 +162,16 @@ def consultarReserva():
 def clientePerfil():
     return render_template('clienteTemplates/clientePerfil.html')
 
+def status_401(error):
+    return redirect(url_for('login'))
+
+
+def status_404(error):
+    return "<h1>Página no encontrada</h1>", 404
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.config.from_object(config['development'])
+    csrf.init_app(app)
+    app.register_error_handler(401, status_401)
+    app.register_error_handler(404, status_404)
+    app.run()

@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-                <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
+		<link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
 		<title>Perfil</title>
 	</head>
 	<body>
@@ -11,7 +11,7 @@
         {{ macroNavbar.Navbar() }}
 	<h1 class="text-lg font-bold my-4 mx-10">Mi perfil</h1>
 	<hr class="border border-gray-600">
-	<button type="button" class="bg-red-400 text-white hover:bg-red-700 my-4 mx-10 px-4 py-2 rounded" onclick="location.href='/'">Cerrar sesión</button>
+	<button type="button" class="bg-red-400 text-white hover:bg-red-700 my-4 mx-10 px-4 py-2 rounded" onclick="location.href='/logoutAdmin'">Cerrar sesión</button>
 	<hr class="border border-gray-600">
 	</body>
 </html>
