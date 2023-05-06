@@ -1,0 +1,9 @@
+{% macro BuildModal(data) %}
+    <div>
+        <h2>Nuevos elementos</h2>
+        <p>{{ data }}</p>
+        {% for value in data %}
+          <p>{{ value }}</p>
+        {% endfor %}
+    </div>
+{% endmacro %}

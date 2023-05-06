@@ -1,23 +1,23 @@
 from flask import Flask, render_template
-from flask_mysqldb import MySQL
+# from flask_mysqldb import MySQL
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'alfaUser'
-app.config['MYSQL_PASSWORD'] = 'omegalambda'
-app.config['MYSQL_DB'] = 'small_restaurant'
+# app.config['MYSQL_HOST'] = 'localhost'
+# app.config['MYSQL_USER'] = 'alfaUser'
+# app.config['MYSQL_PASSWORD'] = 'omegalambda'
+# app.config['MYSQL_DB'] = 'small_restaurant'
 
-mysql = MySQL(app)
+# mysql = MySQL(app)
 
 print("Conexión exitosa")
 
 @app.route('/', methods=['GET'])
 def inicio():
-    cur = mysql.connection.cursor()
-    cur.execute('''SELECT Nombre, Apellido, Correo, TelefonoContacto FROM clientes''')
-    Clientes = cur.fetchall()
-    return render_template('index.html', Clientes=Clientes)
+    # cur = mysql.connection.cursor()
+    # cur.execute('''SELECT Nombre, Apellido, Correo, TelefonoContacto FROM clientes''')
+    # Clientes = cur.fetchall()
+    return render_template('index.html')
 
 @app.route('/login', methods=['GET'])
 def loginAdmin():

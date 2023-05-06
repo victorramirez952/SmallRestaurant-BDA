@@ -1,3 +1,6 @@
+{% set classBtnEditar = 'btnEditar' %}
+{% set classBtnEliminar = 'btnEliminarRowTable' %}
+
 {% macro TablaClientesIndex(Clientes) %}
 <div class="relative overflow-x-auto shadow-md">
 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -39,29 +42,29 @@
         </thead>
         <tbody class="divide-y divide-gray-300">
             <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">1</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">XYZ</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Yondu</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Udonta</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">25000</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
                     <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
             <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">2</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">YZZ</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Peter</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Quill</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">1000000</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
                     <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
         </tbody>
@@ -75,30 +78,30 @@
         class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
         <thead class="bg-gray-300 text-black">
             <tr>
-                <th class="px-6 py-3 border border-gray-500">Ingredientes</th>
-                <th class="px-6 py-3 border border-gray-500">Stock</th>
+                <th class="px-6 py-3 border border-gray-500">Ingrediente</th>
+                <th class="px-6 py-3 border border-gray-500">Cantidad</th>
                 <th class="px-6 py-3 border border-gray-500">Acciones</th>
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-300">
             <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Harina</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">10</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
                     <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
             <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Azucar</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">1</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
                     <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
         </tbody>
@@ -120,25 +123,25 @@
         </thead>
         <tbody class="divide-y divide-gray-300">
             <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">1</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">4</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Disponible</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
                     <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
             <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">2</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">6</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">No disponible</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
                     <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
         </tbody>
@@ -151,26 +154,26 @@
     <table class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
         <thead class="bg-gray-300 text-black">
             <tr>
-                <th class="px-6 py-3 border border-gray-500">Ingredientes</th>
+                <th class="px-6 py-3 border border-gray-500">Ingrediente</th>
                 <th class="px-6 py-3 border border-gray-500">Stock</th>
                 <th class="px-6 py-3 border border-gray-500">Acciones</th>
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-300">
-            <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+            <tr class="bg-gray-100 hover:bg-gray-200 fila-tabla">
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Harina</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">100</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
-                    <button type="button" class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                    <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
+                    <button type="button" class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
             <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sal</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">25</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
-                    <button type="button" class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                    <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
+                    <button type="button" class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
         </tbody>
@@ -193,33 +196,33 @@
         </thead>
         <tbody class="divide-y divide-gray-300">
             <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Enchiladas</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Comida</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">100</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:shadow-outline-blue">Más</button>
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:shadow-outline-blue" onclick="location.href='/adminProductosIngredientes'">Más</button>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
                     <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
             <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Chilaquiles</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Comida</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">110</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button"
                         class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:shadow-outline-blue">Más</button>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
                     <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
         </tbody>
@@ -244,29 +247,29 @@
         </thead>
         <tbody class="divide-y divide-gray-300">
             <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">2023-05-05</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">00:10</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">10</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500"></td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">john.doe@gmail.com</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
                     <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
             <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">2023-04-13</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">17:30</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">5</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">La sopa estaba muy caliente</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">jane.doe@gmail.com</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
                     <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
         </tbody>
@@ -289,27 +292,27 @@
         </thead>
         <tbody class="divide-y divide-gray-300">
             <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Cincos</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">501</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">cincos.501@gmail.com</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">5555555</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
                     <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
             <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Heavy</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">500</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">heavy.500@gmail.com</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">123456789</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
                     <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
         </tbody>
@@ -332,27 +335,27 @@
         </thead>
         <tbody class="divide-y divide-gray-300">
             <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">1</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">2023-05-05</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">00:16</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">1500</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
                     <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
             <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sample</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">2</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">2023-03-13</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">14:30</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">2500</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue">Editar</button>
+                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
                     <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue">Eliminar</button>
+                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
         </tbody>

@@ -3,17 +3,23 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-                <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
-		<title>Admin - Prodcutos</title>
+		<link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
+		<script src="{{url_for('static',filename='js/all.min.js')}}"></script>
+		<script src="{{url_for('static',filename='js/jquery.js')}}"></script>
+		<title>Admin - Productos</title>
 	</head>
 	<body>
         {% import "macros/Navbar.html" as macroNavbar %}
         {% import "macros/Botones.html" as macroBotones %}
+		{% import "macros/Modales.html" as macroModales %}
         {{ macroNavbar.Navbar() }}
-	<h1 class="text-lg text-center font-bold my-4">Productos</h1>
+		<h1 class="text-lg text-center font-bold my-4">Productos</h1>
         {% import "macros/Tablas.html" as macroTablas %}
         {{ macroTablas.TablaProductos() }}
         {{ macroBotones.BotonAgregar() }}
+		{{ macroModales.ModalRowTable() }}
+		{{ macroModales.ModalEliminar() }}
 	</body>
 </html>
-
+<script src="../../static/js/ModalBuilding.js"></script>
+<script src="../../static/js/Modales.js"></script>
