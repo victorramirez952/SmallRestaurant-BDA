@@ -104,13 +104,13 @@
 </div>
 {% endmacro %}
 
-{% macro ContenedorPerfil() %}
+{% macro ContenedorPerfil(anchorLogout) %}
 <div class="w-full sm:w-3/5 my-10 mx-auto flex flex-col gap-y-10">
     <hr class="border border-gray-600">
     <p class="text-base font-bold" onclick="location.href='/listaPedidos'">Mis pedidos</p>
     <hr class="border border-gray-600">
     <button type="button"
-        class="w-full sm:w-3/12 h-16 sm:h-auto bg-red-400 text-white hover:bg-red-700 my-4 px-4 py-2 rounded" onclick="location.href='/'">Cerrar
+        class="w-full sm:w-3/12 h-16 sm:h-auto bg-red-400 text-white hover:bg-red-700 my-4 px-4 py-2 rounded" onclick="location.href='/logoutCliente'">Cerrar
         sesión</button>
     <hr class="border border-gray-600">
 </div>

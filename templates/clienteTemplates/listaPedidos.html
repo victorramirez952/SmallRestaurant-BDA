@@ -10,7 +10,7 @@
 	<body>
         {% import "macros/Navbar.html" as macroNavbar %}
         {% import "macros/Contenedores.html" as macroContenedores %}	
-        {{ macroNavbar.NavbarCliente() }}		
+        {{ macroNavbar.NavbarCliente(check_user_logged_in()) }}		
         <h2 class="text-lg text-center font-bold my-4">Pedidos</h2>
 	<div class="container w-full md:w-3/5 my-4 mx-auto flex flex-col">
 	    <p class="w-full font-medium text-base">En proceso</p>

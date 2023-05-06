@@ -10,9 +10,9 @@
 	<body>
         {% import "macros/Navbar.html" as macroNavbar %}
         {% import "macros/Contenedores.html" as macroContenedores %}
-        {{ macroNavbar.NavbarCliente() }}
+        {{ macroNavbar.NavbarCliente(check_user_logged_in()) }}
         <h1 class="text-lg font-bold my-4 mx-10 text-center">Mi perfil</h1>
-        {{ macroContenedores.ContenedorPerfil() }}
+        {{ macroContenedores.ContenedorPerfil(anchorLogout) }}
        </body>
 </html>
 

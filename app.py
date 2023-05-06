@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
-from flask_login import LoginManager, login_user, logout_user, login_required
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 
 from config import config
 
@@ -21,6 +21,24 @@ login_manager_app = LoginManager(app)
 def load_user(id):
     return ModelUser.get_by_id(db, id)
 
+# Define a global variable
+anchorLogin = ""
+anchorLogout = ""
+
+# Add the variable to the template context
+@app.context_processor
+def inject_variables():
+    return dict(
+        anchorLogin=anchorLogin,
+        anchorLogout=anchorLogout,
+    )
+
+@app.context_processor
+def utility_processor():
+    def check_user_logged_in():
+        return current_user.is_authenticated
+    return dict(check_user_logged_in=check_user_logged_in)
+
 @app.route('/', methods=['GET'])
 def inicio():
     # cur = mysql.connection.cursor()
@@ -28,12 +46,11 @@ def inicio():
     # Clientes = cur.fetchall()
     return render_template('index.html')
 
-@app.route('/login', methods=['GET'])
-def loginAdmin():
-    return render_template('login.html')
-
 @app.route('/loginAdmin', methods=['GET', 'POST'])
-def login():
+def loginAdmin():
+    global anchorLogin, anchorLogout;
+    anchorLogin = "/loginAdmin";
+    anchorLogout = "/logoutAdmin";
     if request.method == 'POST':
         user = User(0, request.form['correo'], request.form['password'])
         logged_user = ModelUser.login(db, user)
@@ -61,39 +78,48 @@ def indexAdmin():
     return render_template('adminTemplates/indexAdmin.html')
 
 @app.route('/adminPersonal', methods=['GET'])
+@login_required
 def adminPersonal():
     return render_template('adminTemplates/adminPersonal.html')
 
 @app.route('/adminProductosIngredientes', methods=['GET'])
+@login_required
 def adminProductosIngredientes():
     return render_template('adminTemplates/adminProductosIngredientes.html')
 
 @app.route('/adminMesas', methods=['GET'])
+@login_required
 def adminMesas():
     return render_template('adminTemplates/adminMesas.html')
 
 @app.route('/perfil', methods=['GET'])
+@login_required
 def perfil():
     return render_template('perfil.html')
 
 @app.route('/adminIngredientes', methods=['GET'])
+@login_required
 def adminIngrdientes():
     return render_template('adminTemplates/adminIngredientes.html')
 
 @app.route('/adminProductos', methods=['GET'])
+@login_required
 def adminProductos():
     return render_template('adminTemplates/adminProductos.html')
 
 @app.route('/adminReservas', methods=['GET'])
+@login_required
 def adminReservas():
     return render_template('adminTemplates/adminReservas.html')
 
 @app.route('/adminClientes', methods=['GET'])
+@login_required
 def adminClientes():
     return render_template('adminTemplates/adminClientes.html')
 
 
 @app.route('/adminVentas', methods=['GET'])
+@login_required
 def adminVentas():
     return render_template('adminTemplates/adminVentas.html')
 
@@ -121,6 +147,32 @@ def registrarPedido():
 @app.route('/pedidosOnline', methods=['GET'])
 def pedidosOnline():
     return render_template('empleadoTemplates/pedidosOnline.html')
+
+@app.route('/loginCliente', methods=['GET', 'POST'])
+def loginCliente():
+    global anchorLogin, anchorLogout;
+    anchorLogin = "/loginCliente";
+    anchorLogout = "/logoutCliente";
+    if request.method == 'POST':
+        user = User(0, request.form['correo'], request.form['password'])
+        logged_user = ModelUser.login(db, user)
+        if logged_user != None:
+            if logged_user.password:
+                login_user(logged_user)
+                return redirect(url_for('indexCliente'))
+            else:
+                flash("Invalid password...")
+                return render_template('login.html')
+        else:
+            flash("User not found...")
+            return render_template('login.html')
+    else:
+        return render_template('login.html')
+
+@app.route('/logoutCliente')
+def logoutCliente():
+    logout_user()
+    return redirect(url_for('indexCliente'))
 
 @app.route('/indexCliente', methods=['GET'])
 def indexCliente():
@@ -163,7 +215,7 @@ def clientePerfil():
     return render_template('clienteTemplates/clientePerfil.html')
 
 def status_401(error):
-    return redirect(url_for('login'))
+    return redirect(url_for('loginAdmin'))
 
 
 def status_404(error):
