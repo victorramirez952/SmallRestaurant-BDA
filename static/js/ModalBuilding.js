@@ -47,7 +47,7 @@ function select(header, valor) {
   if (header == "Disponibilidad") {
     return `
           <div class="mt-4">
-          <label for="${header}" class="block text-green-500 font-bold mb-2">Input 3</label>
+          <label for="${header}" class="block text-green-500 font-bold mb-2">${header}</label>
           <select value="${valor}" name="${header}" id="input-${header}"
               class="shadow border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue">
               <option value="Disponible">Disponible</option>

@@ -13,13 +13,16 @@
         {% import "macros/Botones.html" as macroBotones %}
 		{% import "macros/Modales.html" as macroModales %}
         {{ macroNavbar.Navbar() }}
-	<h1 class="text-lg text-center font-bold my-4">Ingredientes</h1>
-	<h1 class="text-lg text-center font-bold my-4">Enchiladas</h1>
+		<h1 class="text-lg text-center font-bold my-4">Ingredientes</h1>
+		<h1 class="text-lg text-center font-bold my-4">Enchiladas</h1>
         {% import "macros/Tablas.html" as macroTablas %}
-        {{ macroTablas.TablaIngredientesProductos() }}
-        {{ macroBotones.BotonAgregar() }}
-		{{ macroModales.ModalRowTable() }}
-		{{ macroModales.ModalEliminar() }}
+		<div>
+			{{ macroTablas.TablaIngredientesProductos() }}
+			{{ macroBotones.BotonAgregar() }}
+		</div>
+		{{ macroModales.ModalTablaEditar() }}
+		{{ macroModales.ModalTablaEliminar() }}
+		{{ macroModales.ModalTablaAgregar() }}
 	</body>
 </html>
 </html>

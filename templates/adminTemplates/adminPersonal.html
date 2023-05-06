@@ -15,10 +15,13 @@
 	{{ macroNavbar.Navbar() }}
 	<h1 class="text-lg text-center font-bold my-4">Personal</h1>
 	{% import "macros/Tablas.html" as macroTablas %}
-	{{ macroTablas.TablaPersonal() }}
-	{{ macroBotones.BotonAgregar() }}
-	{{ macroModales.ModalRowTable() }}
-	{{ macroModales.ModalEliminar() }}
+	<div>
+		{{ macroTablas.TablaPersonal() }}
+		{{ macroBotones.BotonAgregar() }}
+	</div>
+	{{ macroModales.ModalTablaEditar() }}
+	{{ macroModales.ModalTablaEliminar() }}
+	{{ macroModales.ModalTablaAgregar() }}
 	</body>
 </html>
 <script src="../../static/js/ModalBuilding.js"></script>

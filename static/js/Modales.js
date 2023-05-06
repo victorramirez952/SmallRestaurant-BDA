@@ -1,5 +1,6 @@
 $(document).ready(function () {
-  $("tr").on("click", "button.btnEditar", function () {
+  // *******************************************
+  $("tr").on("click", "button.btnModalTablaEditar", function () {
     var fila = $(this).closest("tr");
     var celdas = fila.find("td");
     var header = $(this).closest("table").find("thead tr th");
@@ -18,20 +19,21 @@ $(document).ready(function () {
     });
 
     for (i = 0; i < data.length; i++) {
-      $("#modal-content").append(genInput(headers[i], data[i]));
+      $("#modalTablaEditarContent").append(genInput(headers[i], data[i]));
     }
 
     // Show the modal
-    $('#modal').css('display', 'flex');
+    $("#modalTablaEditar").css("display", "flex");
   });
 
-  $(".btnCloseModal").click(function () {
-      $("#modal-content").empty();
-      $("#modal").hide();
-    });
+  $(".btnCloseModalTablaEditar").click(function () {
+    $("#modalTablaEditarContent").empty();
+    $("#modalTablaEditar").hide();
+  });
 
-    //  Btn Eliminar
-    $(".btnEliminarRowTable").click(function () {
+  // *******************************************
+  //  Btn Eliminar
+  $(".btnModalTablaEliminar").click(function () {
     var header = $(this).closest("table").find("thead tr th");
 
     var data = [];
@@ -51,13 +53,36 @@ $(document).ready(function () {
     // }
 
     // Show the modal
-    $('#modalEliminar').css('display', 'flex');
+    $("#modalTablaEliminar").css("display", "flex");
   });
 
-
-  $(".btnCloseModalEliminar").click(function () {
-    $("#modalEliminar").hide();
+  $(".btnCloseModalTablaEliminar").click(function () {
+    $("#modalTablaEliminar").hide();
   });
 
+  // ***********************************************
+   // Seleccionar el botón y agregar un evento click
+   $("#btnTablaAgregar").on("click", function() {
+    var headersResult = $(this).parent().parent().find("table thead tr th");
+    var headers = [];
+    headersResult.each(function(index, element) {
+      let valor = $(element).text();
+      if(valor != "Acciones" && valor != "Id" && valor != "Ingredientes"){
+        headers.push(valor);
+      }
+    });
+
+    for (i = 0; i < headers.length; i++) {
+      $("#modalTablaAgregarContent").append(genInput(headers[i], ""));
+    }
+
+    // Show the modal
+    $("#modalTablaAgregar").css("display", "flex");
+  });
+
+  $(".btnCloseModalTablaAgregar").click(function () {
+    $("#modalTablaAgregarContent").empty();
+    $("#modalTablaAgregar").hide();
+  });
 
 });

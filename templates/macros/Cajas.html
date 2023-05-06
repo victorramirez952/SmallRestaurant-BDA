@@ -41,8 +41,8 @@
 {% endmacro %}
 
 {% macro MesaDisponible(nMesa) %}
-<div id="containerMesa" class="container flex flex-col justify-between items-center gap-4 p-0">
-    <div class="border border-gray-700 p-3 bg-gray-300">
+<div id="containerMesa" class="cursor-pointer container flex flex-col justify-between items-center gap-4 p-0 mesaCaja">
+    <div class="border border-gray-200 p-3 bg-gray-300">
         <img src="../../static/images/mesa.png">
     </div>
     <p>Mesa {{ nMesa + 1 }}</p>

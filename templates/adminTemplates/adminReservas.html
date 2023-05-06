@@ -15,10 +15,13 @@
         {{ macroNavbar.Navbar() }}
 		<h1 class="text-lg text-center font-bold my-4">Reservas</h1>
         {% import "macros/Tablas.html" as macroTablas %}
-        {{ macroTablas.TablaReservas() }}
-        {{ macroBotones.BotonAgregar() }}
-		{{ macroModales.ModalRowTable() }}
-		{{ macroModales.ModalEliminar() }}
+		<div>
+			{{ macroTablas.TablaReservas() }}
+			{{ macroBotones.BotonAgregar() }}
+		</div>
+		{{ macroModales.ModalTablaEditar() }}
+		{{ macroModales.ModalTablaEliminar() }}
+		{{ macroModales.ModalTablaAgregar() }}
 	</body>
 </html>
 <script src="../../static/js/ModalBuilding.js"></script>

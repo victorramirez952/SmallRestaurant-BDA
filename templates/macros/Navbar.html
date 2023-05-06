@@ -1,7 +1,7 @@
 {% macro Navbar() %}
 <nav class="py-0 px-4 w-full grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4 content-center bg-gray-400 h-32 box-border">
-    <h1 class="my-auto text-lg font-bold">Home</h1>
-    <div class="grid grid-rows-3 max-h-32 box-border place-content-end">
+    <h1 class="my-auto text-lg font-bold" onclick="location.href='/indexAdmin'">Home</h1>
+    <div class="grid grid-rows-3 max-h-32 box-border place-content-end" onclick="location.href='/perfil'">
         <img src="https://robohash.org/2806:230:3020:c053:b949:8162:9935:bb35.png"
             class="row-span-2 border-solid border-2 border-gray-600 rows-span-1 h-16 rounded-full" alt="Profile Image">
         <h2 class="text-center">Cody</h2>
@@ -12,18 +12,18 @@
 {% macro NavbarCliente() %}
 <nav id="navbar"
     class="py-0 px-4 w-full grid grid-cols-1 sm:grid-cols-7 gap-1 sm:gap-4 content-center items-center  bg-gray-400 h-32 box-border">
-    <h1 class="my-auto col-span-3 text-lg font-bold">Home</h1>
-    <button class="bg-blue-500 text-white mx-auto flex hover:bg-blue-700 my-8 px-4 py-2 rounded">
+    <h1 class="my-auto col-span-3 text-lg font-bold" onclick="location.href='/indexCliente'">Home</h1>
+    <button class="bg-blue-500 text-white mx-auto flex hover:bg-blue-700 my-8 px-4 py-2 rounded" onclick="location.href='/reservar'">
         Reservar
     </button>
-    <button class="bg-blue-500 text-white mx-auto flex hover:bg-blue-700 my-8 px-4 py-2 rounded">
+    <button class="bg-blue-500 text-white mx-auto flex hover:bg-blue-700 my-8 px-4 py-2 rounded" onclick="location.href='/menu'">
         Menu
     </button>
-    <div class="grid grid-rows-3 max-h-32 box-border items-center justify-center place-content-end">
+    <div class="grid grid-rows-3 max-h-32 box-border items-center justify-center place-content-end" onclick="location.href='/carrito'">
         <i class="fa-solid fa-cart-shopping row-span-2 h-14"></i>
         <h2 class="text-center">Carrito</h2>
     </div>
-    <div class="grid grid-rows-3 max-h-32 box-border place-content-end">
+    <div class="grid grid-rows-3 max-h-32 box-border place-content-end" onclick="location.href='/clientePerfil'">
         <img src="https://robohash.org/2806:230:3020:c053:8cab:417:9ad:a1f0.png"
             class="row-span-2 border-solid border-2 border-gray-600 rows-span-1 h-16 rounded-full" alt="Profile Image">
         <h2 class="text-center">Bly</h2>

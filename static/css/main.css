@@ -727,6 +727,10 @@ video {
   margin-top: 1rem;
 }
 
+.mt-40 {
+  margin-top: 10rem;
+}
+
 .mt-8 {
   margin-top: 2rem;
 }
@@ -881,6 +885,10 @@ video {
 
 .border-collapse {
   border-collapse: collapse;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .resize-none {
