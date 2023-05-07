@@ -11,10 +11,14 @@
 	<body>
         {% import "macros/Navbar.html" as macroNavbar %}
         {% import "macros/Modales.html" as macroModales %}
-        {{ macroNavbar.Navbar() }}
+        {% set Usuario = 'Empleado' %}
+        {{ macroNavbar.Navbar(anchorIndex) }}
         <h1 class="text-lg text-center font-bold my-4">Pedidos en línea</h1>
         {% import "macros/Tablas.html" as macroTablas %}
-        {{ macroTablas.TablaPedidosOnline('Empleado') }}
+        {% if anchorLogin == "/loginRepartidor" %}
+            {% set Usuario = "Repartidor" %}
+        {% endif %}
+        {{ macroTablas.TablaPedidosOnline(Usuario) }}
         {{ macroModales.ModalEditarEdoPedidoOnline() }}
         {{ macroModales.ModalTablaEliminar() }}
 	</body>

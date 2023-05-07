@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
+		<title>Index - Repartidor</title>
+	</head>
+	<body>
+        {% import "macros/Navbar.html" as macroNavbar %}
+        {{ macroNavbar.Navbar(anchorIndex) }}
+	<div
+    class="mx-auto mt-20 container grid grid-cols-1 w-full sm:w-1/4 sm:gap-x-20 md:gap-x-28 sm:gap-y-10 content-center">
+	    <div class="grid grid-rows-5 py-2 gap-y-5" onclick="location.href='/pedidosOnline'">
+            <div class="bg-gray-400 row-span-4">
+            </div>
+            <p class="row-span-1 font-bold text-center">Pedidos Online</p>
+	    </div>
+	</div>
+	</body>
+</html>
+

@@ -11,7 +11,7 @@
 	<body>
         {% import "macros/Navbar.html" as macroNavbar %}
         {% import "macros/Modales.html" as macroModales %}
-        {{ macroNavbar.Navbar() }}
+        {{ macroNavbar.Navbar(anchorIndex) }}
         <h1 class="text-lg text-center font-bold my-4">Registrar Pedido</h1>
         {% import "macros/Contenedores.html" as macroContenedores %}
         {{ macroContenedores.ContenedorRegistroPedidos() }}

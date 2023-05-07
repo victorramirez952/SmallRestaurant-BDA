@@ -24,6 +24,7 @@ def load_user(id):
 # Define a global variable
 anchorLogin = ""
 anchorLogout = ""
+anchorIndex = ""
 
 # Add the variable to the template context
 @app.context_processor
@@ -31,6 +32,7 @@ def inject_variables():
     return dict(
         anchorLogin=anchorLogin,
         anchorLogout=anchorLogout,
+        anchorIndex=anchorIndex
     )
 
 @app.context_processor
@@ -41,16 +43,22 @@ def utility_processor():
 
 @app.route('/', methods=['GET'])
 def inicio():
-    # cur = mysql.connection.cursor()
-    # cur.execute('''SELECT Nombre, Apellido, Correo, TelefonoContacto FROM clientes''')
-    # Clientes = cur.fetchall()
+    return redirect(url_for('index'))
+
+@app.route('/index', methods=['GET'])
+def index():
+    session['previous_url'] = request.url
     return render_template('index.html')
+
+# *********************ADMIN ************************************
 
 @app.route('/loginAdmin', methods=['GET', 'POST'])
 def loginAdmin():
-    global anchorLogin, anchorLogout;
+    session['previous_url'] = request.url
+    global anchorLogin, anchorLogout, anchorIndex;
     anchorLogin = "/loginAdmin";
     anchorLogout = "/logoutAdmin";
+    anchorIndex = "/indexAdmin";
     if request.method == 'POST':
         user = User(0, request.form['correo'], request.form['password'])
         logged_user = ModelUser.login(db, user)
@@ -68,7 +76,7 @@ def loginAdmin():
         return render_template('login.html')
 
 @app.route('/logoutAdmin')
-def logout():
+def logoutAdmin():
     logout_user()
     return redirect(url_for('loginAdmin'))
 
@@ -123,36 +131,139 @@ def adminClientes():
 def adminVentas():
     return render_template('adminTemplates/adminVentas.html')
 
+# *******************CHEF****************************************
+
+@app.route('/loginChef', methods=['GET', 'POST'])
+def loginChef():
+    session['previous_url'] = request.url
+    global anchorLogin, anchorLogout, anchorIndex;
+    anchorLogin = "/loginChef";
+    anchorLogout = "/logoutChef";
+    anchorIndex = "/indexChef";
+    if request.method == 'POST':
+        user = User(0, request.form['correo'], request.form['password'])
+        logged_user = ModelUser.login(db, user)
+        if logged_user != None:
+            if logged_user.password:
+                login_user(logged_user)
+                return redirect(url_for('indexChef'))
+            else:
+                flash("Invalid password...")
+                return render_template('login.html')
+        else:
+            flash("User not found...")
+            return render_template('login.html')
+    else:
+        return render_template('login.html')
+
+@app.route('/logoutChef')
+def logoutChef():
+    logout_user()
+    return redirect(url_for('loginChef'))
+
 @app.route('/indexChef', methods=['GET'])
+@login_required
 def indexChef():
     return render_template('chefTemplates/indexChef.html')
 
+# ***********************EMPLEADO*************************************
+
+@app.route('/loginEmpleado', methods=['GET', 'POST'])
+def loginEmpleado():
+    session['previous_url'] = request.url
+    global anchorLogin, anchorLogout, anchorIndex;
+    anchorLogin = "/loginEmpleado";
+    anchorLogout = "/logoutEmpleado";
+    anchorIndex = "/indexEmpleado";
+    if request.method == 'POST':
+        user = User(0, request.form['correo'], request.form['password'])
+        logged_user = ModelUser.login(db, user)
+        if logged_user != None:
+            if logged_user.password:
+                login_user(logged_user)
+                return redirect(url_for('indexEmpleado'))
+            else:
+                flash("Invalid password...")
+                return render_template('login.html')
+        else:
+            flash("User not found...")
+            return render_template('login.html')
+    else:
+        return render_template('login.html')
+
+@app.route('/logoutEmpleado')
+def logoutEmpleado():
+    logout_user()
+    return redirect(url_for('loginEmpleado'))
 
 @app.route('/indexEmpleado', methods=['GET'])
+@login_required
 def indexEmpleado():
     return render_template('empleadoTemplates/indexEmpleado.html')
 
 @app.route('/confirmarReserva', methods=['GET'])
+@login_required
 def confirmarReserva():
     return render_template('empleadoTemplates/confirmarReserva.html')
 
 @app.route('/actDispMesas', methods=['GET'])
+@login_required
 def actDispMesas():
     return render_template('empleadoTemplates/actDisponibilidadMesas.html')
 
 @app.route('/registrarPedido', methods=['GET'])
+@login_required
 def registrarPedido():
     return render_template('empleadoTemplates/registrarPedido.html')
 
 @app.route('/pedidosOnline', methods=['GET'])
+@login_required
 def pedidosOnline():
     return render_template('empleadoTemplates/pedidosOnline.html')
 
+# ***************************REPARTIDOR**********************************
+@app.route('/loginRepartidor', methods=['GET', 'POST'])
+def loginRepartidor():
+    session['previous_url'] = request.url
+    global anchorLogin, anchorLogout, anchorIndex;
+    anchorLogin = "/loginRepartidor";
+    anchorLogout = "/logoutRepartidor";
+    anchorIndex = "/indexRepartidor";
+    if request.method == 'POST':
+        user = User(0, request.form['correo'], request.form['password'])
+        logged_user = ModelUser.login(db, user)
+        if logged_user != None:
+            if logged_user.password:
+                login_user(logged_user)
+                return redirect(url_for('indexRepartidor'))
+            else:
+                flash("Invalid password...")
+                return render_template('login.html')
+        else:
+            flash("User not found...")
+            return render_template('login.html')
+    else:
+        return render_template('login.html')
+
+@app.route('/logoutRepartidor')
+def logoutRepartidor():
+    logout_user()
+    return redirect(url_for('loginRepartidor'))
+
+
+@app.route('/indexRepartidor', methods=['GET'])
+@login_required
+def indexRepartidor():
+    return render_template('repartidorTemplates/indexRepartidor.html')
+
+# ***************************CLIENTE**********************************
+
 @app.route('/loginCliente', methods=['GET', 'POST'])
 def loginCliente():
-    global anchorLogin, anchorLogout;
+    global anchorLogin, anchorLogout, anchorIndex;
     anchorLogin = "/loginCliente";
     anchorLogout = "/logoutCliente";
+    anchorIndex = "/indexCliente";
     if request.method == 'POST':
         user = User(0, request.form['correo'], request.form['password'])
         logged_user = ModelUser.login(db, user)
@@ -214,8 +325,14 @@ def consultarReserva():
 def clientePerfil():
     return render_template('clienteTemplates/clientePerfil.html')
 
+# ***************************OTROS**********************************
+
 def status_401(error):
-    return redirect(url_for('loginAdmin'))
+    previous_url = session.get('previous_url')
+    if previous_url:
+        session.pop('previous_url')
+        return redirect(previous_url)
+    return redirect(url_for('index'))
 
 
 def status_404(error):

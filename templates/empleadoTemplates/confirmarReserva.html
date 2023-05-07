@@ -9,7 +9,7 @@
 	</head>
 	<body>
         {% import "macros/Navbar.html" as macroNavbar %}
-        {{ macroNavbar.Navbar() }}
+        {{ macroNavbar.Navbar(anchorIndex) }}
         <h1 class="text-lg text-center font-bold my-4">Confirmar reserva</h1>
         {% import "macros/Formularios.html" as macroFormularios %}
         {{ macroFormularios.ConfirmarReserva() }}
