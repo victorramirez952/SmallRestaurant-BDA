@@ -338,9 +338,23 @@ def mesasDisponibles():
 def reservar():
     return render_template('clienteTemplates/reservar.html')
 
+def to_int_list(lst):
+    return list(map(int, lst))
+app.jinja_env.filters['to_int_list'] = to_int_list
+
+@app.route('/procesarFormMesasDisponibles', methods=['POST'])
+def procesarFormMesasDisponibles():
+    mesasSeleccionadas = request.form['mesasSeleccionadas'];
+    mesasIds = mesasSeleccionadas.split(',');
+    mesasIdsFiltrados =  list(set(mesasIds));
+    mesasIdsFiltrados = sorted(mesasIdsFiltrados, key=int);
+    session['mesasIdsFiltrados'] = mesasIdsFiltrados;
+    return redirect(url_for('formularioReservar'));
+
 @app.route('/formularioReservar', methods=['GET'])
 def formularioReservar():
-    return render_template('clienteTemplates/formularioReservar.html')
+    mesasIdsFiltrados = session['mesasIdsFiltrados'];
+    return render_template('clienteTemplates/formularioReservar.html', mesasIds=mesasIdsFiltrados);
 
 @app.route('/consultarReserva', methods=['GET'])
 def consultarReserva():
@@ -368,4 +382,4 @@ if __name__ == '__main__':
     csrf.init_app(app)
     app.register_error_handler(401, status_401)
     app.register_error_handler(404, status_404)
-    app.run()
+    app.run(debug=True)

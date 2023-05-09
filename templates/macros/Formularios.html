@@ -84,7 +84,8 @@
 </form>
 {% endmacro %}
 
-{% macro FormularioClienteReservacion() %}
+{% macro FormularioClienteReservacion(mesasIds) %}
+{% set mesasIds_Int = mesasIds | to_int_list %}
 <form action="" id="formularioClienteReservacion" class="w-full sm:w-5/12 my-4 mx-auto  p-3">
     <label for="nombre" class="my-4 block text-blue-500 font-bold mb-2">Nombre:</label>
     <input type="text" name="nombre" id="nombre"
@@ -105,11 +106,23 @@
     <label for="solicitud especial" class="my-4 block text-blue-500 font-bold mb-2">Solicitud especial:</label>
     <textarea name="solicitud" id="solicitud" cols="30" rows="10"
         class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue resize-none"></textarea>
-
-    <button type="button"
-        class="w-2/5 my-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline-blue mx-auto flex justify-center items-center">
-        Reservar
-    </button>
+    <label for="mesas" class="my-4 block text-blue-500 font-bold">Mesas:</label>
+    {% import "macros/Cajas.html" as macroCajas %}
+    <div id="containerMesasReservadas" class="container grid grid-cols-2 sm:grid-cols-5 gap-4">
+        {% for i in mesasIds_Int %}
+            {{ macroCajas.MesaDisponible(i) }}
+        {% endfor %}
+    </div>
+    <div class="flex gap-2 border my-5 bg-gray-400">
+        <button type="button"
+            class="w-2/5 my-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline-blue mx-auto flex justify-center items-center" onclick="location.href='/mesasDisponibles'">
+            Cancelar
+        </button>
+        <button type="button"
+            class="w-2/5 my-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline-blue mx-auto flex justify-center items-center" onclick="location.href='/indexCliente'">
+            Reservar
+        </button>
+    </div>
 </form>
 {% endmacro %}
 

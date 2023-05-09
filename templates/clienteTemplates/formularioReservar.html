@@ -9,10 +9,11 @@
     </head>
     <body>
         {% import "macros/Navbar.html" as macroNavbar %}
-	{% import "macros/Formularios.html" as macroFormularios %}
+	    {% import "macros/Formularios.html" as macroFormularios %}
         {{ macroNavbar.NavbarCliente(check_user_logged_in()) }}
         <h2 class="text-lg text-center font-bold my-4">Reservación</h2>
-        {{ macroFormularios.FormularioClienteReservacion() }}
+        {% print(mesasSeleccionadas) %}
+        {{ macroFormularios.FormularioClienteReservacion(mesasIds) }}
    </body>
 </html>
 

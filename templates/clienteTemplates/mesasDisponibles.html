@@ -12,12 +12,16 @@
         {% import "macros/Contenedores.html" as macroContenedores %}
         {% import "macros/Navbar.html" as macroNavbar %}
         {{ macroNavbar.NavbarCliente(check_user_logged_in()) }}
-	<h2 class="text-lg text-center font-bold my-4">Reservación</h2>
-	<div class="w-full flex justify-end pr-4">
-            <button type="button" class="bg-blue-500 text-white hover:bg-blue-700 my-4 px-4 py-2 rounded" onclick="location.href='/formularioReservar'">Continuar</button>
+        <h2 class="text-lg text-center font-bold my-4">Reservación</h2>
+        <div class="w-full flex justify-end pr-4">
+            <form action="/procesarFormMesasDisponibles" method="POST" id="formMesas">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="mesasSeleccionadas" value="">
+                <button type="button" class="bg-blue-500 text-white hover:bg-blue-700 my-4 px-4 py-2 rounded" id="btnContinuarMesas">Continuar</button>
+            </form>
         </div>
         <h3 class="text-lg text-center font-bold my-4">Mesas disponibles</h3>
-	{{ macroContenedores.ContenedorMesas(20) }}
+        {{ macroContenedores.ContenedorMesas(20) }}
     </body>
 </html>
 <script src="../../static/js/Funcionalidades.js"></script>

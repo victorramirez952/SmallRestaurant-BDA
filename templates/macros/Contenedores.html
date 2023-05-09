@@ -72,7 +72,8 @@
 
 {% macro ContenedorMesas(nMesas) %}
 {% import "macros/Cajas.html" as macroCajas %}
-<div class="container w-full sm:w-3/4 my-8 mx-auto grid grid-cols-2 sm:grid-cols-5 gap-x-4 gap-y-10">
+<h2 class="text-center font-medium text-red-600" id="alertMesasSeleccionadas"></h2>
+<div class="container w-full sm:w-3/4 my-8 mx-auto grid grid-cols-2 sm:grid-cols-5 gap-x-4 gap-y-10 containerMesas">
     {% for i in range(nMesas) %}
     {{ macroCajas.MesaDisponible(i) }}
     {% endfor %}
