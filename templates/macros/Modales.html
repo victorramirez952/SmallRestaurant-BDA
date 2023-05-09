@@ -159,3 +159,53 @@
     </div>
 </div>
 {% endmacro %}
+
+{% macro ModalCarritoEliminar() %}
+<div id="modalCarritoEliminar" tabindex="-1" class="fixed top-0 left-0 right-0 hidden z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-full max-h-screen bg-gray-600/50 justify-center items-center" data-product-id="">
+    <div class="w-full sm:w-4/12 max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button"
+                class="w-1/12 absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 rounded-lg text-sm p-1.5 inline-flex items-center justify-center dark:hover:bg-gray-800 dark:hover:text-white btnCloseModalCarritoEliminar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="p-6 text-center">
+                <button type="button"
+                    class="mx-auto mb-4 text-gray-400 w-14 dark:text-gray-200">
+                    <i class="fa-solid fa-circle-exclamation h-12"></i>
+                </button>
+                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">¿Estas seguro de eliminar este elemento del carrito?</h3>
+                <button data-modal-hide="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 btnCloseModalCarritoEliminar">No, cancelar</button>
+                <button data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 btnAceptarEliminarCarrito">
+                    Sí, estoy seguro
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro ModalVaciarCarrito() %}
+<div id="modalVaciarCarrito" tabindex="-1" class="fixed top-0 left-0 right-0 hidden z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-full max-h-screen bg-gray-600/50 justify-center items-center" data-product-id="">
+    <div class="w-full sm:w-4/12 max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button"
+                class="w-1/12 absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 rounded-lg text-sm p-1.5 inline-flex items-center justify-center dark:hover:bg-gray-800 dark:hover:text-white btnCloseModalVaciarCarrito">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="p-6 text-center">
+                <button type="button"
+                    class="mx-auto mb-4 text-gray-400 w-14 dark:text-gray-200">
+                    <i class="fa-solid fa-circle-exclamation h-12"></i>
+                </button>
+                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">¿Estas seguro de vaciar el carrito?</h3>
+                <button data-modal-hide="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 btnCloseModalVaciarCarrito">No, cancelar</button>
+                <button data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 btnAceptarVaciarCarrito">
+                    Sí, estoy seguro
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}

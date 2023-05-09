@@ -52,13 +52,13 @@
     <div class="flex flex-col justify-between">
         <p class="font-medium text-base">Pedido</p>
         <button type="button"
-            class="border border-gray-400 bg-blue-500 text-white hover:bg-blue-700 my-2 px-4 py-2 rounded">Ver
+            class="border border-gray-400 bg-blue-500 text-white hover:bg-blue-700 my-2 px-4 py-2 rounded" onclick="location.href='/carrito'">Ver
             pedido</button>
     </div>
 </div>
 {% endmacro %}
 
-{% macro FormularioPedidos() %}
+{% macro FormularioPedidos(check_user_logged_in) %}
 <form id="formularioPedido" class="w-full md:w-3/5 mx-auto my-10">
     {{ Pedido() }}
     <label for="tarjeta" class="block text-blue-500 font-bold mt-4 mb-2">No. de tarjeta</label>
@@ -70,10 +70,16 @@
     <p class="my-4">*Por el momento solo aceptamos pagos con tarjeta de crédito o débito</p>
     <div class="container h-24 w-full flex justify-between items-center px-4 py-2 mx-auto my-8 bg-gray-300"
         id="containerPagar">
-        <i class="fa-solid fa-trash-can h-10 hover:text-blue-400"></i>
-        <button type="button"
-            class="h-5/6 w-3/5 sm:w-2/5 bg-blue-500 text-white flex items-center justify-center hover:bg-blue-700 my-8 px-4 py-2 rounded text-xl font-bold">Pagar
-            $400.00 MXN</button>
+        <a href="{{ url_for('carrito') }}" class="w-3/5 sm:w-2/5 font-medium text-md underline text-center">Cancelar</a>
+        {% if check_user_logged_in %}
+            <button type="button"
+                class="h-5/6 w-3/5 sm:w-2/5 bg-blue-500 text-white flex items-center justify-center hover:bg-blue-700 my-8 px-4 py-2 rounded text-xl font-bold"
+                onclick="location.href='/listaPedidos'">Pagar $400.00 MXN</button>
+        {% else %}
+            <button type="button" class="h-5/6 w-3/5 sm:w-2/5 bg-blue-500 text-white flex items-center justify-center hover:bg-blue-700 my-8 px-4 py-2 rounded text-xl font-bold" onclick="location.href='/loginCliente'">
+                Inicia sesión para continuar
+            </button>
+        {% endif %}
     </div>
 </form>
 {% endmacro %}

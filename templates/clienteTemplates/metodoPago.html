@@ -8,13 +8,13 @@
 		<title>Metodo Pago</title>
 	</head>
 	<body>
-        {% import "macros/Navbar.html" as macroNavbar %}
-	{% import "macros/Formularios.html" as macroFormularios %}
-        {% import "macros/Contenedores.html" as macroContenedores %}
-        {{ macroNavbar.NavbarCliente(check_user_logged_in()) }}		
-        <h2 class="text-lg text-center font-bold my-4">Método de pago</h2>
-        {{ macroContenedores.ContenedorUbicacion() }}
-	{{ macroFormularios.FormularioPedidos() }}
+		{% import "macros/Navbar.html" as macroNavbar %}
+		{% import "macros/Formularios.html" as macroFormularios %}
+		{% import "macros/Contenedores.html" as macroContenedores %}
+		{{ macroNavbar.NavbarCliente(check_user_logged_in()) }}
+		<h2 class="text-lg text-center font-bold my-4">Método de pago</h2>
+		{{ macroContenedores.ContenedorUbicacion() }}
+		{{ macroFormularios.FormularioPedidos(check_user_logged_in()) }}
 	</body>
 </html>
 

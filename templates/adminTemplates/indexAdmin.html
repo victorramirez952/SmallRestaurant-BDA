@@ -8,7 +8,7 @@
 	</head>
 	<body>
         {% import "macros/Navbar.html" as macroNavbar %}
-        {{ macroNavbar.Navbar() }}
+        {{ macroNavbar.Navbar(anchorIndex) }}
 		<h1 class="text-center my-10 font-bold text-xl">Bienvenido, {{ current_user.fullname }}</h1>
 	<div
     class="mx-auto mt-20 container grid grid-cols-1 sm:grid-cols-3 gap-1 w-full sm:w-3/4 sm:gap-x-20 md:gap-x-28 sm:gap-y-10 content-center">

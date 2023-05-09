@@ -119,4 +119,40 @@ $(document).ready(function () {
     $("#modalEditarEdoPedidoOnline").hide();
   });
 
+  // ***********************************************
+  // ****************ELIMINAR CARRITO***************************
+  var productId;
+  $(".btnModalEliminarCarrito").click(function () {
+    productId = $(this).data('product-id');
+
+    // Show the modal
+    $("#modalCarritoEliminar").css("display", "flex");
+  });
+
+  $(".btnCloseModalCarritoEliminar").click(function () {
+    $("#modalCarritoEliminar").hide();
+  });
+
+  $(".btnAceptarEliminarCarrito").click(function () {
+    if (productId) {
+      location.href = "eliminarProductoCarrito/" + productId;
+    }
+  });
+
+  // ***********************************************
+  // ****************VACIAR CARRITO***************************
+  $(".btnModalVaciarCarrito").click(function () {
+
+    // Show the modal
+    $("#modalVaciarCarrito").css("display", "flex");
+  });
+
+  $(".btnCloseModalVaciarCarrito").click(function () {
+    $("#modalVaciarCarrito").hide();
+  });
+
+  $(".btnAceptarVaciarCarrito").click(function () {
+      location.href = "vaciarCarrito";
+  });
+  
 });

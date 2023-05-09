@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from flask_session import Session
 
 from config import config
 
@@ -43,12 +44,34 @@ def utility_processor():
 
 @app.route('/', methods=['GET'])
 def inicio():
+    session['cart'] = [] # Inicializa el carrito vacío
     return redirect(url_for('index'))
 
 @app.route('/index', methods=['GET'])
 def index():
     session['previous_url'] = request.url
     return render_template('index.html')
+
+@app.route('/agregarCarrito/<string:productId>', methods=['POST'])
+def agregarCarrito(productId):
+    cart = session.get('cart', [])
+    if productId not in cart: # verifica si el ID del producto ya está en el carrito
+        cart.append(productId)
+        session['cart'] = cart
+    return redirect(url_for('carrito'))
+
+@app.route('/vaciarCarrito')
+def vaciarCarrito():
+    session.pop('cart', None)
+    return redirect(url_for('carrito'))
+
+@app.route('/eliminarProductoCarrito/<string:productId>')
+def eliminarProductoCarrito(productId):
+    cart = session.get('cart', [])
+    if productId in cart:
+        cart.remove(productId)
+        session['cart'] = cart
+    return redirect(url_for('carrito'))
 
 # *********************ADMIN ************************************
 
@@ -260,6 +283,7 @@ def indexRepartidor():
 
 @app.route('/loginCliente', methods=['GET', 'POST'])
 def loginCliente():
+    print('Omega')
     global anchorLogin, anchorLogout, anchorIndex;
     anchorLogin = "/loginCliente";
     anchorLogout = "/logoutCliente";
@@ -295,7 +319,8 @@ def menu():
 
 @app.route('/carrito', methods=['GET'])
 def carrito():
-    return render_template('clienteTemplates/carrito.html')
+    cart = session.get('cart', [])
+    return render_template('clienteTemplates/carrito.html', cart=cart)
 
 @app.route('/metodoPago', methods=['GET'])
 def metodoPago():

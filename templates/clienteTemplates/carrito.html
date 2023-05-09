@@ -3,18 +3,28 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-                <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
-                <script src="{{url_for('static',filename='js/all.min.js')}}"></script>
+		<link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
+		<script src="{{url_for('static',filename='js/all.min.js')}}"></script>
+		<script src="{{url_for('static',filename='js/jquery.js')}}"></script>
 		<title>Carrito</title>
 	</head>
 	<body>
 		{% import "macros/Contenedores.html" as macroContenedores %}
 		{% import "macros/Navbar.html" as macroNavbar %}
+		{% import "macros/Modales.html" as macroModales %}
 		{{ macroNavbar.NavbarCliente(check_user_logged_in()) }}
 		<h2 class="text-lg text-center font-bold my-4">Carrito</h2>
 		{{ macroContenedores.ContenedorUbicacion() }}
 		{% import "macros/Carrito.html" as macroCarrito %}
-		{{ macroCarrito.Carrito() }}
+		{% if cart|length == 0 %}
+		<h2 class="text-lg text-center font-bold my-4">Tu carrito está vacío</h2>
+		{% else %}s
+			<h1 class="text-lg text-center font-bold my-4">Carrito de compras</h1>
+			{{ macroCarrito.Carrito(cart) }}
+		{% endif %}
+		{{ macroModales.ModalCarritoEliminar() }}
+		{{ macroModales.ModalVaciarCarrito() }}
 	</body>
 </html>
-
+<script src="../../static/js/Funcionalidades.js"></script>
+<script src="../../static/js/Modales.js"></script>

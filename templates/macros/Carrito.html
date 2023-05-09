@@ -1,4 +1,5 @@
-{% macro ProductoCarrito() %}
+{% set classBtnModalEliminarCarrito = 'btnModalEliminarCarrito' %}
+{% macro ProductoCarrito(productId) %}
 <div class="container grid grid-cols-1 sm:grid-cols-2 py-8 sm:py-0 bg-gray-300 border border-gray-600 gap-8 sm:gap-0"
     id="containerProductoCarrito">
     <div class="container grid grid-cols-2 gap-x-2 grid-rows-2 h-40 p-3 ">
@@ -6,30 +7,30 @@
             <img src="../../static/images/taco.png" class="w-auto h-2/5 mx-auto self-center row-span-2 max-h-32">
         </div>
         <div class="row-span-2 flex flex-col justify-between">
-            <p class="font-bold text-sm">Nombre platillo</p>
+            <p class="font-bold text-sm">{{ productId }}</p>
             <p class="font-medium text-sm">$104.50 MXN</p>
         </div>
     </div>
     <div class="container grid grid-cols-5 items-center">
-        <i class="fa-solid fa-trash-can h-10 hover:text-blue-400"></i>
+        <i class="fa-solid fa-trash-can h-10 hover:text-blue-400 {{ classBtnModalEliminarCarrito }}" data-product-id="{{ productId }}"></i>
         <input type="number" value="1" name="cantidadProducto" class="h-10 text-center" min="1">
         <p class="text-center">U</p>
-        <button class="flex hover:text-blue-400 items-center justify-center font-medium rounded-md">
+        <button class="flex hover:text-blue-400 items-center justify-center font-medium rounded-md btnMasProducto">
             <i class="h-10  fa-solid fa-circle-plus"></i>
         </button>
-        <button class="flex hover:text-blue-400 items-center justify-center font-medium rounded-md">
+        <button class="flex hover:text-blue-400 items-center justify-center font-medium rounded-md btnMenosProducto">
             <i class="h-10  fa-solid fa-circle-minus"></i>
         </button>
     </div>
 </div>
 {% endmacro %}
 
-{% macro Carrito() %}
+{% macro Carrito(cart) %}
 {% import "macros/Contenedores.html" as macroContenedores %}
 <div class="container w-full sm:w-3/4 mx-auto my-8">
-    {{ ProductoCarrito() }}
-    {{ ProductoCarrito() }}
-    {{ ProductoCarrito() }}
+    {% for productId in cart %}
+        {{ ProductoCarrito(productId) }}
+    {% endfor %}
 </div>
 {{ macroContenedores.ContenedorPagar() }}
 {% endmacro %}

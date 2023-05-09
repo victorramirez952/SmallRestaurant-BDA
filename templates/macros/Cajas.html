@@ -43,9 +43,12 @@
     <!-- Contenedor derecho -->
     <div class="container grid grid-rows-6 gap-y-0 sm:gap-y-4">
         <div class="border border-gray-600 row-span-5 "></div>
-        <button type="button"
-            class="row-span-2 w-full bg-blue-500 place-self-end text-white hover:bg-blue-700 px-4 py-2 btnAgregarCarrito">Agregar al
-            carrito</button>
+        <form action="{{ url_for('agregarCarrito', productId=platillo) }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit"
+                class="row-span-2 w-full bg-blue-500 place-self-end text-white hover:bg-blue-700 px-4 py-2 btnAgregarCarrito">Agregar al
+                carrito</button>
+        </form>
     </div>
 </div>
 {% endmacro %}
