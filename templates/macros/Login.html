@@ -1,12 +1,12 @@
 {% macro Login(anchorLogin) %}
 <h1 class="text-3xl text-center font-bold my-10">Iniciar sesion</h1>
-<div class="flex flex-col items-center border border-gray-600 w-full sm:w-3/4 md:w-5/12 mx-auto pt-16 pb-20 rounded-sm">
+<div class="flex flex-col items-center border border-gray-600 w-full sm:w-3/4 md:w-5/12 mx-auto px-6 py-8 rounded-sm">
     {% with messages = get_flashed_messages() %}
 
         {% if messages %}
         <br />
         {% for message in messages %}
-        <div class="w-2/3 mb-10 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative alertLogin">
+        <div class="w-2/3 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative alertLogin">
             <strong class="font-bold">{{ message }}</strong>
             <button type="button"
                 class="w-1/12 absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 rounded-lg text-sm p-1.5 inline-flex items-center justify-center dark:hover:bg-gray-800 dark:hover:text-white btnCloseAlertLogin">
@@ -17,17 +17,17 @@
         {% endif %}
 
     {% endwith %}
-    <form id="formLogin" class="w-full max-w-md" action="{{ anchorLogin }}" method="POST">
+    <form id="formLogin" class="w-full max-w-md p-6 space-y-4 md:space-y-6 sm:p-8" action="{{ anchorLogin }}" method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <div class="mb-4">
+        <div class="">
             <label for="correo" class="block text-green-500 font-bold mb-2">Correo:</label>
             <input type="text" name="correo" id="correo"
-                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green" value=""/>
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value=""/>
         </div>
-        <div class="mb-6">
+        <div class="">
             <label for="password" class="block text-green-500 font-bold mb-2">Contraseña:</label>
             <input type="password" name="password" id="password"
-                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green" value=""/>
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value=""/>
         </div>
         <div class="flex justify-center">
             <button type="submit"
@@ -35,6 +35,9 @@
                 Iniciar sesión
             </button>
         </div>
+        <p class="text-sm font-light text-gray-600">
+            ¿No tienes una cuenta aún? <a href="signUp" class="font-medium text-blue-500 hover:underline">Registrate</a>
+        </p>
     </form>
 </div>
 {% if anchorLogin == "/loginCliente" %}
@@ -45,4 +48,49 @@
         </button>
     </div>
 {% endif %}
+{% endmacro %}
+
+{% macro SignUp(anchorLogin) %}
+<h1 class="text-3xl text-center font-bold my-6">Crear una cuenta</h1>
+<div class="flex flex-col items-center border border-gray-600 w-full sm:w-3/4 md:w-5/12 mx-auto px-6 py-8 rounded-sm">
+    <div class="w-2/3 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded hidden alertSignUp">
+        <strong class="font-bold" id="mensajeAlertSignUp"></strong>
+        <button type="button"
+            class="w-1/12 absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 rounded-lg text-sm p-1.5 inline-flex items-center justify-center dark:hover:bg-gray-800 dark:hover:text-white btnCloseAlertSignUp">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+    <form id="formSignUp" class="w-full max-w-md p-6 space-y-3 md:space-y-5 sm:p-8" action="registrarUsuario" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="">
+            <label for="fullname" class="block text-green-500 font-bold mb-2">Nombre completo:</label>
+            <input type="text" name="fullname" id="fullname"
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value=""/>
+        </div>
+        <div class="">
+            <label for="correo" class="block text-green-500 font-bold mb-2">Correo:</label>
+            <input type="text" name="correo" id="correo"
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value=""/>
+        </div>
+        <div class="">
+            <label for="password" class="block text-green-500 font-bold mb-2">Contraseña:</label>
+            <input type="password" name="password" id="passwordA"
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value=""/>
+        </div>
+        <div class="">
+            <label for="password" class="block text-green-500 font-bold mb-2">Reescribir contraseña:</label>
+            <input type="password" name="passwordB" id="passwordB"
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value=""/>
+        </div>
+        <div class="flex justify-center">
+            <button type="button"
+                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-1 focus:shadow-outline-green" id="btnCrearCuenta">
+                Crear cuenta
+            </button>
+        </div>
+        <p class="text-sm font-light text-gray-600">
+            ¿Ya tienes una cuenta? <a href="{{ anchorLogin }}" class="font-medium text-blue-500 hover:underline">Inicia sesión</a>
+        </p>
+    </form>
+</div>
 {% endmacro %}

@@ -1,0 +1,18 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
+  <script src="{{url_for('static',filename='js/all.min.js')}}"></script>
+  <script src="{{url_for('static',filename='js/jquery.js')}}"></script>
+  <title>Login</title>
+</head>
+
+<body>
+        {% import "macros/Login.html" as macroLogin %}
+        {{ macroLogin.SignUp(anchorLogin) }}
+        
+</body>
+</html>
+<script src="../../static/js/Funcionalidades.js"></script>

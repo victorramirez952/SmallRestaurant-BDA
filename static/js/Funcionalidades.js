@@ -80,6 +80,83 @@ $(document).ready(function () {
       $(".btnCloseAlertLogin").click(function() {
         $(".alertLogin").hide();
       });
-  
+
+      //   ***************************************
+      //   ***************************************
+      $('#passwordB').on('input', function() {
+        let passwordA = $("#passwordA").val();
+        let passwordB = $(this).val();
+        if(passwordA.length != 0 && passwordA != passwordB){
+          $("#mensajeAlertSignUp").text("Las contraseñas no son iguales");
+          $("#passwordB").addClass("bg-red-400");
+        } else{
+          $("#passwordB").removeClass("bg-red-400");
+          $(".alertSignUp").removeClass("relative");
+          $(".alertSignUp").addClass("hidden");
+        }
+      });
+
+      $('#passwordA').on('input', function() {
+        let passwordA = $(this).val();
+        let passwordB = $("#passwordB").val();
+        if(passwordB.length != 0 && passwordA != passwordB){
+          $("#mensajeAlertSignUp").text("Las contraseñas no son iguales");
+          $("#passwordB").addClass("bg-red-400");
+        } else{
+          $("#passwordB").removeClass("bg-red-400");
+          $(".alertSignUp").removeClass("relative");
+          $(".alertSignUp").addClass("hidden");
+        }
+      });
+
+      $('#btnCrearCuenta').click(function() {
+        let fullname = $('#formSignUp input[name="fullname"]').val();
+        let correo = $('#formSignUp input[name="correo"]').val();
+        let passwordA = $("#passwordA").val();
+        let passwordB = $("#passwordB").val();
+        let formularioCompleto = true;
+        $.each([fullname, correo, passwordA, passwordB], function(index, variable) {
+          if (!variable) {
+            formularioCompleto = false;
+            return false; // Detener la iteración
+          }
+        });
+        if(!formularioCompleto){
+          $("#mensajeAlertSignUp").text("Debe llenar todos los campos");
+          $(".alertSignUp").removeClass("hidden");
+          $(".alertSignUp").addClass("relative");
+        } else if(passwordB.length != 0 && passwordA == passwordB){
+          $.ajax({
+            url: '/procesarFormulario',
+            type: 'get',
+            contentType: 'aplication/json',
+            data:{
+              correo: correo
+            },
+            success: function(response){
+              if(response.existe == 'True'){
+                $("#mensajeAlertSignUp").text("Usuario ya existente");
+                $(".alertSignUp").removeClass("hidden");
+                $(".alertSignUp").addClass("relative");
+              } else {
+                $("#formSignUp").submit();
+              }
+            },
+            error: function(error){
+              alert("Hubo un error");
+            }
+          })
+        } else{
+          $("#mensajeAlertSignUp").text("Las contraseñas no son iguales");
+          $(".alertSignUp").removeClass("hidden");
+          $(".alertSignUp").addClass("relative");
+        }
+      });
+
+      $('.btnCloseAlertSignUp').click(function() {
+        $(".alertSignUp").removeClass("relative");
+        $(".alertSignUp").addClass("hidden");
+      });
+
   });
   

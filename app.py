@@ -1,8 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_session import Session
+from werkzeug.security import generate_password_hash
+from time import time
 
 from config import config
 
@@ -52,6 +54,26 @@ def index():
     session['previous_url'] = request.url
     return render_template('index.html')
 
+@app.route('/procesarFormulario', methods=['GET'])
+def procesarFormulario():
+    correo = request.args.get('correo')
+    cursor = db.connection.cursor()
+    sql = """SELECT username FROM user 
+            WHERE username = '{}'""".format(correo)
+    cursor.execute(sql)
+    row = cursor.fetchone()
+    cursor.close()
+    if(row):
+        return jsonify({'existe': 'True'});
+    return jsonify({'existe: ': 'False'})
+
+@app.route('/signUp', methods=['GET'])
+def signUp():
+    global anchorLogin;
+    if(anchorLogin == ''):
+        return render_template('signUp.html', anchorLogin="/loginCliente")
+    return render_template('signUp.html', anchorLogin=anchorLogin)
+
 @app.route('/agregarCarrito/<string:productId>', methods=['POST'])
 def agregarCarrito(productId):
     cart = session.get('cart', [])
@@ -73,6 +95,22 @@ def eliminarProductoCarrito(productId):
         session['cart'] = cart
     return redirect(url_for('carrito'))
 
+@app.route('/registrarUsuario', methods=['POST'])
+def registrarUsuario():
+    if request.method == 'POST':
+        global anchorLogin;
+        correo = request.form['correo'];
+        password = request.form['password'];
+        fullname = request.form['fullname'];
+        hashed_password = generate_password_hash(password);
+        print(hashed_password);
+        cursor = db.connection.cursor()
+        cursor.execute('''INSERT INTO user (username, password, fullname) VALUES (%s, %s, %s)''', (correo, hashed_password, fullname));
+        db.connection.commit();
+        cursor.close()
+        urlLogin = anchorLogin[1:]
+        return redirect(url_for(urlLogin))
+    
 # *********************ADMIN ************************************
 
 @app.route('/loginAdmin', methods=['GET', 'POST'])
