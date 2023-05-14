@@ -2,9 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from flask_session import Session
 from werkzeug.security import generate_password_hash
-from time import time
 
 from config import config
 
@@ -21,8 +19,8 @@ db = MySQL(app)
 login_manager_app = LoginManager(app)
 
 @login_manager_app.user_loader
-def load_user(id):
-    return ModelUser.get_by_id(db, id)
+def load_user(idUsuario):
+    return ModelUser.get_by_id(db, idUsuario)
 
 # Define a global variable
 anchorLogin = ""
@@ -94,6 +92,11 @@ def eliminarProductoCarrito(productId):
         cart.remove(productId)
         session['cart'] = cart
     return redirect(url_for('carrito'))
+
+@app.route('/pagarPedido')
+def pagarPedido():
+    session['cart'] = [];
+    return redirect(url_for('listaPedidos'))
 
 @app.route('/registrarUsuario', methods=['POST'])
 def registrarUsuario():
@@ -321,7 +324,6 @@ def indexRepartidor():
 
 @app.route('/loginCliente', methods=['GET', 'POST'])
 def loginCliente():
-    print('Omega')
     global anchorLogin, anchorLogout, anchorIndex;
     anchorLogin = "/loginCliente";
     anchorLogout = "/logoutCliente";
@@ -330,7 +332,7 @@ def loginCliente():
         user = User(0, request.form['correo'], request.form['password'])
         logged_user = ModelUser.login(db, user)
         if logged_user != None:
-            if logged_user.password:
+            if logged_user.Contrasenia:
                 login_user(logged_user)
                 return redirect(url_for('indexCliente'))
             else:

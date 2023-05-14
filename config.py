@@ -5,9 +5,9 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
     MYSQL_HOST = 'localhost'
-    MYSQL_USER = 'root'
+    MYSQL_USER = 'alfaUser'
     MYSQL_PASSWORD = 'omegalambda'
-    MYSQL_DB = 'small_restaurant'
+    MYSQL_DB = 'proyecto_final'
 
 
 config = {
