@@ -1090,6 +1090,10 @@ video {
   place-self: end;
 }
 
+.place-self-center {
+  place-self: center;
+}
+
 .self-end {
   align-self: flex-end;
 }

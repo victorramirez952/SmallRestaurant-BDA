@@ -12,7 +12,7 @@
 		{% import "macros/Contenedores.html" as macroContenedores %}
 		{% import "macros/Navbar.html" as macroNavbar %}
 		{% import "macros/Modales.html" as macroModales %}
-		{{ macroNavbar.NavbarCliente(check_user_logged_in()) }}
+		{{ macroNavbar.NavbarCliente(check_user_logged_in(), current_user) }}
 		<h2 class="text-lg text-center font-bold my-4">Carrito</h2>
 		{{ macroContenedores.ContenedorUbicacion() }}
 		{% import "macros/Carrito.html" as macroCarrito %}

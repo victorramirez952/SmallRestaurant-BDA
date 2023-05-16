@@ -9,7 +9,7 @@
 	</head>
 	<body>
 	{% import "macros/Navbar.html" as macroNavbar %}
-	{{ macroNavbar.NavbarCliente(check_user_logged_in()) }}
+	{{ macroNavbar.NavbarCliente(check_user_logged_in(), current_user) }}
 	<div class="my-8 container grid grid-cols-1 sm:grid-cols-2 items-center w-full sm:w-3/4 mx-auto">
 	    <div class="bg-gray-300 h-64"></div>
 	    <button class="bg-blue-500 text-white mx-auto hover:bg-blue-700 my-4 px-4 py-2 rounded" onclick="location.href='/menu'">Menú</button>

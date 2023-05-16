@@ -22,12 +22,12 @@
         <div class="">
             <label for="correo" class="block text-green-500 font-bold mb-2">Correo:</label>
             <input type="text" name="correo" id="correo"
-                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value=""/>
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" required value=""/>
         </div>
         <div class="">
             <label for="password" class="block text-green-500 font-bold mb-2">Contraseña:</label>
             <input type="password" name="password" id="password"
-                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value=""/>
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" required value=""/>
         </div>
         <div class="flex justify-center">
             <button type="submit"
@@ -53,6 +53,22 @@
 {% macro SignUp(anchorLogin) %}
 <h1 class="text-3xl text-center font-bold my-6">Crear una cuenta</h1>
 <div class="flex flex-col items-center border border-gray-600 w-full sm:w-3/4 md:w-5/12 mx-auto px-6 py-8 rounded-sm">
+    {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+        <br />
+        {% for message in messages %}
+        <div class="w-2/3 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative alertLogin">
+            <strong class="font-bold">{{ message }}</strong>
+            <button type="button"
+                class="w-1/12 absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 rounded-lg text-sm p-1.5 inline-flex items-center justify-center dark:hover:bg-gray-800 dark:hover:text-white btnCloseAlertLogin">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+    {% endwith %}
     <div class="w-2/3 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded hidden alertSignUp">
         <strong class="font-bold" id="mensajeAlertSignUp"></strong>
         <button type="button"
@@ -63,27 +79,80 @@
     <form id="formSignUp" class="w-full max-w-md p-6 space-y-3 md:space-y-5 sm:p-8" action="registrarUsuario" method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="">
-            <label for="fullname" class="block text-green-500 font-bold mb-2">Nombre completo:</label>
-            <input type="text" name="fullname" id="fullname"
-                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value=""/>
+            <label for="nombres" class="block text-green-500 font-bold mb-2">Nombre(s):</label>
+            <input type="text" name="nombres" id="nombres"
+            class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value="Anakin"/>
+        </div>
+        <div class="">
+            <label for="apellidoPaterno" class="block text-green-500 font-bold mb-2">Apellido Paterno:</label>
+            <input type="text" name="apellidoPaterno" id="apellidoPaterno"
+            class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value="Skywalker"/>
+        </div>
+        <div class="">
+            <label for="apellidoMaterno" class="block text-green-500 font-bold mb-2">Apellido Materno:</label>
+            <input type="text" name="apellidoMaterno" id="apellidoMaterno"
+            class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value="Omega"/>
+        </div>
+        <div class="">
+            <label for="telefono" class="block text-green-500 font-bold mb-2">Telefono de contacto:</label>
+            <input type="tel" name="telefono" id="telefono"
+            class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value="1234566"/>
         </div>
         <div class="">
             <label for="correo" class="block text-green-500 font-bold mb-2">Correo:</label>
             <input type="text" name="correo" id="correo"
-                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value=""/>
+            class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value="anakin@gmail.com"/>
         </div>
         <div class="">
             <label for="password" class="block text-green-500 font-bold mb-2">Contraseña:</label>
             <input type="password" name="password" id="passwordA"
-                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value=""/>
+            class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value="omega"/>
         </div>
         <div class="">
             <label for="password" class="block text-green-500 font-bold mb-2">Reescribir contraseña:</label>
             <input type="password" name="passwordB" id="passwordB"
-                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value=""/>
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value="omega"/>
+        </div>
+        <div class="flex flex-col">
+            <label for="estado" class="block text-green-500 font-bold mb-2">Estado:</label>
+            <select name="estado" id="selectEstados"
+                class="shadow border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green">
+            </select>
+        </div>
+        <div class="flex flex-col">
+            <label for="municipio" class="block text-green-500 font-bold mb-2">Municipio:</label>
+            <select name="municipio" id="selectMunicipios"
+                class="shadow border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green"">
+            </select>
+        </div>
+        <div class="flex flex-col">
+            <label for="colonia" class="block text-green-500 font-bold mb-2">Colonia:</label>
+            <select name="colonia" id="selectColonias"
+                class="shadow border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green">
+            </select>
+        </div>
+        <div class="">
+            <label for="calle" class="block text-green-500 font-bold mb-2">Calle:</label>
+            <input type="calle" name="calle" id="calle"
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value="Rebelion"/>
+        </div>
+        <div class="">
+            <label for="numExterior" class="block text-green-500 font-bold mb-2">Número Exterior:</label>
+            <input type="number" name="numExterior" id="numExterior"
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value="405" max="999999999"/>
+        </div>
+        <div class="">
+            <label for="numInterior" class="block text-green-500 font-bold mb-2">Número Interior:</label>
+            <input type="number" name="numInterior" id="numInterior"
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value="" max="999999999"/>
+        </div>
+        <div class="">
+            <label for="codigoPostal" class="block text-green-500 font-bold mb-2">Código Postal:</label>
+            <input type="number" name="codigoPostal" id="codigoPostal"
+                class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green required" value="8888" max="999999999"/>
         </div>
         <div class="flex justify-center">
-            <button type="button"
+            <button type="submit"
                 class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-1 focus:shadow-outline-green" id="btnCrearCuenta">
                 Crear cuenta
             </button>

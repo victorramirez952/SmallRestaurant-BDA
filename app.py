@@ -101,18 +101,43 @@ def pagarPedido():
 @app.route('/registrarUsuario', methods=['POST'])
 def registrarUsuario():
     if request.method == 'POST':
-        global anchorLogin;
-        correo = request.form['correo'];
-        password = request.form['password'];
-        fullname = request.form['fullname'];
-        hashed_password = generate_password_hash(password);
-        print(hashed_password);
-        cursor = db.connection.cursor()
-        cursor.execute('''INSERT INTO user (username, password, fullname) VALUES (%s, %s, %s)''', (correo, hashed_password, fullname));
-        db.connection.commit();
-        cursor.close()
-        urlLogin = anchorLogin[1:]
-        return redirect(url_for(urlLogin))
+        try:
+            global anchorLogin;
+            nombres = request.form['nombres'];
+            apellidoPaterno = request.form['apellidoPaterno'];
+            apellidoMaterno = request.form['apellidoMaterno'];
+            telefonoContacto = request.form['telefono'];
+            correo = request.form['correo'];
+            contrasenia = request.form['password'];
+            estado = request.form['estado'];
+            municipio = request.form['municipio'];
+            colonia = request.form['colonia'];
+            calle = request.form['calle'];
+            numeroExterior = request.form['numExterior'];
+            numeroInterior = request.form['numInterior'];
+            codigoPostal = request.form['codigoPostal'];
+
+            if numeroInterior is None or numeroInterior == '':
+                    numeroInterior = None;
+
+            hashed_password = generate_password_hash(contrasenia);
+            cursor = db.connection.cursor()
+            # imagen por defecto sera "Cincos.jpg"
+            # idTipoUsuario para cliente = 1
+            cursor.callproc('RegistrarCliente', [correo, hashed_password, "Cincos.jpg", 1, estado, municipio, colonia, calle, numeroExterior, numeroInterior, codigoPostal, nombres, apellidoPaterno, apellidoMaterno, telefonoContacto, ...])
+            resultados1 = cursor.fetchall()
+            print(resultados1)
+            cursor.nextset()
+            cursor.close()
+            urlLogin = anchorLogin[1:]
+            if urlLogin == '' or  urlLogin is None:
+                    urlLogin = 'loginCliente'
+            return redirect(url_for(urlLogin))
+        except Exception as e:
+            error_message = str(e.args[1])  # Accede al primer argumento de la excepción
+            flash(error_message)
+            return redirect(url_for('signUp'))
+            
     
 # *********************ADMIN ************************************
 
@@ -336,10 +361,10 @@ def loginCliente():
                 login_user(logged_user)
                 return redirect(url_for('indexCliente'))
             else:
-                flash("Invalid password...")
+                flash("Contraseña incorrecta")
                 return render_template('login.html')
         else:
-            flash("User not found...")
+            flash("Usuario no encontrado")
             return render_template('login.html')
     else:
         return render_template('login.html')

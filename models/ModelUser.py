@@ -8,9 +8,6 @@ class ModelUser():
         try:
             cursor = db.connection.cursor()
             cursor.callproc('IniciarSesion', [user.Correo])
-            # sql = """SELECT idUsuario, Correo, Contrasenia, idTipoUsuario FROM usuarios 
-            #         WHERE Correo = '{}'""".format(user.Correo)
-            # cursor.execute(sql)
             row = cursor.fetchone()
             if row != None:
                 user = User(row[0], row[1], User.check_password(row[2], user.Contrasenia), row[3])

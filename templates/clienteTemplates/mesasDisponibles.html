@@ -11,7 +11,7 @@
     <body>
         {% import "macros/Contenedores.html" as macroContenedores %}
         {% import "macros/Navbar.html" as macroNavbar %}
-        {{ macroNavbar.NavbarCliente(check_user_logged_in()) }}
+        {{ macroNavbar.NavbarCliente(check_user_logged_in(), current_user) }}
         <h2 class="text-lg text-center font-bold my-4">Reservación</h2>
         <div class="w-full flex justify-end pr-4">
             <form action="/procesarFormMesasDisponibles" method="POST" id="formMesas">

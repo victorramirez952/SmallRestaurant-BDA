@@ -22,7 +22,7 @@
 </nav>
 {% endmacro %}
 
-{% macro NavbarCliente(check_user_logged_in) %}
+{% macro NavbarCliente(check_user_logged_in, current_user) %}
 <nav id="navbar"
     class="py-0 px-4 w-full grid grid-cols-1 sm:grid-cols-7 gap-1 sm:gap-4 content-center items-center  bg-gray-400 h-32 box-border">
     <h1 class="my-auto col-span-3 text-lg font-bold" onclick="location.href='/indexCliente'">Home</h1>
@@ -40,8 +40,8 @@
         {% if check_user_logged_in %}
         <div class="col-span-1 grid grid-rows-3 max-h-32 box-border items-center place-content-center" onclick="location.href='/clientePerfil'">
             <img src="../../static/images/Cincos.jpg"
-            class="row-span-2 border-solid border-2 border-gray-600 rows-span-1 h-16 w-16 object-cover rounded-full" alt="Profile Image">
-            <h2 class="text-center">Cincos</h2>
+            class="row-span-2 border-solid border-2 border-gray-600 rows-span-1 h-16 w-16 object-cover rounded-full place-self-center" alt="Profile Image">
+            <h2 class="text-center">{{ current_user.Correo }}</h2>
         </div>
         {% else %}
             <button class="col-span-1 bg-blue-500 text-white mx-auto flex hover:bg-blue-700 my-8 px-4 py-2 rounded max-h-32 box-border items-center justify-center" onclick="location.href='/loginCliente'">

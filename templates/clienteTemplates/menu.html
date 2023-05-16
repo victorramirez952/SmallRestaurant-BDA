@@ -11,7 +11,7 @@
 	<body>
         {% import "macros/Navbar.html" as macroNavbar %}
         {% import "macros/Modales.html" as macroModales %}
-        {{ macroNavbar.NavbarCliente(check_user_logged_in()) }}
+        {{ macroNavbar.NavbarCliente(check_user_logged_in(), current_user) }}
         <h2 class="text-lg text-center font-bold my-4">Menu</h2>
         <div class="flex gap-4 w-full sm:w-3/4 mx-auto font-medium text-lg">
             <a href="#">Platillos</a>

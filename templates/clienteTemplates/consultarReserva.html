@@ -10,7 +10,7 @@
     <body>
         {% import "macros/Navbar.html" as macroNavbar %}
         {% import "macros/Formularios.html" as macroFormularios %}
-        {{ macroNavbar.NavbarCliente(check_user_logged_in()) }}
+        {{ macroNavbar.NavbarCliente(check_user_logged_in(), current_user) }}
         <h2 class="text-lg text-center font-bold my-4">Reservación</h2>
         {{ macroFormularios.FormularioConsultarReserva() }}
    </body>

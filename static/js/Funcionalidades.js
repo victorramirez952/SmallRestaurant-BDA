@@ -109,13 +109,27 @@ $(document).ready(function () {
         }
       });
 
-      $('#btnCrearCuenta').click(function() {
-        let fullname = $('#formSignUp input[name="fullname"]').val();
+      $('#btnCrearCuenta').click(function(event) {
+        event.preventDefault();
+        let nombres = $('#formSignUp input[name="nombres"]').val();
+        let apellidoPaterno = $('#formSignUp input[name="apellidoPaterno"]').val();
+        let apellidoMaterno = $('#formSignUp input[name="apellidoMaterno"]').val();
+        let telefono = $('#formSignUp input[name="telefono"]').val();
         let correo = $('#formSignUp input[name="correo"]').val();
         let passwordA = $("#passwordA").val();
         let passwordB = $("#passwordB").val();
+        let estado = $('#selectEstados').find('option:selected').data('nombre')
+        let municipio = $('#selectMunicipios').find('option:selected').data('nombre')
+        let colonia = $('#selectColonias').find('option:selected').data('nombre')
+        let calle = $('#formSignUp input[name="calle"]').val();
+        let numeroExterior = $('#formSignUp input[name="numExterior"]').val();
+        let numeroInterior = $('#formSignUp input[name="numInterior"]').val();
+        let codigoPostal = $('#formSignUp input[name="codigoPostal"]').val();
+
         let formularioCompleto = true;
-        $.each([fullname, correo, passwordA, passwordB], function(index, variable) {
+        let form = [nombres, apellidoPaterno, apellidoMaterno, telefono, correo, passwordA, passwordB, estado, municipio, colonia, calle, numeroExterior, codigoPostal]
+        console.log(numeroInterior);
+        $.each(form, function(index, variable) {
           if (!variable) {
             formularioCompleto = false;
             return false; // Detener la iteración
@@ -125,27 +139,15 @@ $(document).ready(function () {
           $("#mensajeAlertSignUp").text("Debe llenar todos los campos");
           $(".alertSignUp").removeClass("hidden");
           $(".alertSignUp").addClass("relative");
+        } else if(codigoPostal.length > 9){
+          $("#mensajeAlertSignUp").text("El codigo postal es demasiado largo");
+          $(".alertSignUp").removeClass("hidden");
+          $(".alertSignUp").addClass("relative");
         } else if(passwordB.length != 0 && passwordA == passwordB){
-          $.ajax({
-            url: '/procesarFormulario',
-            type: 'get',
-            contentType: 'aplication/json',
-            data:{
-              correo: correo
-            },
-            success: function(response){
-              if(response.existe == 'True'){
-                $("#mensajeAlertSignUp").text("Usuario ya existente");
-                $(".alertSignUp").removeClass("hidden");
-                $(".alertSignUp").addClass("relative");
-              } else {
-                $("#formSignUp").submit();
-              }
-            },
-            error: function(error){
-              alert("Hubo un error");
-            }
-          })
+          $('#selectEstados').find('option:selected').val(estado)
+          $('#selectMunicipios').find('option:selected').val(municipio)
+          $('#selectColonias').find('option:selected').val(colonia)
+          $("#formSignUp").submit();
         } else{
           $("#mensajeAlertSignUp").text("Las contraseñas no son iguales");
           $(".alertSignUp").removeClass("hidden");
@@ -158,5 +160,53 @@ $(document).ready(function () {
         $(".alertSignUp").addClass("hidden");
       });
 
+      //   ***************************************
+      //   ***************************************
+      const estadosJsonUrl = 'static/json/México.min.json';
+  
+      let estados;
+
+      $.getJSON(estadosJsonUrl, function(data) {
+        estados = data;
+        const estadosSelect = $('#selectEstados');
+    
+        $.each(estados, function(index, estado) {
+          const optionElement = $('<option></option>').val(estado.clave).text(estado.nombre).data('nombre', estado.nombre);
+          estadosSelect.append(optionElement);
+        });
+    
+        estadosSelect.change(function() {
+          const estadoClave = $(this).val();
+          const municipios = estados.find(est => est.clave === estadoClave).municipios;
+          const municipiosSelect = $('#selectMunicipios');
+    
+          municipiosSelect.empty();
+    
+          $.each(municipios, function(index, municipio) {
+            const optionElement = $('<option></option>').val(municipio.clave).text(municipio.nombre).data('nombre', municipio.nombre);
+            municipiosSelect.append(optionElement);
+          });
+    
+          $('#selectColonias').empty();
+        });
+      }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.error('Error al obtener los estados:', textStatus, errorThrown);
+      });
+    
+      $('#selectMunicipios').change(function() {
+        const estadoClave = $('#selectEstados').val();
+        const municipioClave = $(this).val();
+        const municipios = estados.find(est => est.clave === estadoClave).municipios;
+        const municipio = municipios.find(mun => mun.clave === municipioClave);
+        const localidades = municipio.localidades;
+        const localidadesSelect = $('#selectColonias');
+    
+        localidadesSelect.empty();
+    
+        $.each(localidades, function(index, localidad) {
+          const optionElement = $('<option></option>').val(localidad.clave).text(localidad.nombre).data('nombre', localidad.nombre);
+          localidadesSelect.append(optionElement);
+        });
+      });
   });
   

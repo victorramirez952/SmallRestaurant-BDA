@@ -7,7 +7,7 @@ class DevelopmentConfig(Config):
     MYSQL_HOST = 'localhost'
     MYSQL_USER = 'alfaUser'
     MYSQL_PASSWORD = 'omegalambda'
-    MYSQL_DB = 'proyecto_final'
+    MYSQL_DB = 'pro'
 
 
 config = {
