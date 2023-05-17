@@ -3,17 +3,44 @@
     <head>
         <meta charset="UTF-8">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-	<link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
-	<script src="{{url_for('static',filename='js/all.min.js')}}"></script>
+        <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
+        <script src="{{url_for('static',filename='js/all.min.js')}}"></script>
+		<script src="{{url_for('static',filename='js/jquery.js')}}"></script>
         <title>Formulario reservar</title>
     </head>
     <body>
         {% import "macros/Navbar.html" as macroNavbar %}
 	    {% import "macros/Formularios.html" as macroFormularios %}
+        {% if check_user_logged_in() %}
+            <script>
+                const csrfToken = "{{ csrf_token() }}";
+                const idUsuario = "{{ current_user.id }}";
+                const data = {id: idUsuario};
+                fetch('/getDatosCliente', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.querySelector('input[name="idCliente"]').value = data[0];
+                        document.querySelector('input[name="nombre"]').value = data[1];
+                        document.querySelector('input[name="apellidoPaterno"]').value = data[2];
+                        document.querySelector('input[name="apellidoMaterno"]').value = data[3];
+                        document.querySelector('input[name="telefono"]').value = data[4];
+                    })
+                    .catch(error => {
+                        // Manejar el error en caso de que la petición falle
+                        console.error(error);
+                    });
+            </script>
+        {% endif %}
         {{ macroNavbar.NavbarCliente(check_user_logged_in(), current_user) }}
         <h2 class="text-lg text-center font-bold my-4">Reservación</h2>
-        {% print(mesasSeleccionadas) %}
-        {{ macroFormularios.FormularioClienteReservacion(mesasIds) }}
+        {{ macroFormularios.FormularioClienteReservacion(numMesas) }}
    </body>
 </html>
-
+<script src="../../static/js/Funcionalidades.js"></script>

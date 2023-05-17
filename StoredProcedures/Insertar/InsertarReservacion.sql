@@ -18,7 +18,7 @@ BEGIN
         VALUES (p_CantidadPersonas, p_Comentarios, p_idHorario, p_idCliente, p_Confirmada);
         SET p_IdInsertado = LAST_INSERT_ID();
     ELSE
-        SET p_IdInsertado = v_Encontrado;
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Ya tiene una reserva para ese horario';
     END IF;
 END //
 

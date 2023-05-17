@@ -70,27 +70,26 @@
 </div>
 {% endmacro %}
 
-{% macro ContenedorMesas(nMesas) %}
+{% macro ContenedorMesas(mesas) %}
 {% import "macros/Cajas.html" as macroCajas %}
 <h2 class="text-center font-medium text-red-600" id="alertMesasSeleccionadas"></h2>
-<div class="container w-full sm:w-3/4 my-8 mx-auto grid grid-cols-2 sm:grid-cols-5 gap-x-4 gap-y-10 containerMesas">
-    {% for i in range(nMesas) %}
-    {{ macroCajas.MesaDisponible(i) }}
-    {% endfor %}
-</div>
+<form action="procesarMesasSeleccionadas" id="formMesasSeleccionadas" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="mesasIdsHidden" id="mesasIdsHidden" value="">
+    <div class="container w-full sm:w-3/4 my-8 mx-auto grid grid-cols-2 sm:grid-cols-5 gap-x-4 gap-y-10 containerMesas">
+        {% for mesa in mesas %}
+        {{ macroCajas.MesaDisponible(mesa) }}
+        {% endfor %}
+    </div>
+</form>
 {% endmacro %}
 
 {% macro ContenedorResultadosHorarios() %}
 <div
-    class="containerResultadosHorarios container w-full md:w-3/5 my-10 mx-auto grid grid-rows-7 md:grid-rows-2 gap-y-6 md:gap-y-2">
+    class="containerResultadosHorarios cols-span-1 md:col-span-3 row-span-1 w-full my-10 grid grid-rows-7 md:grid-rows-2 gap-y-6 md:gap-y-2">
     <h2 class="row-span-2 md:row-span-1 text-lg font-bold">Resultados</h2>
     <div
-        class="container row-span-5 md:row-span-1 grid grid-cols-1 md:grid-cols-5 gap-x-4 gap-y-4 md:gap-y-0 content-start md:content-between">
-        <button type="button" class="bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded" onclick="location.href='/mesasDisponibles'">06:30 pm</button>
-        <button type="button" class="bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded" onclick="location.href='/mesasDisponibles'">07:00 pm</button>
-        <button type="button" class="bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded" onclick="location.href='/mesasDisponibles'">07:30 pm</button>
-        <button type="button" class="bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded" onclick="location.href='/mesasDisponibles'">08:00 pm</button>
-        <button type="button" class="bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded" onclick="location.href='/mesasDisponibles'">08:30 pm</button>
+        class="md:row-span-1 grid grid-cols-1 md:grid-cols-5 gap-x-2 gap-y-2 md:gap-y-0 content-start md:content-between" id="contenedorResultadosHorarios">
     </div>
 </div>
 {% endmacro %}

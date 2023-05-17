@@ -84,33 +84,39 @@
 </form>
 {% endmacro %}
 
-{% macro FormularioClienteReservacion(mesasIds) %}
-{% set mesasIds_Int = mesasIds | to_int_list %}
-<form action="" id="formularioClienteReservacion" class="w-full sm:w-5/12 my-4 mx-auto  p-3">
-    <label for="nombre" class="my-4 block text-blue-500 font-bold mb-2">Nombre:</label>
+{% macro FormularioClienteReservacion(numMesas) %}
+<!-- {% set mesasIds_Int = mesasIds | to_int_list %} -->
+<form action="registrarReservacion" id="formularioClienteReservacion" class="w-full sm:w-5/12 my-4 mx-auto  p-3" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <input type="hidden" name="idCliente" id="idCliente"
+        class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue" value=""/>
+
+    <label for="nombre" class="my-4 block text-blue-500 font-bold mb-2">Nombre(s):</label>
     <input type="text" name="nombre" id="nombre"
-        class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue" />
+        class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue" required/>
+    
+    <label for="apellidoPaterno" class="my-4 block text-blue-500 font-bold mb-2">ApellidoPaterno:</label>
+    <input type="text" name="apellidoPaterno" id="apellidoPaterno"
+        class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue" required/>
+    
+    <label for="apellidoMaterno" class="my-4 block text-blue-500 font-bold mb-2">ApellidoMaterno:</label>
+    <input type="text" name="apellidoMaterno" id="apellidoMaterno"
+        class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue" required/>
 
-    <label for="apellido" class="my-4 block text-blue-500 font-bold mb-2">Apellido:</label>
-    <input type="text" name="apellido" id="apellido"
-        class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue" />
-
-    <label for="telefono" class="my-4 block text-blue-500 font-bold mb-2">Telefono:</label>
+    <label for="telefono" class="my-4 block text-blue-500 font-bold mb-2">Telefono de contacto:</label>
     <input type="tel" name="telefono" id="telefono"
-        class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue" />
+        class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue" required/>
 
-    <label for="correo" class="my-4 block text-blue-500 font-bold mb-2">Correo:</label>
-    <input type="email" name="correo" id="correo"
-        class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue" />
-
-    <label for="solicitud especial" class="my-4 block text-blue-500 font-bold mb-2">Solicitud especial:</label>
-    <textarea name="solicitud" id="solicitud" cols="30" rows="10"
+    <label for="solicitudEspecial" class="my-4 block text-blue-500 font-bold mb-2">Solicitud especial:</label>
+    <textarea name="solicitudEspecial" id="solicitudEspecial" cols="30" rows="10"
         class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue resize-none"></textarea>
+    
     <label for="mesas" class="my-4 block text-blue-500 font-bold">Mesas:</label>
     {% import "macros/Cajas.html" as macroCajas %}
     <div id="containerMesasReservadas" class="container grid grid-cols-2 sm:grid-cols-5 gap-4">
-        {% for i in mesasIds_Int %}
-            {{ macroCajas.MesaDisponible(i) }}
+        {% for mesa in numMesas %}
+            {{ macroCajas.MesaDisponible(mesa) }}
         {% endfor %}
     </div>
     <div class="flex gap-2 border my-5 bg-gray-400">
@@ -119,7 +125,7 @@
             Cancelar
         </button>
         <button type="button"
-            class="w-2/5 my-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline-blue mx-auto flex justify-center items-center" onclick="location.href='/indexCliente'">
+            class="w-2/5 my-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline-blue mx-auto flex justify-center items-center" id="btnReservar">
             Reservar
         </button>
     </div>
@@ -127,13 +133,15 @@
 {% endmacro %}
 
 {% macro FormularioReservacion() %}
+{% import "macros/Contenedores.html" as macroContenedores %}
 <form id="formularioReservacion"
-    class="w-full md:w-3/5 my-8 mx-auto grid grid-cols-1 md:grid-cols-3 grid-rows-4 md:grid-rows-2 gap-4 p-4 md:p-0">
+    class="w-full md:w-3/5 my-8 mx-auto grid grid-cols-1 md:grid-cols-3 grid-rows-4 md:grid-rows-2 gap-4 p-4 md:p-0" action="buscarHorarios" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <div class="flex flex-col">
         <label for="noPersonas" class="block text-blue-500 font-bold mb-2">No. de personas</label>
-        <select value="2" name="noPersonas" id="noPersonas"
-            class="shadow border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue">
-            <option value="1">1</option>
+        <select name="noPersonas" id="noPersonas"
+            class="shadow border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue" max=15 required>
+            <option value="1" selected>1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
@@ -143,28 +151,18 @@
     <div class="flex flex-col">
         <label for="fecha" class="block text-blue-500 font-bold mb-2">Fecha</label>
         <input type="date" name="fecha" id="fecha"
-            class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue">
+            class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue" required>
     </div>
     <div class="flex flex-col">
         <label for="horario" class="block text-blue-500 font-bold mb-2">Horario</label>
-        <select value="07:30 pm" name="horario" id="horario"
-            class="shadow border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue">
-            <option value="08:30 am">08:30 am</option>
-            <option value="10:00 am">10:00 am</option>
-            <option value="11:30 am">11:30 am</option>
-            <option value="13:00 pm">13:00 pm</option>
-            <option value="14:30 pm">14:30 pm</option>
-            <option value="16:00 pm">16:00 pm</option>
-            <option value="17:30 pm">17:30 pm</option>
-            <option value="19:00 pm">19:00 pm</option>
-            <option value="19:30 pm">19:30 pm</option>
-            <option value="20:30 pm">20:30 pm</option>
-            <option value="22:00 pm">22:00 pm</option>
+        <select name="horario" id="horarioBuscar"
+            class="shadow border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue" required>
         </select>
     </div>
     <button type="button"
-        class="cols-span-1 md:col-span-3 row-span-1 w-full bg-blue-500 text-white mx-auto hover:bg-blue-700 my-4 px-4 py-2 rounded">Buscar
-        mesas</button>
+        class="cols-span-1 md:col-span-3 row-span-1 w-full bg-blue-500 text-white mx-auto hover:bg-blue-700 my-4 px-4 py-2 rounded" id="btnBuscarHorarios">Buscar
+        horarios</button>
+        {{ macroContenedores.ContenedorResultadosHorarios() }}
 </form>
 {% endmacro %}
 

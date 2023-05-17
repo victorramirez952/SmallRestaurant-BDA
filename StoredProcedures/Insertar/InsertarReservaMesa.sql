@@ -12,9 +12,9 @@ BEGIN
     IF v_Encontrado IS NULL THEN
         INSERT INTO ReservasMesas (NumMesa, idReserva)
         VALUES (p_NumMesa, p_idReserva);
-        SELECT 'Registro insertado correctamente.';
+        COMMIT;
     ELSE
-        SELECT 'No se pudo agregar el registro. La tupla NumMesa-idReserva ya existe.';
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No se pudo agregar el registro. La tupla NumMesa-idReserva ya existe';
     END IF;
 END //
 

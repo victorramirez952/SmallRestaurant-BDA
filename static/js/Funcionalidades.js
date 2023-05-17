@@ -1,7 +1,29 @@
 $(document).ready(function () {
+      //   ***************************************
+      // //   ***************************************
+      // const csrfToken = "{{ csrf_token() }}";
+
+      // $.ajax({
+      //     url: '/getDatosCliente',
+      //     method: 'POST',
+      //     headers: {
+      //         'Content-Type': 'application/json',
+      //         'X-CSRFToken': csrfToken
+      //     },
+      //     data: JSON.stringify({ id: idCliente }),
+      //     success: function(data) {
+      //         // Aquí puedes procesar los datos recibidos y guardarlos
+      //         console.log(data);
+      //     },
+      //     error: function(error) {
+      //         // Manejar el error en caso de que la petición falle
+      //         console.error(error);
+      //     }
+      // });
+
+    var mesasSeleccionadas = []
     $(".mesaCaja").click(function() {
         let mesa = $(this).find("div");
-        // .toggleClass("bg-blue-600 border-blue-500");
         if (mesa.hasClass("bg-gray-300")) {
           $("#alertMesasSeleccionadas").text("");
           mesa.removeClass("bg-gray-300 border-gray-200");
@@ -66,11 +88,13 @@ $(document).ready(function () {
         let selectedMesas = $('.containerMesas div[data-mesa-selected="true"]');
         selectedMesas.each(function() {
           mesasIds.push($(this).data('mesa-id'));
+          console.log(mesasIds);
         });
         if(mesasIds.length != 0){
-          $('#formMesas input[name="mesasSeleccionadas"]').val(mesasIds.join(','));
+          // $('#formMesasSeleccionadas input[name="mesasSeleccionadas"]').val(mesasIds.join(','));
+          $('#mesasIdsHidden').val(JSON.stringify(mesasIds));
           mesasIds = [];
-          $('#formMesas').submit();
+          $('#formMesasSeleccionadas').submit();
         }
         else $("#alertMesasSeleccionadas").text("Selecciona al menos una mesa");
       });
@@ -128,7 +152,6 @@ $(document).ready(function () {
 
         let formularioCompleto = true;
         let form = [nombres, apellidoPaterno, apellidoMaterno, telefono, correo, passwordA, passwordB, estado, municipio, colonia, calle, numeroExterior, codigoPostal]
-        console.log(numeroInterior);
         $.each(form, function(index, variable) {
           if (!variable) {
             formularioCompleto = false;
@@ -160,53 +183,136 @@ $(document).ready(function () {
         $(".alertSignUp").addClass("hidden");
       });
 
-      //   ***************************************
-      //   ***************************************
-      const estadosJsonUrl = 'static/json/México.min.json';
-  
-      let estados;
 
-      $.getJSON(estadosJsonUrl, function(data) {
-        estados = data;
-        const estadosSelect = $('#selectEstados');
-    
-        $.each(estados, function(index, estado) {
-          const optionElement = $('<option></option>').val(estado.clave).text(estado.nombre).data('nombre', estado.nombre);
-          estadosSelect.append(optionElement);
+      //   ***************************************
+      //   ***************************************
+      $('#btnBuscarHorarios').on('click', function(event) {
+        event.preventDefault();
+        let noPersonas = $('#formularioReservacion select[name="noPersonas"]').val();
+        let fecha = $('#formularioReservacion input[name="fecha"]').val();
+        let horario = $('#formularioReservacion select[name="horario"]').val();
+        if(!noPersonas || !fecha || !horario){
+          $('#formularioReservacion')[0].reportValidity();
+          return;
+        }
+        // Convertir el horario ingresado a un objeto de fecha
+        let timeParts = horario.split(':'); // Dividir el horario en horas y minutos
+        let selectedTime = new Date(); // Crear un objeto de fecha actual
+
+        // Establecer las horas y minutos del objeto de fecha
+        selectedTime.setHours(parseInt(timeParts[0]));
+        selectedTime.setMinutes(parseInt(timeParts[1]));
+        selectedTime.setSeconds(0); // Establecer los segundos a 0
+        
+        // Definir los límites de horarios
+        let startTime = new Date();
+        startTime.setHours(8);
+        startTime.setMinutes(30);
+        startTime.setSeconds(0);
+
+        let endTime = new Date();
+        endTime.setHours(22);
+        endTime.setMinutes(30);
+        endTime.setSeconds(0);
+        
+        // Definir la cantidad máxima de horarios más tempranos y más tardíos
+        let maxHorariosTempranos = 2;
+        let maxHorariosTardios = 2;
+        
+        // Definir el intervalo de tiempo en minutos
+        let intervalMinutes = 30;
+        
+        // Calcular los horarios cercanos
+        let nearbyTimes = [];
+        
+        // Obtener los horarios más tempranos
+        let current = new Date(selectedTime);
+        for (let i = 0; i < maxHorariosTempranos; i++) {
+          current.setMinutes(current.getMinutes() - intervalMinutes);
+          if (current >= startTime) {
+            nearbyTimes.unshift(new Date(current));
+          }
+        }
+        
+        // Agregar el horario ingresado por el usuario
+        nearbyTimes.push(selectedTime);
+        
+        // Obtener los horarios más tardíos
+        current = new Date(selectedTime);
+        for (let i = 0; i < maxHorariosTardios; i++) {
+          current.setMinutes(current.getMinutes() + intervalMinutes);
+          if (current <= endTime) {
+            nearbyTimes.push(new Date(current));
+          }
+        }
+        
+        // Generar los botones en el contenedor
+        let container = $('#contenedorResultadosHorarios');
+        container.empty();
+        
+        $.each(nearbyTimes, function(index, time) {
+          let formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          let button = $('<button>')
+            .attr('type', 'button')
+            .attr('data-horario', formattedTime)
+            // .addClass('btnBuscarMesas')
+            .click(clickBtnHorario = () => $("#formularioReservacion").submit())
+            .addClass('bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded')
+            .text(formattedTime);
+          
+          container.append(button);
         });
-    
-        estadosSelect.change(function() {
-          const estadoClave = $(this).val();
-          const municipios = estados.find(est => est.clave === estadoClave).municipios;
-          const municipiosSelect = $('#selectMunicipios');
-    
-          municipiosSelect.empty();
-    
-          $.each(municipios, function(index, municipio) {
-            const optionElement = $('<option></option>').val(municipio.clave).text(municipio.nombre).data('nombre', municipio.nombre);
-            municipiosSelect.append(optionElement);
-          });
-    
-          $('#selectColonias').empty();
-        });
-      }).fail(function(jqXHR, textStatus, errorThrown) {
-        console.error('Error al obtener los estados:', textStatus, errorThrown);
       });
-    
-      $('#selectMunicipios').change(function() {
-        const estadoClave = $('#selectEstados').val();
-        const municipioClave = $(this).val();
-        const municipios = estados.find(est => est.clave === estadoClave).municipios;
-        const municipio = municipios.find(mun => mun.clave === municipioClave);
-        const localidades = municipio.localidades;
-        const localidadesSelect = $('#selectColonias');
-    
-        localidadesSelect.empty();
-    
-        $.each(localidades, function(index, localidad) {
-          const optionElement = $('<option></option>').val(localidad.clave).text(localidad.nombre).data('nombre', localidad.nombre);
-          localidadesSelect.append(optionElement);
+
+      //   ***************************************
+      //   ***************************************
+      let startTime = new Date();
+      startTime.setHours(8);
+      startTime.setMinutes(30);
+      startTime.setSeconds(0);
+      
+      let endTime = new Date();
+      endTime.setHours(22);
+      endTime.setMinutes(30);
+      endTime.setSeconds(0);
+      
+      let intervalMinutes = 30;
+      
+      let selectHorario = $('#horarioBuscar');
+      
+      while (startTime <= endTime) {
+        let formattedTime = startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        let option = $('<option>')
+          .val(formattedTime)
+          .text(formattedTime);
+        
+        selectHorario.append(option);
+        
+        startTime.setMinutes(startTime.getMinutes() + intervalMinutes);
+      }
+
+      //   ***************************************
+      //   ***************************************
+      $("#btnReservar").click(function(){
+        let nombre = $('#formularioClienteReservacion input[name="nombre"]').val();
+        let apellidoPaterno = $('#formularioClienteReservacion input[name="apellidoPaterno"]').val();
+        let apellidoMaterno = $('#formularioClienteReservacion input[name="apellidoMaterno"]').val();
+        let telefono = $('#formularioClienteReservacion input[name="telefono"]').val();
+        let solicitudEspecial = $('#formularioClienteReservacion input[name="solicitudEspecial"]').val();
+
+        let formularioCompleto = true;
+        let form = [nombre, apellidoPaterno, apellidoMaterno, telefono]
+        $.each(form, function(index, variable) {
+          if (!variable) {
+            formularioCompleto = false;
+            return false;
+          }
         });
+        if(!formularioCompleto){
+          $('#formularioClienteReservacion')[0].reportValidity();
+          return;
+        }
+        $('#formularioClienteReservacion').submit();
       });
   });
   

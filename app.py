@@ -3,6 +3,7 @@ from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash
+import json
 
 from config import config
 
@@ -137,8 +138,81 @@ def registrarUsuario():
             error_message = str(e.args[1])  # Accede al primer argumento de la excepción
             flash(error_message)
             return redirect(url_for('signUp'))
+
+@app.route('/registrarReservacion', methods=['POST'])
+def registrarReservacion():
+    if request.method == 'POST':
+        try:
+            idCliente = request.form['idCliente'];
+            fecha = session['fecha'];
+            horario = session['horario'];
+            cantidadPersonas = session['noPersonas'];
+            comentarios = request.form['solicitudEspecial'];
+            confirmada = 0;
+            if(idCliente == ''): idCliente = None;
+            mesasSeleccionadas = session['mesasSeleccionadas'];
+            if(comentarios == ''): comentarios = None;
+
+            cursor = db.connection.cursor()
+            idReserva = None
+            cursor.callproc('RegistrarReservacion', [idCliente, fecha, horario, cantidadPersonas, comentarios, confirmada, ...])
+            # Obtener los resultados utilizando un cursor
+            rows = cursor.fetchall()
+            cursor.nextset()  # Mover al siguiente conjunto de resultados
+            if len(rows) > 0:
+                idReserva = rows[0][0]
             
-    
+            for numMesa in mesasSeleccionadas:
+                cursor.callproc('InsertarReservaMesa', [numMesa, idReserva])
+                cursor.nextset()
+
+            cursor.close()
+            urlIndex = anchorIndex[1:]
+            if urlIndex == '' or  urlIndex is None:
+                    urlIndex = 'indexCliente'
+            return redirect(url_for(urlIndex))
+        except Exception as e:
+            error_message = str(e.args[1])  # Accede al primer argumento de la excepción
+            flash(error_message)
+            return error_message
+
+@app.route('/buscarHorarios', methods=['POST'])
+def buscarHorarios():
+    if request.method == 'POST':
+        try:
+            noPersonas = request.form['noPersonas'];
+            fecha = request.form['fecha'];
+            horario = request.form['horario'];
+            session['noPersonas'] = noPersonas;
+            session['fecha'] = fecha;
+            horario += ":00";
+            session['horario'] = horario;
+            cursor = db.connection.cursor()
+            cursor.callproc('ObtenerMesasDisponibles', [fecha, horario, noPersonas])
+            mesas = cursor.fetchall()
+            cursor.nextset()
+            cursor.close()
+            return render_template('clienteTemplates/mesasDisponibles.html', mesas=mesas)
+        except Exception as e:
+                error_message = str(e.args[1])  # Accede al primer argumento de la excepción
+                # flash(error_message)
+                return redirect(url_for('reservar'))
+
+@app.route('/getDatosCliente', methods=['POST'])
+def getDatosCliente():
+    try:
+        idUsuario = request.get_json()
+        cursor = db.connection.cursor()
+        cursor.callproc('ConsultarCliente', [idUsuario['id']])
+        cliente = cursor.fetchone()
+        cursor.nextset()
+        cursor.close()
+        return jsonify(cliente)
+    except Exception as e:
+        error_message = str(e.args[1])
+        # flash(error_message)
+        return redirect(url_for('reservar'))
+
 # *********************ADMIN ************************************
 
 @app.route('/loginAdmin', methods=['GET', 'POST'])
@@ -407,14 +481,29 @@ def to_int_list(lst):
     return list(map(int, lst))
 app.jinja_env.filters['to_int_list'] = to_int_list
 
-@app.route('/procesarFormMesasDisponibles', methods=['POST'])
-def procesarFormMesasDisponibles():
-    mesasSeleccionadas = request.form['mesasSeleccionadas'];
-    mesasIds = mesasSeleccionadas.split(',');
-    mesasIdsFiltrados =  list(set(mesasIds));
-    mesasIdsFiltrados = sorted(mesasIdsFiltrados, key=int);
-    session['mesasIdsFiltrados'] = mesasIdsFiltrados;
-    return redirect(url_for('formularioReservar'));
+@app.route('/procesarMesasSeleccionadas', methods=['POST'])
+def procesarMesasSeleccionadas():
+    if request.method == 'POST':
+        try:
+            mesasSeleccionadas = request.form.get('mesasIdsHidden')
+            mesasSeleccionadas = json.loads(mesasSeleccionadas)
+            print(mesasSeleccionadas)
+            session['mesasSeleccionadas'] = mesasSeleccionadas;
+            numMesas = []
+            for numMesa in mesasSeleccionadas:
+                cursor = db.connection.cursor()
+                cursor.callproc('ConsultarMesa', [numMesa])
+                resultado = cursor.fetchone()
+                if resultado:
+                    valores = [x for x in resultado]
+                    numMesas.append(valores)
+                cursor.nextset()
+            print(numMesas)
+            return render_template('clienteTemplates/formularioReservar.html', numMesas=numMesas);
+        except Exception as e:
+            error_message = str(e.args[1])  # Accede al primer argumento de la excepción
+            print(error_message)
+            return redirect(url_for('mesasDisponibles'))
 
 @app.route('/formularioReservar', methods=['GET'])
 def formularioReservar():
