@@ -5,6 +5,7 @@
 		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
                 <link href="{{url_for('static',filename='css/main.css')}}" rel="stylesheet">
                 <script src="{{url_for('static',filename='js/all.min.js')}}"></script>
+				<script src="{{url_for('static',filename='js/jquery.js')}}"></script>
 		<title>Metodo Pago</title>
 	</head>
 	<body>
@@ -17,4 +18,7 @@
 		{{ macroFormularios.FormularioPedidos(check_user_logged_in()) }}
 	</body>
 </html>
-
+<script>const csrfToken = "{{ csrf_token() }}";</script>
+<!-- Fetchs.js contiene una funcion global para actualizar el montoTotal -->
+<script src="../../static/js/Fetchs.js"></script>
+<script src="../../static/js/Funcionalidades.js"></script>

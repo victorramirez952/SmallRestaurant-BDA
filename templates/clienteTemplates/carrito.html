@@ -16,15 +16,18 @@
 		<h2 class="text-lg text-center font-bold my-4">Carrito</h2>
 		{{ macroContenedores.ContenedorUbicacion() }}
 		{% import "macros/Carrito.html" as macroCarrito %}
-		{% if cart|length == 0 %}
+		{% if carrito|length == 0 %}
 		<h2 class="text-lg text-center font-bold my-4">Tu carrito está vacío</h2>
 		{% else %}s
 			<h1 class="text-lg text-center font-bold my-4">Carrito de compras</h1>
-			{{ macroCarrito.Carrito(cart) }}
+			{{ macroCarrito.Carrito(carrito) }}
 		{% endif %}
 		{{ macroModales.ModalCarritoEliminar() }}
 		{{ macroModales.ModalVaciarCarrito() }}
 	</body>
 </html>
-<script src="../../static/js/Funcionalidades.js"></script>
+<script>const csrfToken = "{{ csrf_token() }}";</script>
+<!-- Fetchs.js contiene una funcion global para actualizar el montoTotal -->
+<script src="../../static/js/Fetchs.js"></script>
 <script src="../../static/js/Modales.js"></script>
+<script src="../../static/js/Funcionalidades.js"></script>

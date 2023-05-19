@@ -5,11 +5,11 @@ CREATE PROCEDURE MostrarProductosPorComida(
 )
 BEGIN
     IF p_Comida = 1 THEN
-        SELECT NombreProducto, Precio, Imagen
+        SELECT idProducto, NombreProducto, Precio, Descripcion, Imagen
         FROM Productos
         WHERE Comida = 1;
     ELSEIF p_Comida = 0 THEN
-        SELECT NombreProducto, Precio, Imagen
+        SELECT idProducto, NombreProducto, Precio, Descripcion, Imagen
         FROM Productos
         WHERE Comida = 0;
     END IF;

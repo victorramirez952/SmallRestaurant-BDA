@@ -10,7 +10,8 @@ BEGIN
   -- Verificar si el NumTransaccion ya existe en la tabla Pagos
   SELECT NumTransaccion INTO v_idPago
   FROM Pagos
-  WHERE NumTransaccion = p_NumTransaccion;
+  WHERE NumTransaccion = p_NumTransaccion
+  LIMIT 1;
 
   IF v_idPago IS NULL THEN
     -- El NumTransaccion no existe en la tabla Pagos, mostrar un mensaje de error

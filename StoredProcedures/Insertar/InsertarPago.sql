@@ -12,18 +12,19 @@ BEGIN
   -- Verificar si el Pedido existe
   SELECT NumTransaccion INTO v_numTransaccion
   FROM Pagos
-  WHERE idPedido = p_idPedido;
+  WHERE idPedido = p_idPedido
+  LIMIT 1;
 
-  IF v_numTransaccion IS NULL THEN
+  IF v_numTransaccion IS NOT NULL THEN
+    -- El NumTransaccion ya existe, lanzar un error mediante SIGNAL
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El NumTransaccion ya existe en la tabla Pagos.';
+  ELSE
     -- El Pedido no existe, insertar un nuevo registro
     INSERT INTO Pagos (MontoTotal, idMetodoPago, idPedido)
     VALUES (p_MontoTotal, p_idMetodoPago, p_idPedido);
 
     -- Obtener el numTransaccion insertado
     SET p_numTransaccion = LAST_INSERT_ID();
-  ELSE
-    -- El Pedido ya existe, retornar el numTransaccion encontrado
-    SET p_numTransaccion = v_numTransaccion;
   END IF;
 END //
 

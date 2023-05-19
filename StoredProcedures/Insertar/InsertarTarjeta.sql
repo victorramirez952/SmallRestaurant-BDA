@@ -12,7 +12,8 @@ BEGIN
   -- Verificar si el NumeroTarjeta ya existe
   SELECT idTarjeta INTO v_idTarjeta
   FROM Tarjetas
-  WHERE NumeroTarjeta = p_NumeroTarjeta;
+  WHERE NumeroTarjeta = p_NumeroTarjeta
+  LIMIT 1;
 
   IF v_idTarjeta IS NULL THEN
     -- El NumeroTarjeta no existe, insertar un nuevo registro

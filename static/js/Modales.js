@@ -123,7 +123,11 @@ $(document).ready(function () {
   // ****************ELIMINAR CARRITO***************************
   var productId;
   $(".btnModalEliminarCarrito").click(function () {
-    productId = $(this).data('product-id');
+    let idDetalleCarrito = $(this).closest('#containerProductoCarrito').find('.inputIdDetalleCarrito').val();
+    let idProducto = $(this).closest('#containerProductoCarrito').find('.inputIdDetalleCarritoProducto').val();
+    $("#modalIdDetalleCarrito").val(idDetalleCarrito)
+    $("#modalIdDetalleCarritoProducto").val(idProducto)
+    // productId = $(this).data('product-id');
 
     // Show the modal
     $("#modalCarritoEliminar").css("display", "flex");
@@ -133,17 +137,15 @@ $(document).ready(function () {
     $("#modalCarritoEliminar").hide();
   });
 
-  $(".btnAceptarEliminarCarrito").click(function () {
-    if (productId) {
-      location.href = "eliminarProductoCarrito/" + productId;
-    }
-  });
+  // Funcionalidad movida en el archivo Fetchs.js
+  // $(".btnAceptarEliminarCarrito").click(function () {
+  // });
 
   // ***********************************************
   // ****************VACIAR CARRITO***************************
   $(".btnModalVaciarCarrito").click(function () {
-
-    // Show the modal
+    let idCarrito = $(this).closest('#containerPagar').find('.inputIdCarrito').val();
+    $("#modalIdCarrito").val(idCarrito)
     $("#modalVaciarCarrito").css("display", "flex");
   });
 
@@ -152,7 +154,18 @@ $(document).ready(function () {
   });
 
   $(".btnAceptarVaciarCarrito").click(function () {
-      location.href = "vaciarCarrito";
+      $("#formVaciarCarrito").submit();
   });
-  
+
+  // ***********************************************
+  // ****************AGREGAR AL  CARRITO***************************
+  $("#btnModalAgregarProductoCarrito").click(function () {
+    let idProducto = $('#formModalAgregarCarrito input[name="idProducto"]').val();
+    let cantidad = $('#formModalAgregarCarrito input[name="cantidad"]').val();
+    let comentarios = $('#formModalAgregarCarrito textarea[name="comentarios"]').val();
+    $('#formModalAgregarCarrito')[0].reportValidity();
+    if ($('#formModalAgregarCarrito')[0].checkValidity()) {
+      $("#formModalAgregarCarrito").submit();  // Enviar el formulario si es válido
+    }    
+  });
 });

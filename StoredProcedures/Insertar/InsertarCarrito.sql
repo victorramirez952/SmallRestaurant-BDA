@@ -11,7 +11,7 @@ BEGIN
 
     IF v_Encontrado IS NULL THEN
         INSERT INTO Carritos (idCliente)
-        VALUES (p_idCliente);
+        VALUES (p_idCliente);   
         SET p_IdInsertado = LAST_INSERT_ID();
     ELSE
         SET p_IdInsertado = v_Encontrado;

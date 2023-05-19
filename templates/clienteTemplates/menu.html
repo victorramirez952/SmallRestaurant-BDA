@@ -13,13 +13,14 @@
         {% import "macros/Modales.html" as macroModales %}
         {{ macroNavbar.NavbarCliente(check_user_logged_in(), current_user) }}
         <h2 class="text-lg text-center font-bold my-4">Menu</h2>
-        <div class="flex gap-4 w-full sm:w-3/4 mx-auto font-medium text-lg">
-            <a href="#">Platillos</a>
-            <a href="#">Bebidas</a>
+        <div class="flex place-content-start gap-4 w-full lg:w-10/12 mx-auto font-medium text-lg">
+            <a href="/getProductosComidas" id="btnVerPlatillos" class="bg-blue-500 text-white hover:bg-blue-700 my-4 px-4 py-2 rounded">Platillos</a>
+            <a href="/getProductosBebidas" id="btnVerBebidas" class="bg-blue-500 text-white hover:bg-blue-700 my-4 px-4 py-2 rounded">Bebidas</a>
         </div>
         {% import "macros/Contenedores.html" as macroContenedores %}
-        {{ macroContenedores.ContenedorPlatillos() }}
+        {{ macroContenedores.ContenedorPlatillos(productos) }}
         {{ macroModales.ModalProducto() }}
 	</body>
 </html>
 <script src="../../static/js/Funcionalidades.js"></script>
+<script src="../../static/js/Modales.js"></script>

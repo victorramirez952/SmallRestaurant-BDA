@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
+from flask import Flask, render_template, render_template_string, request, redirect, url_for, flash, session, jsonify
 from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash
-import json
+import json, datetime
 
 from config import config
 
@@ -73,26 +73,94 @@ def signUp():
         return render_template('signUp.html', anchorLogin="/loginCliente")
     return render_template('signUp.html', anchorLogin=anchorLogin)
 
-@app.route('/agregarCarrito/<string:productId>', methods=['POST'])
-def agregarCarrito(productId):
-    cart = session.get('cart', [])
-    if productId not in cart: # verifica si el ID del producto ya está en el carrito
-        cart.append(productId)
-        session['cart'] = cart
-    return redirect(url_for('carrito'))
+@app.route('/agregarCarrito', methods=['POST'])
+def agregarCarrito():
+    # cart = session.get('cart', [])
+    try:
+        global anchorLogin;
+        idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+        if idUsuario is None:
+            return redirect(url_for("clienteTemplates/indexCliente"))
+        idProducto = request.form['idProducto'];
+        cantidad = request.form['cantidad'];
+        print("cantidad:", cantidad)
+        comentarios = request.form['comentarios'];
+        if not comentarios: comentarios = None;
 
-@app.route('/vaciarCarrito')
+        print(idUsuario)
+        print(idProducto)
+        print(cantidad)
+        print(comentarios)
+
+        cursor = db.connection.cursor()
+        cursor.callproc('RegistrarProductoCarrito', [idUsuario, idProducto, cantidad, comentarios, ...])
+        # Obtener los resultados utilizando un cursor
+        rows = cursor.fetchall()
+        cursor.nextset()  # Mover al siguiente conjunto de resultados
+        cursor.close()
+        return redirect(url_for('carrito'))
+        # if productId not in cart: # verifica si el ID del producto ya está en el carrito
+        #     cart.append(productId)
+        #     session['cart'] = cart
+    except Exception as e:
+            error_message = str(e.args[1])
+            flash(error_message)
+            return redirect(url_for('indexCliente'))
+
+@app.route('/editarCantidadProductoCarrito', methods=['POST'])
+def editarCantidadProductoCarrito():
+    try:
+        detalleCarrito = request.get_json()
+        idDetalleCarrito = detalleCarrito['idDetalleCarrito']
+        cantidad = 1
+        suma = detalleCarrito['suma']
+        cursor = db.connection.cursor()
+        print(idDetalleCarrito)
+        print(cantidad)
+        print(suma)
+        cursor.callproc('EditarCantidadProductoCarrito', [idDetalleCarrito, cantidad, suma])
+        cursor.nextset()
+        cursor.close()
+        return jsonify("Exito")
+    except Exception as e:
+        error_message = str(e.args[1])
+        # flash(error_message)
+        return jsonify(error_message)
+
+@app.route('/vaciarCarrito', methods=['POST'])
 def vaciarCarrito():
-    session.pop('cart', None)
-    return redirect(url_for('carrito'))
+    # session.pop('cart', None)
+    try:
+        idCarrito = request.form['idCarrito']
+        cursor = db.connection.cursor()
+        cursor.callproc('VaciarCarrito', [idCarrito])
+        cursor.nextset()
+        cursor.close()
+        return redirect(url_for('carrito'))
+    except Exception as e:
+        error_message = str(e.args[1])
+        # flash(error_message)
+        return redirect(url_for('carrito'))
 
-@app.route('/eliminarProductoCarrito/<string:productId>')
-def eliminarProductoCarrito(productId):
-    cart = session.get('cart', [])
-    if productId in cart:
-        cart.remove(productId)
-        session['cart'] = cart
-    return redirect(url_for('carrito'))
+@app.route('/eliminarProductoCarrito', methods=['POST'])
+def eliminarProductoCarrito():
+    # cart = session.get('cart', [])
+    # if productId in cart:
+    #     cart.remove(productId)
+    #     session['cart'] = cart
+    try:
+        detalleCarrito = request.get_json()
+        idDetalleCarrito = detalleCarrito['idDetalleCarrito']
+        idProducto = detalleCarrito['idProducto']
+        cursor = db.connection.cursor()
+        cursor.callproc('EliminarProductoCarrito', [idDetalleCarrito, idProducto])
+        cursor.nextset()
+        cursor.close()
+        return jsonify("Exito")
+    except Exception as e:
+        error_message = str(e.args[1])
+        # flash(error_message)
+        return jsonify(error_message)
 
 @app.route('/pagarPedido')
 def pagarPedido():
@@ -374,10 +442,37 @@ def confirmarReserva():
 def actDispMesas():
     return render_template('empleadoTemplates/actDisponibilidadMesas.html')
 
-@app.route('/registrarPedido', methods=['GET'])
+@app.route('/registrarPedido', methods=['POST'])
 @login_required
 def registrarPedido():
-    return render_template('empleadoTemplates/registrarPedido.html')
+    if request.method == "POST":
+        try:
+            idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+            if idUsuario is None:
+                return redirect(url_for("clienteTemplates/indexCliente"))
+            numeroTarjeta = request.form['noTarjeta'];
+            fechaVencimiento = request.form['fechaVencimiento'];
+            titular = request.form['titular'];
+            idMetodoPago = request.form['idMetodoPago'];
+            print("numeroTarjeta: ", numeroTarjeta)
+            print("fechaVencimiento: ", fechaVencimiento)
+            print("titular: ", titular)
+            print("idMetodoPago: ", idMetodoPago)
+            fecha_actual = datetime.date.today()
+            hora_actual = datetime.datetime.now().time()
+            hora_formateada = hora_actual.strftime("%H:%M:%S")
+            print(fecha_actual)
+            print(hora_formateada)
+
+            cursor = db.connection.cursor()
+            cursor.callproc('RegistrarPedidoEnLinea', [idUsuario, fecha_actual, hora_formateada, idMetodoPago, numeroTarjeta, fechaVencimiento, titular, ...])
+            cursor.nextset()  # Mover al siguiente conjunto de resultados
+            cursor.close()
+            return redirect(url_for('listaPedidos'))
+        except Exception as e:
+                error_message = str(e.args[1])
+                print(error_message)
+                return redirect(url_for('indexCliente'))
 
 @app.route('/pedidosOnline', methods=['GET'])
 @login_required
@@ -454,12 +549,91 @@ def indexCliente():
 
 @app.route('/menu', methods=['GET'])
 def menu():
-    return render_template('clienteTemplates/menu.html')
+    try:
+        global anchorLogin;
+        cursor = db.connection.cursor()
+        cursor.callproc('MostrarProductosPorComida', [1])
+        resultados = cursor.fetchall()
+        cursor.nextset()
+        cursor.close()
+        return render_template('clienteTemplates/menu.html', productos=resultados)
+    except Exception as e:
+        error_message = str(e.args[1])
+        print(error_message)
+        return redirect(url_for('indexCliente'))
+    
+@app.route('/getProductosBebidas', methods=['GET'])
+def getProductosBebidas():
+    try:
+        global anchorLogin;
+        macro1 = "ContenedorPlatillos";
+        cursor = db.connection.cursor()
+        cursor.callproc('MostrarProductosPorComida', [0])
+        productos = cursor.fetchall()
+        cursor.nextset()
+        cursor.close()
+        return render_template("clienteTemplates/menu.html", productos=productos)
+    except Exception as e:
+        error_message = str(e.args[1])
+        print(error_message)
+        return jsonify(error_message)
+
+@app.route('/getProductosComidas', methods=['GET'])
+def getProductosComidas():
+    try:
+        global anchorLogin;
+        cursor = db.connection.cursor()
+        cursor.callproc('MostrarProductosPorComida', [1])
+        productos = cursor.fetchall()
+        cursor.nextset()
+        cursor.close()
+        return render_template("clienteTemplates/menu.html", productos=productos)
+    except Exception as e:
+        error_message = str(e.args[1])
+        print(error_message)
+        return jsonify(error_message)
 
 @app.route('/carrito', methods=['GET'])
 def carrito():
-    cart = session.get('cart', [])
-    return render_template('clienteTemplates/carrito.html', cart=cart)
+    try:
+        global anchorLogin;
+        idUsuario = None
+        idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+        print(idUsuario)
+        if idUsuario is not None:
+            cursor = db.connection.cursor()
+            cursor.callproc('ConsultarProductosCarrito', [idUsuario])
+            productos = cursor.fetchall()
+            print(productos)
+            cursor.nextset()
+            cursor.close()
+            return render_template("clienteTemplates/carrito.html", carrito=productos)
+        cart = session.get('cart', [])
+        return render_template("clienteTemplates/carrito.html", carrito=cart)
+    except Exception as e:
+        error_message = str(e.args[1])
+        print(error_message)
+        return render_template('clienteTemplates/indexCliente.html')
+
+@app.route('/calcularMontoTotal', methods=['GET'])
+def calcularMontoTotal():
+    try:
+        global anchorLogin;
+        idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+        if idUsuario is not None:
+            cursor = db.connection.cursor()
+            cursor.callproc('CalcularMontoTotal', [idUsuario])
+            print(idUsuario)
+            montoTotal = cursor.fetchone()
+            print(montoTotal)
+            cursor.nextset()
+            cursor.close()
+            return jsonify(montoTotal)
+        return jsonify("No se proporcionó un idUsuario")
+    except Exception as e:
+        error_message = str(e.args[1])
+        print(error_message)
+        return jsonify(error_message)
 
 @app.route('/metodoPago', methods=['GET'])
 def metodoPago():
@@ -467,7 +641,24 @@ def metodoPago():
 
 @app.route('/listaPedidos', methods=['GET'])
 def listaPedidos():
-    return render_template('clienteTemplates/listaPedidos.html')
+    try:
+        idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+        if idUsuario is not None:
+            cursor = db.connection.cursor()
+            cursor.callproc('ConsultarPedidosEnProceso', [idUsuario])
+            pedidosEnProceso = cursor.fetchall()
+            print(pedidosEnProceso)
+            cursor.nextset()
+            cursor.callproc('ConsultarPedidosEntregados', [idUsuario])
+            pedidosEntregados = cursor.fetchall()
+            print(pedidosEntregados)
+            cursor.close()
+            return render_template('clienteTemplates/listaPedidos.html', pedidosEnProceso=pedidosEnProceso, pedidosEntregados=pedidosEntregados)
+        return jsonify("No se proporcionó un idUsuario")
+    except Exception as e:
+        error_message = str(e.args[1])
+        print(error_message)
+        return redirect(url_for('clienteTemplates/indexCliente.html'))
 
 @app.route('/mesasDisponibles', methods=['GET'])
 def mesasDisponibles():
@@ -501,7 +692,7 @@ def procesarMesasSeleccionadas():
             print(numMesas)
             return render_template('clienteTemplates/formularioReservar.html', numMesas=numMesas);
         except Exception as e:
-            error_message = str(e.args[1])  # Accede al primer argumento de la excepción
+            error_message = str(e.args[1])
             print(error_message)
             return redirect(url_for('mesasDisponibles'))
 

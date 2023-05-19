@@ -20,37 +20,41 @@
 </div>
 {% endmacro %}
 
-{% macro Platillo(platillo, precio) %}
+{% macro Platillo(producto) %}
+<form action="{{ url_for('agregarCarrito') }}" method="post" class="formPlatillo">
 <div
     class="containerPlatillo h-auto px-0 sm:px-4 py-2 container border border-gray-600 bg-gray-300 grid grid-cols-1 lg:grid-cols-2 grid-rows-2 lg:grid-rows-1 platillo">
+    <input type="hidden" name="comentarios">
     <!-- Contenedor izquierdo -->
     <div class="container max-h-full grid grid-rows-5">
-        <p class="font-medium text-base nombrePlatillo">{{ platillo }}</p>
-        <p class="row-span-3 descripcionPlatillo text-sm text-ellipsis p-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sagittis tincidunt odio. Vestibulum eget commodo nisl, id scelerisque est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sagittis tincidunt odio. Vestibulum eget commodo nisl, id scelerisque est.</p>
+        <p class="font-medium text-base nombrePlatillo">{{ producto[1] }}</p>
+        <p class="row-span-3 descripcionPlatillo text-sm text-ellipsis p-1">{{ producto[3] }}</p>
         <!-- Contenedor de opciones inferiores -->
         <div class="containerButtons container grid grid-cols-7 mt-2 items-center text-center">
-            <p class="font-medium text-sm col-span-2 text-start precioPlatillo">${{ precio }} MXN</p>
-            <input type="number" name="cantidad" class="col-span-2 text-center" min="0" value="0">
+            <p class="font-medium text-sm col-span-2 text-start precioPlatillo">${{ producto[2] }} MXN</p>
+            <input type="number" name="cantidad" class="col-span-2 text-center" min="1" value="0">
             <p class="text-center font-medium">U</p>
-            <button class="flex hover:text-blue-400 items-center justify-center font-medium rounded-md btnMasProducto">
+            <button type="button" class="flex hover:text-blue-400 items-center justify-center font-medium rounded-md btnMasProductoMenu">
                 <i class="h-7 fa-solid fa-circle-plus"></i>
             </button>
-            <button class="flex hover:text-blue-400 items-center justify-center font-medium rounded-md btnMenosProducto">
+            <button type="button" class="flex hover:text-blue-400 items-center justify-center font-medium rounded-md btnMenosProductoMenu">
                 <i class="h-7  fa-solid fa-circle-minus"></i>
             </button>
         </div>
     </div>
     <!-- Contenedor derecho -->
     <div class="container grid grid-rows-6 gap-y-0 sm:gap-y-4">
-        <div class="border border-gray-600 row-span-5 "></div>
-        <form action="{{ url_for('agregarCarrito', productId=platillo) }}" method="post">
+        <div class="border border-gray-600 row-span-5">
+            <img src="{{url_for('static',filename='images/producto[5]')}}" alt="{{ producto[4] }}">
+        </div>
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-            <button type="submit"
+            <input type="hidden" name="idProducto" id="idProducto" value="{{ producto[0] }}">
+            <button type="button"
                 class="row-span-2 w-full bg-blue-500 place-self-end text-white hover:bg-blue-700 px-4 py-2 btnAgregarCarrito">Agregar al
                 carrito</button>
-        </form>
-    </div>
-</div>
+            </div>
+        </div>
+    </form>
 {% endmacro %}
 
 {% macro MesaDisponible(mesa) %}

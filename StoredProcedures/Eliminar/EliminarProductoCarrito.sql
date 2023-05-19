@@ -1,18 +1,33 @@
 DELIMITER //
 
 CREATE PROCEDURE EliminarProductoCarrito(
-  IN p_idCliente INT,
+  IN p_idDetalleCarrito INT,
   IN p_idProducto INT
 )
 BEGIN
-  DELETE FROM DetallesCarritos
-  WHERE idCarrito IN (
-    SELECT idCarrito
-    FROM Carritos
-    WHERE idCliente = p_idCliente
-  ) AND idProducto = p_idProducto;
+  DECLARE EXIT HANDLER FOR SQLEXCEPTION
+  BEGIN
+    ROLLBACK;
+    RESIGNAL;
+  END;
 
-  SELECT 'El producto ha sido eliminado del carrito.' AS mensaje;
+  START TRANSACTION;
+
+  -- Verificar si el registro existe en la tabla DetallesCarritos
+  SELECT COUNT(*) INTO @recordCount
+  FROM DetallesCarritos
+  WHERE idDetalleCarrito = p_idDetalleCarrito AND idProducto = p_idProducto;
+
+  IF @recordCount > 0 THEN
+    -- Eliminar el registro
+    DELETE FROM DetallesCarritos
+    WHERE idDetalleCarrito = p_idDetalleCarrito AND idProducto = p_idProducto;
+  ELSE
+    -- Lanzar un error personalizado si el registro no existe
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El registro no existe en la tabla DetallesCarritos.';
+  END IF;
+
+  COMMIT;
 END //
 
 DELIMITER ;

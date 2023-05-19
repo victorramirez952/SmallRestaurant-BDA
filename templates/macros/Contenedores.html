@@ -26,16 +26,13 @@
 </div>
 {% endmacro %}
 
-{% macro ContenedorPlatillos() %}
+{% macro ContenedorPlatillos(productos) %}
 {% import "macros/Cajas.html" as macroCajas %}
 <div id="containerPlatillos"
     class="w-full lg:w-10/12 mx-auto my-5 container grid grid-cols-1 sm:grid-cols-2 gap-y-64 md:gap-4">
-    {{ macroCajas.Platillo('Enchiladas', 100.00) }}
-    {{ macroCajas.Platillo('Flautas', 150.50) }}
-    {{ macroCajas.Platillo('Quesadillas', 69.99) }}
-    {{ macroCajas.Platillo('Torta', 79.99) }}
-    {{ macroCajas.Platillo('Tamales', 99.99) }}
-    {{ macroCajas.Platillo('Quesadillas sin queso', 100.00) }}
+    {% for producto in productos %}
+        {{ macroCajas.Platillo(producto) }}
+    {% endfor %}
 </div>
 {% endmacro %}
 
@@ -50,22 +47,24 @@
 </div>
 {% endmacro %}
 
-{% macro ContenedorPagar() %}
+{% macro ContenedorPagar(idCarrito) %}
 <div class="container h-24 w-full sm:w-3/4 flex justify-between items-center px-4 py-2 mx-auto my-8 border border-gray-600 bg-gray-400"
     id="containerPagar">
+    <input type="hidden" value="{{ idCarrito }}" class="inputIdCarrito">
     <i class="fa-solid fa-trash-can h-10 hover:text-blue-400 btnModalVaciarCarrito"></i>
     <button type="button"
-        class="h-5/6 w-3/5 sm:w-2/5 bg-blue-500 text-white flex items-center justify-center hover:bg-blue-700 my-8 px-4 py-2 rounded text-xl font-bold" onclick="location.href='/metodoPago'">Pagar
-        $400.00 MXN</button>
+        class="h-5/6 w-3/5 sm:w-2/5 bg-blue-500 text-white flex items-center justify-center hover:bg-blue-700 my-8 px-4 py-2 rounded text-xl font-bold" onclick="location.href='/metodoPago'">Pagar&nbsp;
+        $<span id="montoTotal"></span>&nbsp;MXN</button>
 </div>
 {% endmacro %}
 
-{% macro ContenedorPedido(Fecha, Estado) %}
+{% macro ContenedorPedido(pedido) %}
 <div class="w-full py-4 container grid grid-cols-3 sm:grid-cols-5 gap-x-2 border border-b-gray-600">
     <div class="col-span-1 h-32 bg-gray-300"></div>
     <div class="col-span-2 sm:col-span-4 flex flex-col justify-between">
-        <p>Fecha: {{ Fecha }}</p>
-        <p>Estado: {{ Estado }}</p>
+        <p>Fecha: {{ pedido[1] }}</p>
+        <p>Hora: {{ pedido[2] }}</p>
+        <p>Estado: {{ pedido[3] }}</p>
     </div>
 </div>
 {% endmacro %}

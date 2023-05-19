@@ -1,27 +1,5 @@
 $(document).ready(function () {
-      //   ***************************************
-      // //   ***************************************
-      // const csrfToken = "{{ csrf_token() }}";
-
-      // $.ajax({
-      //     url: '/getDatosCliente',
-      //     method: 'POST',
-      //     headers: {
-      //         'Content-Type': 'application/json',
-      //         'X-CSRFToken': csrfToken
-      //     },
-      //     data: JSON.stringify({ id: idCliente }),
-      //     success: function(data) {
-      //         // Aquí puedes procesar los datos recibidos y guardarlos
-      //         console.log(data);
-      //     },
-      //     error: function(error) {
-      //         // Manejar el error en caso de que la petición falle
-      //         console.error(error);
-      //     }
-      // });
-
-    var mesasSeleccionadas = []
+    let mesasSeleccionadas = []
     $(".mesaCaja").click(function() {
         let mesa = $(this).find("div");
         if (mesa.hasClass("bg-gray-300")) {
@@ -36,20 +14,6 @@ $(document).ready(function () {
           }
       });
 
-    //   ***************************************
-    $(".btnMasProducto").click(function() {
-        var input = $(this).siblings('input[type="number"]');
-        var value = parseInt(input.val());
-        input.val(value + 1);
-      });
-
-    //   ***************************************
-    $(".btnMenosProducto").click(function() {
-        var input = $(this).siblings('input[type="number"]');
-        var value = parseInt(input.val());
-        if(value != 0) input.val(value - 1);
-      });
-
       //   ***************************************
     $(".btnCloseModalProducto").click(function() {
         $("#modalProducto").hide();
@@ -62,14 +26,29 @@ $(document).ready(function () {
       if (!$(event.target).closest('.containerButtons, .btnAgregarCarrito').length) {
         // Do something if the click was not on an excluded div
         let platillo = $(this).find(".nombrePlatillo");
+        let idProducto = $(this).find("input[name='idProducto']").val();
         let descripcion = $(this).find(".descripcionPlatillo");
         let precioPlatillo = $(this).find(".precioPlatillo");
-        $("#modalProducto .modalNombrePlatillo").text(platillo.text());
-        $("#modalProducto .modalDescripcionPlatillo").text(descripcion.text());
-        $("#modalProducto .modalPrecioPlatillo").text(precioPlatillo.text());
+        $("#formModalAgregarCarrito input[name='idProducto']").val(idProducto);
+        $("#formModalAgregarCarrito .modalNombrePlatillo").text(platillo.text());
+        $("#formModalAgregarCarrito .modalDescripcionPlatillo").text(descripcion.text());
+        $("#formModalAgregarCarrito .modalPrecioPlatillo").text(precioPlatillo.text());
         $("#modalProducto").css("display", "flex");
       }
       });
+
+      $(".btnMasProductoMenu").click(function() {
+        let input = $(this).siblings('input[type="number"]');
+        let value = parseInt(input.val());
+        input.val(value + 1);
+      });
+
+    //   ***************************************
+    $(".btnMenosProductoMenu").click(function() {
+        let input = $(this).siblings('input[type="number"]');
+        let value = parseInt(input.val());
+        if(value > 0)input.val(value - 1);
+    });
 
       //   ***************************************
       //   ***************************************
@@ -313,6 +292,30 @@ $(document).ready(function () {
           return;
         }
         $('#formularioClienteReservacion').submit();
+      });
+
+      //   ***************************************
+      //   ***************************************
+      $("#btnVerBebidas").click(function(){
+       window.location.href = "getProductosComida";
+      });
+
+      //   ***************************************
+      //   ***************************************
+      $(".btnAgregarCarrito").click(function(){
+        let formulario = $(this).closest(".formPlatillo")
+        formulario[0].reportValidity();
+        if (formulario[0].checkValidity()) {
+          formulario[0].submit();  // Enviar el formulario si es válido
+        }
+      });
+
+      $("#btnPagarPedido").click(function(){
+        let formulario = $("#formularioPedido");
+        formulario[0].reportValidity();
+        if (formulario[0].checkValidity()) {
+          formulario[0].submit();  // Enviar el formulario si es válido
+        }
       });
   });
   
