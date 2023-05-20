@@ -97,8 +97,9 @@ Hay dos formas de hacerlo
 
 ### Subiendo el archivo .zip
 ___
-Subir el archivo .zip a la instancia utilizando la funcionalidad "Subir Archivo" de SSH
+No recomendamos este método ya que el proyecto sufrió algunos cambios en el código y en el archivo dump, esto con el fin de corregir errores que ocurrían al migrar el proyecto de Windows a Linux.
 
+Subir el archivo .zip a la instancia utilizando la funcionalidad "Subir Archivo" de SSH
 Descomprimir el archivo .zip mediante:
 ```
 unzip 'Proyecto Final Pequeño Restaurante.zip
