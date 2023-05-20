@@ -7,17 +7,32 @@ import json, datetime
 
 from config import config
 
-app = Flask(__name__)
-
-# Models:
 from models.ModelUser import ModelUser
 
-# Entities:
 from models.entities.User import User
+
+app = Flask(__name__)
+app.secret_key = 'B!1w8NAt1T^%kvhUI*S^'
+
+# Models:
 
 csrf = CSRFProtect()
 db = MySQL(app)
 login_manager_app = LoginManager(app)
+
+csrf.init_app(app)
+app.config.from_object(config['development'])
+
+# Define the status_401 function
+def status_401(error):
+    return redirect(url_for('/'))
+
+# Register the error handler
+@app.errorhandler(401)
+def handle_401_error(error):
+    return status_401(error)
+
+# Entities:
 
 @login_manager_app.user_loader
 def load_user(idUsuario):
