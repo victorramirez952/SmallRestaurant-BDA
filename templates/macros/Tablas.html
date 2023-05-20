@@ -26,47 +26,40 @@
 </div>
 {% endmacro %}
 
-{% macro TablaPersonal() %}
+{% macro TablaPersonal(personal) %}
 <div class="overflow-x-auto">
     <table
         class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
         <thead class="bg-gray-300 text-black">
             <tr>
                 <th class="px-6 py-3 border border-gray-500">Id</th>
-                <th class="px-6 py-3 border border-gray-500">RFC</th>
                 <th class="px-6 py-3 border border-gray-500">Nombre</th>
-                <th class="px-6 py-3 border border-gray-500">Apellido</th>
+                <th class="px-6 py-3 border border-gray-500">Apellido Paterno</th>
+                <th class="px-6 py-3 border border-gray-500">Apellido Materno</th>
                 <th class="px-6 py-3 border border-gray-500">Salario</th>
+                <th class="px-6 py-3 border border-gray-500">Correo</th>
+                <th class="px-6 py-3 border border-gray-500">Tipo Usuario</th>
                 <th class="px-6 py-3 border border-gray-500">Acciones</th>
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-300">
-            <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">1</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">XYZ</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Yondu</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Udonta</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">25000</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
-                    <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
-                </td>
-            </tr>
-            <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">2</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">YZZ</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Peter</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Quill</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">1000000</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
-                    <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
-                </td>
-            </tr>
+            {% for persona in personal %}
+                <tr class="bg-gray-100 hover:bg-gray-200">
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ persona[0] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ persona[1] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ persona[2] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ persona[3] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ persona[4] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ persona[5] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ persona[6] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                        <button type="button"
+                            class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
+                        <button type="button"
+                            class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>
@@ -78,38 +71,34 @@
         class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
         <thead class="bg-gray-300 text-black">
             <tr>
+                <th class="px-6 py-3 border border-gray-500">Id</th>
                 <th class="px-6 py-3 border border-gray-500">Ingrediente</th>
                 <th class="px-6 py-3 border border-gray-500">Cantidad</th>
+                <th class="px-6 py-3 border border-gray-500">TipoUnidad</th>
                 <th class="px-6 py-3 border border-gray-500">Acciones</th>
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-300">
-            <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Harina</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">10</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
-                    <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
-                </td>
-            </tr>
-            <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Azucar</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">1</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
-                    <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
-                </td>
-            </tr>
+            {% for ingrediente in ingredientes %}
+                <tr class="bg-gray-100 hover:bg-gray-200">
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ ingrediente[0] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ ingrediente[1] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ ingrediente[2] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ ingrediente[3] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                        <button type="button"
+                            class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
+                        <button type="button"
+                            class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>
 {% endmacro %}
 
-{% macro TablaMesas() %}
+{% macro TablaMesas(mesas) %}
 <div class="overflow-x-auto">
     <table
         class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
@@ -122,242 +111,187 @@
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-300">
-            <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">1</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">4</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Disponible</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
-                    <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
-                </td>
-            </tr>
-            <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">2</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">6</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">No Disponible</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
-                    <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
-                </td>
-            </tr>
+            {% for mesa in mesas %}
+                <tr class="bg-gray-100 hover:bg-gray-200">
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ mesa[0] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ mesa[1] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ mesa[2] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                        <button type="button"
+                            class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
+                        <button type="button"
+                            class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>
 {% endmacro %}
 
-{% macro TablaIngredientes() %}
+{% macro TablaIngredientes(ingredientes) %}
 <div class="overflow-x-auto">
     <table class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
         <thead class="bg-gray-300 text-black">
             <tr>
-                <th class="px-6 py-3 border border-gray-500">Ingrediente</th>
-                <th class="px-6 py-3 border border-gray-500">Stock</th>
+                <th class="px-6 py-3 border border-gray-500">Id</th>
+                <th class="px-6 py-3 border border-gray-500">Nombre Ingrediente</th>
+                <th class="px-6 py-3 border border-gray-500">Stock Ingrediente</th>
+                <th class="px-6 py-3 border border-gray-500">Tipo Unidad</th>
                 <th class="px-6 py-3 border border-gray-500">Acciones</th>
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-300">
+            {% for ingrediente in ingredientes %}
             <tr class="bg-gray-100 hover:bg-gray-200 fila-tabla">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Harina</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">100</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ ingrediente[0] }}</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ ingrediente[1] }}</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ ingrediente[2] }}</td>
+                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ ingrediente[3] }}</td>
                 <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
                     <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
                     <button type="button" class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
                 </td>
             </tr>
-            <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Sal</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">25</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
-                    <button type="button" class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
-                </td>
-            </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>
 {% endmacro %}
 
-{% macro TablaProductos() %}
-<div class="overflow-x-auto">
-    <table
-        class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
-        <thead class="bg-gray-300 text-black">
-            <tr>
-                <th class="px-6 py-3 border border-gray-500">Nombre</th>
-                <th class="px-6 py-3 border border-gray-500">Tipo</th>
-                <th class="px-6 py-3 border border-gray-500">Precio</th>
-                <th class="px-6 py-3 border border-gray-500">Ingredientes</th>
-                <th class="px-6 py-3 border border-gray-500">Acciones</th>
-            </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-300">
-            <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Enchiladas</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Comida</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">100</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:shadow-outline-blue" onclick="location.href='/adminProductosIngredientes'">Más</button>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
-                    <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
-                </td>
-            </tr>
-            <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Chilaquiles</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Comida</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">110</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:shadow-outline-blue">Más</button>
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
-                    <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-{% endmacro %}
-
-
-{% macro TablaReservas() %}
-<div class="overflow-x-auto">
-    <table
-        class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
-        <thead class="bg-gray-300 text-black">
-            <tr>
-                <th class="px-6 py-3 border border-gray-500">Fecha</th>
-                <th class="px-6 py-3 border border-gray-500">Hora</th>
-                <th class="px-6 py-3 border border-gray-500">Cantidad de personas</th>
-                <th class="px-6 py-3 border border-gray-500">Comentarios</th>
-                <th class="px-6 py-3 border border-gray-500">Correo cliente</th>
-                <th class="px-6 py-3 border border-gray-500">Acciones</th>
-            </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-300">
-            <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">2023-05-05</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">00:10</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">10</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500"></td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">john.doe@gmail.com</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
-                    <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
-                </td>
-            </tr>
-            <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">2023-04-13</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">17:30</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">5</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">La sopa estaba muy caliente</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">jane.doe@gmail.com</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
-                    <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-{% endmacro %}
-
-{% macro TablaClientes() %}
-<div class="overflow-x-auto">
-    <table
-        class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
-        <thead class="bg-gray-300 text-black">
-            <tr>
-                <th class="px-6 py-3 border border-gray-500">Nombre</th>
-                <th class="px-6 py-3 border border-gray-500">Apellido</th>
-                <th class="px-6 py-3 border border-gray-500">Correo</th>
-                <th class="px-6 py-3 border border-gray-500">Telefono</th>
-                <th class="px-6 py-3 border border-gray-500">Acciones</th>
-            </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-300">
-            <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Cincos</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">501</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">cincos.501@gmail.com</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">5555555</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
-                    <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
-                </td>
-            </tr>
-            <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">Heavy</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">500</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">heavy.500@gmail.com</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">123456789</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
-                    <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-{% endmacro %}
-
-{% macro TablaVentas() %}
+{% macro TablaProductos(productos) %}
 <div class="overflow-x-auto">
     <table
         class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
         <thead class="bg-gray-300 text-black">
             <tr>
                 <th class="px-6 py-3 border border-gray-500">Id</th>
+                <th class="px-6 py-3 border border-gray-500">Producto</th>
+                <th class="px-6 py-3 border border-gray-500">Comida</th>
+                <th class="px-6 py-3 border border-gray-500">Precio</th>
+                <th class="px-6 py-3 border border-gray-500">Descripcion</th>
+                <th class="px-6 py-3 border border-gray-500">Imagen</th>
+                <th class="px-6 py-3 border border-gray-500">Ingredientes</th>
+                <th class="px-6 py-3 border border-gray-500">Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-300 tbodyProducto">
+            {% for producto in productos %}
+            <tr class="bg-gray-100 hover:bg-gray-200">
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ producto[0] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ producto[1] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ producto[2] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ producto[3] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ producto[4] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ producto[5] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                        <form action="adminProductosIngredientes" method="POST">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <input type="hidden" value="{{ producto[0] }}" name="idProducto">
+                            <button type="button"
+                                class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:shadow-outline-blue btnProductosIngredientes" data-id="{{ producto[0] }}">Más</button>
+                        </form>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                        <button type="button"
+                            class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
+                        <button type="button"
+                            class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endmacro %}
+
+
+{% macro TablaReservas(reservas) %}
+<div class="overflow-x-auto">
+    <table
+        class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
+        <thead class="bg-gray-300 text-black">
+            <tr>
+                <th class="px-6 py-3 border border-gray-500">Id</th>
+                <th class="px-6 py-3 border border-gray-500">Cantidad Personas</th>
+                <th class="px-6 py-3 border border-gray-500">Comentarios</th>
                 <th class="px-6 py-3 border border-gray-500">Fecha</th>
                 <th class="px-6 py-3 border border-gray-500">Hora</th>
-                <th class="px-6 py-3 border border-gray-500">Total</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-300">
+            {% for reserva in reservas %}
+                <tr class="bg-gray-100 hover:bg-gray-200">
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ reserva[0] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ reserva[1] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ reserva[2] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ reserva[3] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ reserva[4] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endmacro %}
+
+{% macro TablaClientes(Clientes) %}
+<div class="overflow-x-auto">
+    <table
+        class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
+        <thead class="bg-gray-300 text-black">
+            <tr>
+                <th class="px-6 py-3 border border-gray-500">Id</th>
+                <th class="px-6 py-3 border border-gray-500">Nombre</th>
+                <th class="px-6 py-3 border border-gray-500">Apellido Paterno</th>
+                <th class="px-6 py-3 border border-gray-500">Apellido Materno</th>
+                <th class="px-6 py-3 border border-gray-500">Correo</th>
+                <th class="px-6 py-3 border border-gray-500">TelefonoContacto</th>
                 <th class="px-6 py-3 border border-gray-500">Acciones</th>
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-300">
-            <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">1</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">2023-05-05</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">00:16</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">1500</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
-                    <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
-                </td>
+            {% for cliente in Clientes %}
+                <tr class="bg-gray-100 hover:bg-gray-200">
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ cliente[0] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ cliente[1] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ cliente[2] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ cliente[3] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ cliente[4] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ cliente[5] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
+                        <button type="button"
+                            class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
+                        <button type="button"
+                            class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endmacro %}
+
+{% macro TablaVentas(ventas) %}
+<div class="overflow-x-auto">
+    <table
+        class="table-auto w-3/4 text-center border-collapse border border-gray-500 mx-auto my-0 rounded-lg shadow-lg">
+        <thead class="bg-gray-300 text-black">
+            <tr>
+                <th class="px-6 py-3 border border-gray-500">Id</th>
+                <th class="px-6 py-3 border border-gray-500">MontoTotal</th>
+                <th class="px-6 py-3 border border-gray-500">MetodoPago</th>
+                <th class="px-6 py-3 border border-gray-500">idPedido</th>
             </tr>
-            <tr class="bg-gray-100 hover:bg-gray-200">
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">2</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">2023-03-13</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">14:30</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">2500</td>
-                <td class="px-6 py-4 whitespace-nowrap border border-gray-500">
-                    <button type="button"
-                        class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEditar }}">Editar</button>
-                    <button type="button"
-                        class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-r-lg focus:outline-none focus:shadow-outline-blue {{ classBtnEliminar }}">Eliminar</button>
-                </td>
-            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-300">
+            {% for venta in ventas %}
+                <tr class="bg-gray-100 hover:bg-gray-200">
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ venta[0] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ venta[1] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ venta[2] }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap border border-gray-500">{{ venta[3] }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>

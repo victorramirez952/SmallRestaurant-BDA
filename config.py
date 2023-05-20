@@ -6,7 +6,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
     MYSQL_HOST = 'localhost'
     MYSQL_USER = 'alfaUser'
-    MYSQL_PASSWORD = 'omegalambda'
+    MYSQL_PASSWORD = 'omega'
     MYSQL_DB = 'pro'
 
 

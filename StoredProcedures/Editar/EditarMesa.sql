@@ -16,6 +16,7 @@ BEGIN
         UPDATE Mesas SET Capacidad = p_Capacidad, Disponible = p_Disponible WHERE NumMesa = p_NumMesa;
         
         SELECT 'Registro actualizado correctamente.' AS mensaje;
+        COMMIT;
     ELSE
         SELECT 'No se encontró ningún registro con el NumMesa buscado.' AS mensaje;
     END IF;

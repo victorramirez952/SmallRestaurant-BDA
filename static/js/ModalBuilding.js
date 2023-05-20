@@ -1,19 +1,19 @@
 function genInput(header, valor) {
   let nums = [
-    "Salario",
-    "Stock",
-    "Número",
+    "Stock Ingrediente",
     "Capacidad",
-    "Precio",
     "Cantidad de personas",
     "Total",
   ];
+  let decimal = ["Salario", "Precio"];
   let selects = ["Disponibilidad", "Ingredientes", "Estado de la orden", "Estado de la entrega"];
   let dates = ["Fecha"];
   let times = ["Hora"];
   let tels = ["Telefono"];
   let emails = ["Correo"];
 
+  if(header == 'Id' || header == 'id') return inputHidden(header, valor);
+  if (decimal.includes(header)) return inputDecimal(header, valor);
   if (nums.includes(header)) return inputNumber(header, valor);
   if (selects.includes(header)) return genSelect(header, valor);
   if (dates.includes(header)) return inputDate(header, valor);
@@ -21,6 +21,13 @@ function genInput(header, valor) {
   if (tels.includes(header)) return inputTel(header, valor);
   if (emails.includes(header)) return inputEmail(header, valor);
   return inputText(header, valor);
+}
+
+function inputHidden(header, valor) {
+  return `
+              <input type="hidden" name="${header}"" id="input-${header}"
+                  class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green"
+                  value="${valor}">`
 }
 
 function inputText(header, valor) {
@@ -43,6 +50,16 @@ function inputNumber(header, valor) {
             </div>`;
 }
 
+function inputDecimal(header, valor) {
+  return `
+            <div class="mt-2">
+                <label for="${header}" class="block text-green-500 font-bold mb-2" id="valor-columna-1">${header}</label>
+                <input type="number" name="${header}" id="input-${header}" step="any" min="1"
+                    class="shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-green"
+                    value="${valor}" required>
+            </div>`;
+}
+
 function genSelect(header, valor) {
   if (header == "Disponibilidad") {
     let select = `
@@ -50,8 +67,8 @@ function genSelect(header, valor) {
           <label for="${header}" class="block text-green-500 font-bold mb-2">${header}</label>
           <select name="${header}" id="input-${header}"
               class="shadow border border-gray-300 rounded w-full py-2 px-0 sm:px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-blue">
-              <option value="Disponible">Disponible</option>
-              <option value="No Disponible">No disponible</option>
+              <option value="1" selected>Disponible</option>
+              <option value="0">No disponible</option>
           </select>
       </div>`;
     return setSelected(select, valor)

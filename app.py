@@ -285,7 +285,6 @@ def getDatosCliente():
 
 @app.route('/loginAdmin', methods=['GET', 'POST'])
 def loginAdmin():
-    session['previous_url'] = request.url
     global anchorLogin, anchorLogout, anchorIndex;
     anchorLogin = "/loginAdmin";
     anchorLogout = "/logoutAdmin";
@@ -294,14 +293,14 @@ def loginAdmin():
         user = User(0, request.form['correo'], request.form['password'])
         logged_user = ModelUser.login(db, user)
         if logged_user != None:
-            if logged_user.password:
+            if logged_user.Contrasenia:
                 login_user(logged_user)
                 return redirect(url_for('indexAdmin'))
             else:
-                flash("Invalid password...")
+                flash("Contraseña incorrecta")
                 return render_template('login.html')
         else:
-            flash("User not found...")
+            flash("Usuario no encontrado")
             return render_template('login.html')
     else:
         return render_template('login.html')
@@ -314,22 +313,74 @@ def logoutAdmin():
 @app.route('/indexAdmin', methods=['GET'])
 @login_required
 def indexAdmin():
+    global anchorIndex;
+    anchorIndex = "/indexAdmin";
+    anchorLogout = "/logoutAdmin";
     return render_template('adminTemplates/indexAdmin.html')
 
 @app.route('/adminPersonal', methods=['GET'])
 @login_required
 def adminPersonal():
-    return render_template('adminTemplates/adminPersonal.html')
+    global anchorIndex;
+    anchorIndex = '/indexAdmin';
+    anchorLogout = '/logoutAdmin';
+    try:
+        idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+        if idUsuario is None:
+            return redirect(url_for("clienteTemplates/indexAdmin"))
+        cursor = db.connection.cursor()
+        cursor.callproc('ConsultarPersonal')
+        personal = cursor.fetchall();
+        cursor.nextset()
+        cursor.close()
+        return render_template('adminTemplates/adminPersonal.html', personal=personal)
+    except Exception as e:
+            error_message = str(e.args[1])
+            print(error_message)
+            return redirect(url_for('indexAdmin'))
 
-@app.route('/adminProductosIngredientes', methods=['GET'])
+@app.route('/adminProductosIngredientes', methods=['POST'])
 @login_required
 def adminProductosIngredientes():
-    return render_template('adminTemplates/adminProductosIngredientes.html')
+    global anchorIndex;
+    anchorIndex = '/indexAdmin';
+    try:
+        idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+        if idUsuario is None:
+            return redirect(url_for("clienteTemplates/indexAdmin"))
+        idProducto = request.form['idProducto']
+        print(idProducto)
+        cursor = db.connection.cursor()
+        cursor.callproc('ConsultarProductosIngredientes', [idProducto])
+        ingredientes = cursor.fetchall();
+        print(ingredientes)
+        cursor.nextset()
+        cursor.close()
+        return render_template('adminTemplates/adminProductosIngredientes.html', ingredientes=ingredientes)
+    except Exception as e:
+            error_message = str(e.args[1])
+            print(error_message)
+            return redirect(url_for('indexAdmin'))
 
 @app.route('/adminMesas', methods=['GET'])
 @login_required
 def adminMesas():
-    return render_template('adminTemplates/adminMesas.html')
+    global anchorIndex;
+    anchorIndex = '/indexAdmin';
+    try:
+        idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+        if idUsuario is None:
+            return redirect(url_for("clienteTemplates/indexAdmin"))
+        cursor = db.connection.cursor()
+        cursor.callproc('ConsultarMesas')
+        mesas = cursor.fetchall();
+        cursor.nextset()
+        cursor.close()
+        return render_template('adminTemplates/adminMesas.html', mesas=mesas)
+    except Exception as e:
+            error_message = str(e.args[1])
+            print(error_message)
+            return redirect(url_for('indexAdmin'))
 
 @app.route('/perfil', methods=['GET'])
 @login_required
@@ -338,29 +389,422 @@ def perfil():
 
 @app.route('/adminIngredientes', methods=['GET'])
 @login_required
-def adminIngrdientes():
-    return render_template('adminTemplates/adminIngredientes.html')
+def adminIngredientes():
+    global anchorIndex;
+    anchorIndex = '/indexAdmin';
+    try:
+        idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+        if idUsuario is None:
+            return redirect(url_for("clienteTemplates/indexAdmin"))
+        cursor = db.connection.cursor()
+        cursor.callproc('ConsultarIngredientes')
+        ingredientes = cursor.fetchall();
+        cursor.nextset()
+        cursor.close()
+        return render_template('adminTemplates/adminIngredientes.html', ingredientes=ingredientes)
+    except Exception as e:
+            error_message = str(e.args[1])
+            print(error_message)
+            return redirect(url_for('indexAdmin'))
 
 @app.route('/adminProductos', methods=['GET'])
 @login_required
 def adminProductos():
-    return render_template('adminTemplates/adminProductos.html')
+    global anchorIndex;
+    anchorIndex = '/indexAdmin';
+    try:
+        idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+        if idUsuario is None:
+            return redirect(url_for("clienteTemplates/indexAdmin"))
+        cursor = db.connection.cursor()
+        cursor.callproc('ConsultarProductos')
+        productos = cursor.fetchall();
+        cursor.nextset()
+        cursor.close()
+        return render_template('adminTemplates/adminProductos.html', productos=productos)
+    except Exception as e:
+        error_message = str(e.args[1])
+        print(error_message)
+        return redirect(url_for('indexAdmin'))
 
 @app.route('/adminReservas', methods=['GET'])
 @login_required
 def adminReservas():
-    return render_template('adminTemplates/adminReservas.html')
+    global anchorIndex;
+    anchorIndex = '/indexAdmin';
+    try:
+        idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+        if idUsuario is None:
+            return redirect(url_for("clienteTemplates/indexCliente"))
+        cursor = db.connection.cursor()
+        cursor.callproc('ConsultarReservas')
+        reservas = cursor.fetchall();
+        cursor.nextset()
+        cursor.close()
+        return render_template('adminTemplates/adminReservas.html', reservas=reservas)
+    except Exception as e:
+            error_message = str(e.args[1])
+            print(error_message)
+            return redirect(url_for('indexAdmin'))
 
 @app.route('/adminClientes', methods=['GET'])
 @login_required
 def adminClientes():
-    return render_template('adminTemplates/adminClientes.html')
-
+    global anchorIndex;
+    anchorIndex = '/indexAdmin';
+    try:
+        idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+        if idUsuario is None:
+            return redirect(url_for("clienteTemplates/indexCliente"))
+        cursor = db.connection.cursor()
+        cursor.callproc('ConsultarClientes')
+        clientes = cursor.fetchall();
+        cursor.nextset()
+        cursor.close()
+        return render_template('adminTemplates/adminClientes.html', clientes=clientes)
+    except Exception as e:
+            error_message = str(e.args[1])
+            print(error_message)
+            return redirect(url_for('indexAdmin'))
 
 @app.route('/adminVentas', methods=['GET'])
 @login_required
 def adminVentas():
-    return render_template('adminTemplates/adminVentas.html')
+    global anchorIndex;
+    anchorIndex = '/indexAdmin';
+    anchorLogout = '/logoutAdmin';
+    try:
+        idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+        if idUsuario is None:
+            return redirect(url_for("clienteTemplates/indexCliente"))
+        cursor = db.connection.cursor()
+        cursor.callproc('ConsultarVentas')
+        ventas = cursor.fetchall();
+        cursor.nextset()
+        cursor.close()
+        return render_template('adminTemplates/adminVentas.html', ventas=ventas)
+    except Exception as e:
+            error_message = str(e.args[1])
+            print(error_message)
+            return redirect(url_for('indexAdmin'))
+
+@app.route('/editarCliente', methods=['POST'])
+def editarCliente():
+    if request.method == 'POST':
+        try:
+            Idcliente = request.form['Id'];
+            nombre = request.form['Nombre'];
+            apellidoPaterno = request.form['Apellido Paterno'];
+            apellidoMaterno = request.form['Apellido Materno'];
+            correo = request.form['Correo'];
+            telefonoContacto = request.form['TelefonoContacto'];
+            print(Idcliente)
+            print(nombre)
+            print(apellidoPaterno)
+            print(apellidoMaterno)
+            print(correo)
+            print(telefonoContacto)
+            cursor = db.connection.cursor()
+            cursor.callproc('ConsultarIdUsuarioIdCliente', [Idcliente])
+            resultado = cursor.fetchone()[0];
+            idUsuario = resultado;
+            cursor.nextset()
+            print(idUsuario);
+            cursor.callproc('EditarCliente', [Idcliente, nombre, apellidoPaterno, apellidoMaterno, telefonoContacto, idUsuario]);
+            cursor.nextset()
+            cursor.close()
+            return redirect(url_for('adminClientes'))
+        except Exception as e:
+                error_message = str(e.args[1])  # Accede al primer argumento de la excepción
+                # flash(error_message)
+                return redirect(url_for('indexAdmin'))
+
+@app.route('/eliminarCliente', methods=['POST'])
+def eliminarCliente():
+    if request.method == 'POST':
+        try:
+            Idcliente = request.form['Id'];
+            cursor = db.connection.cursor()
+            cursor.callproc('ConsultarIdUsuarioIdCliente', [Idcliente])
+            resultado = cursor.fetchone()[0];
+            idUsuario = resultado;
+            cursor.nextset()
+            cursor.callproc('EliminarCliente', [Idcliente, idUsuario]);
+            cursor.nextset()
+            cursor.close()
+            return redirect(url_for('adminClientes'))
+        except Exception as e:
+                error_message = str(e.args[1])  # Accede al primer argumento de la excepción
+                # flash(error_message)
+                return redirect(url_for('indexAdmin'))
+
+@app.route('/editarIngrediente', methods=['POST'])
+def editarIngrediente():
+    if request.method == 'POST':
+        try:
+            IdIngrediente = request.form['Id'];
+            ingrediente = request.form['Nombre Ingrediente'];
+            stock = request.form['Stock Ingrediente'];
+            tipoUnidad = request.form['Tipo Unidad'];
+            cursor = db.connection.cursor()
+            cursor.callproc('EditarIngrediente', [IdIngrediente, ingrediente, stock, tipoUnidad]);
+            cursor.nextset()
+            cursor.close()
+            return redirect(url_for('adminIngredientes'))
+        except Exception as e:
+                error_message = str(e.args[1])  # Accede al primer argumento de la excepción
+                print(error_message)
+                return redirect(url_for('adminIngredientes'))
+
+@app.route('/eliminarIngrediente', methods=['POST'])
+def eliminarIngrediente():
+    if request.method == 'POST':
+        try:
+            IdIngrediente = request.form['Id'];
+            print(IdIngrediente)
+            cursor = db.connection.cursor()
+            cursor.callproc('EliminarIngrediente', [IdIngrediente]);
+            cursor.nextset()
+            cursor.close()
+            return redirect(url_for('adminIngredientes'))
+        except Exception as e:
+                error_message = str(e.args[1])  # Accede al primer argumento de la excepción
+                print(error_message)
+                return redirect(url_for('indexAdmin'))
+
+@app.route('/agregarIngrediente', methods=['POST'])
+@login_required
+def agregarIngrediente():
+    global anchorIndex;
+    anchorIndex = '/indexAdmin';
+    try:
+        idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+        if idUsuario is None:
+            return redirect(url_for("clienteTemplates/indexAdmin"))
+        ingrediente = request.form['Nombre Ingrediente'];
+        stock = request.form['Stock Ingrediente'];
+        tipoUnidad = request.form['Tipo Unidad'];
+        print(ingrediente)
+        print(stock)
+        print(tipoUnidad)
+        cursor = db.connection.cursor()
+        cursor.callproc('RegistrarIngrediente', [ingrediente, stock, tipoUnidad, ...])
+        ingredientes = cursor.fetchall();
+        print(ingredientes)
+        cursor.nextset()
+        cursor.close()
+        return redirect(url_for('adminIngredientes'))
+    except Exception as e:
+            error_message = str(e.args[1])
+            print(error_message)
+            return redirect(url_for('indexAdmin'))
+
+@app.route('/editarMesa', methods=['POST'])
+def editarMesa():
+    if request.method == 'POST':
+        try:
+            numMesa = request.form['Número'];
+            capacidad = request.form['Capacidad'];
+            disponibilidad = request.form['Disponibilidad'];
+            print(numMesa)
+            print(capacidad)
+            print(disponibilidad)
+            cursor = db.connection.cursor()
+            cursor.callproc('EditarMesa', [numMesa, capacidad, disponibilidad]);
+            cursor.nextset()
+            cursor.close()
+            return redirect(url_for('adminMesas'))
+        except Exception as e:
+                error_message = str(e.args[1])  # Accede al primer argumento de la excepción
+                print(error_message)
+                return redirect(url_for('adminIndex'))
+
+@app.route('/eliminarMesa', methods=['POST'])
+def eliminarMesa():
+    if request.method == 'POST':
+        try:
+            numMesa = request.form['Número'];
+            cursor = db.connection.cursor()
+            cursor.callproc('EliminarMesa', [numMesa]);
+            cursor.nextset()
+            cursor.close()
+            return redirect(url_for('adminMesas'))
+        except Exception as e:
+                error_message = str(e.args[1])  # Accede al primer argumento de la excepción
+                print(error_message)
+                return redirect(url_for('indexAdmin'))
+
+@app.route('/agregarMesa', methods=['POST'])
+@login_required
+def agregarMesa():
+    global anchorIndex;
+    anchorIndex = '/indexAdmin';
+    try:
+        idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+        if idUsuario is None:
+            return redirect(url_for("clienteTemplates/indexAdmin"))
+        numMesa = request.form['Número'];
+        capacidad = request.form['Capacidad'];
+        disponibilidad = request.form['Disponibilidad'];
+        cursor = db.connection.cursor()
+        cursor.callproc('InsertarMesa', [numMesa, capacidad, disponibilidad, ...])
+        cursor.nextset()
+        cursor.close()
+        db.connection.commit()
+        return redirect(url_for('adminMesas'))
+    except Exception as e:
+            error_message = str(e.args[1])
+            print(error_message)
+            return redirect(url_for('indexAdmin'))
+
+@app.route('/editarPersonal', methods=['POST'])
+def editarPersonal():
+    if request.method == 'POST':
+        try:
+            nombre = request.form['Nombre'];
+            apellidoPaterno = request.form['Apellido Paterno'];
+            apellidoMaterno = request.form['Apellido Materno'];
+            salario = request.form['Salario'];
+            correo = request.form['Correo'];
+            tipoUsuario = request.form['Tipo Usuario'];
+            if tipoUsuario not in ['Mesero', 'Repartidor', 'Chef']:
+                return redirect(url_for('indexAdmin'))
+            cursor = db.connection.cursor()
+            cursor.callproc('ConsultarIdUsuarioFullname', [nombre, apellidoPaterno, apellidoMaterno])
+            resultado = cursor.fetchone()[0];
+            idUsuario = resultado;
+            cursor.nextset()
+            cursor.close()
+            print(idUsuario);
+            cursor = db.connection.cursor()
+            cursor.callproc('EditarPersonal', [idUsuario, nombre, apellidoPaterno, apellidoMaterno, salario, correo, tipoUsuario.strip()]);
+            cursor.nextset()
+            cursor.close()
+            db.connection.commit()
+            return redirect(url_for('adminPersonal'))
+        except Exception as e:
+            error_message = str(e.args[1])  # Accede al primer argumento de la excepción
+            print(error_message)
+            return redirect(url_for('indexAdmin'))
+
+@app.route('/eliminarPersonal', methods=['POST'])
+def eliminarPersonal():
+    if request.method == 'POST':
+        try:
+            idUsuario = request.form['Id'];
+            print(idUsuario)
+            cursor = db.connection.cursor()
+            cursor.callproc('EliminarPersonal', [idUsuario]);
+            cursor.nextset()
+            cursor.close()
+            return redirect(url_for('adminPersonal'))
+        except Exception as e:
+            error_message = str(e.args[1])  # Accede al primer argumento de la excepción
+            print(error_message)
+            return redirect(url_for('indexAdmin'))
+
+@app.route('/agregarPersonal', methods=['POST'])
+@login_required
+def agregarPersonal():
+    global anchorIndex;
+    anchorIndex = '/indexAdmin';
+    try:
+        idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+        if idUsuario is None:
+            return redirect(url_for("clienteTemplates/indexAdmin"))
+        nombre = request.form['Nombre'];
+        apellidoPaterno = request.form['Apellido Paterno'];
+        apellidoMaterno = request.form['Apellido Materno'];
+        salario = request.form['Salario'];
+        correo = request.form['Correo'];
+        tipoUsuario = request.form['Tipo Usuario'];
+        if tipoUsuario not in ['Mesero', 'Repartidor', 'Chef']:
+            return redirect(url_for('indexAdmin'))
+        cursor = db.connection.cursor()
+        cursor.callproc('RegistrarPersonal', [nombre, apellidoPaterno, apellidoMaterno, salario, correo, tipoUsuario, ...])
+        cursor.nextset()
+        cursor.close()
+        db.connection.commit()
+        return redirect(url_for('adminPersonal'))
+    except Exception as e:
+            error_message = str(e.args[1])
+            print(error_message)
+            return redirect(url_for('indexAdmin'))
+
+@app.route('/editarProducto', methods=['POST'])
+def editarProducto():
+    if request.method == 'POST':
+        try:
+            idProducto = request.form['Id'];
+            producto = request.form['Producto'];
+            comida = request.form['Comida'];
+            precio = request.form['Precio'];
+            descripcion = request.form['Descripcion'];
+            imagen = request.form['Imagen'];
+            print(idProducto)
+            print(producto)
+            print(comida)
+            print(precio)
+            print(descripcion)
+            print(imagen)
+            cursor = db.connection.cursor()
+            cursor.callproc('EditarProducto', [idProducto, producto, comida, precio, descripcion, imagen]);
+            cursor.nextset()
+            cursor.close()
+            db.connection.commit()
+            return redirect(url_for('adminProductos'))
+        except Exception as e:
+                error_message = str(e.args[1])  # Accede al primer argumento de la excepción
+                print(error_message)
+                return redirect(url_for('indexAdmin'))
+
+@app.route('/eliminarProducto', methods=['POST'])
+def eliminarProducto():
+    if request.method == 'POST':
+        try:
+            idProducto = request.form['Id'];
+            print(idProducto)
+            cursor = db.connection.cursor()
+            cursor.callproc('EliminarProducto', [idProducto]);
+            cursor.nextset()
+            cursor.close()
+            db.connection.commit()
+            return redirect(url_for('adminProductos'))
+        except Exception as e:
+            error_message = str(e.args[1])  # Accede al primer argumento de la excepción
+            print(error_message)
+            return redirect(url_for('indexAdmin'))
+
+@app.route('/agregarProducto', methods=['POST'])
+@login_required
+def agregarProducto():
+    global anchorIndex;
+    anchorIndex = '/indexAdmin';
+    try:
+        idUsuario = current_user.id if current_user and hasattr(current_user, 'id') else None
+        if idUsuario is None:
+            return redirect(url_for("clienteTemplates/indexAdmin"))
+        producto = request.form['Producto'];
+        comida = request.form['Comida'];
+        precio = request.form['Precio'];
+        descripcion = request.form['Descripcion'];
+        imagen = request.form['Imagen'];
+        print(producto)
+        print(comida)
+        print(precio)
+        print(descripcion)
+        print(imagen)
+        cursor = db.connection.cursor()
+        cursor.callproc('InsertarProducto', [producto, comida, precio, descripcion, imagen, ...])
+        cursor.nextset()
+        cursor.close()
+        db.connection.commit()
+        return redirect(url_for('adminProductos'))
+    except Exception as e:
+            error_message = str(e.args[1])
+            print(error_message)
+            return redirect(url_for('indexAdmin'))
+
 
 # *******************CHEF****************************************
 

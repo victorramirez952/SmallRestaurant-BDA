@@ -11,7 +11,7 @@ $(document).ready(function () {
     let i = 0;
     header.each(function (index, celda) {
       var valor = $(celda).text();
-      if (valor != "Acciones" && valor != "Id" && valor != "Ingredientes") {
+      if (valor != "Acciones" && valor != "Ingredientes") {
         headers.push(valor);
         data.push(celdas[i].innerHTML);
       }
@@ -34,24 +34,24 @@ $(document).ready(function () {
   // *******************************************
   //  Btn Eliminar
   $(".btnModalTablaEliminar").click(function () {
+    var fila = $(this).closest("tr");
+    var celdas = fila.find("td");
     var header = $(this).closest("table").find("thead tr th");
-
     var data = [];
     var headers = [];
 
     let i = 0;
     header.each(function (index, celda) {
       var valor = $(celda).text();
-      if (valor != "Acciones" && valor != "Id" && valor != "Ingredientes") {
+      if (valor != "Acciones" && valor != "Ingredientes") {
         headers.push(valor);
+        data.push(celdas[i].innerHTML);
       }
       i++;
     });
 
-    // for (i = 0; i < data.length; i++) {
-    //   $("#modalEliminarContent").append(genInput(headers[i], data[i]));
-    // }
-
+    $("#idRegistro").attr('name', headers[0]).val(data[0]);
+    
     // Show the modal
     $("#modalTablaEliminar").css("display", "flex");
   });
@@ -81,6 +81,7 @@ $(document).ready(function () {
   });
 
   $(".btnCloseModalTablaAgregar").click(function () {
+
     $("#modalTablaAgregarContent").empty();
     $("#modalTablaAgregar").hide();
   });
@@ -168,4 +169,38 @@ $(document).ready(function () {
       $("#formModalAgregarCarrito").submit();  // Enviar el formulario si es válido
     }    
   });
+
+        //   ***************************************
+      //   ***************************************
+      $(".btnAdminEditar").click(function(){
+        let formulario = $(this).closest("form")
+        formulario[0].reportValidity();
+        if (formulario[0].checkValidity()) {
+          formulario.submit();  // Enviar el formulario si es válido
+        }
+      });
+
+      //   ***************************************
+      //   ***************************************
+      $(".btnAdminEliminar").click(function(){
+        let formulario = $(this).closest("form")
+        let nameA = $("#idRegistro").attr('name');
+        let valueA = $("#idRegistro").val();
+        formulario.find(".inputFormIdRegistro").attr('name', nameA).val(valueA);
+        formulario.submit();
+      });
+
+      //   ***************************************
+      //   ***************************************
+      $(".btnAdminAgregar").click(function(event){
+        event.preventDefault()
+        let formulario = $(this).closest("form")
+        let nameA = $("#idRegistro").attr('name');
+        let valueA = $("#idRegistro").val();
+        formulario.find(".inputFormIdRegistro").attr('name', nameA).val(valueA);
+        formulario[0].reportValidity();
+        if (formulario[0].checkValidity()) {
+          formulario.submit();  // Enviar el formulario si es válido
+        }
+      });
 });

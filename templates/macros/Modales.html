@@ -1,72 +1,83 @@
-{% macro ModalTablaEditar() %}
+{% macro ModalTablaEditar(action) %}
 <!-- Main modal -->
 <div id="modalTablaEditar" tabindex="-1" aria-hidden="true"
     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen max-h-full bg-gray-600/50 justify-center items-center">
     <div class="relative mx-auto my-4 w-full md:w-4/12 max-h-full bg-green-600">
         <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <button type="button"
-                class="w-1/12 absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 rounded-lg text-sm p-1.5 inline-flex items-center justify-center dark:hover:bg-gray-800 dark:hover:text-white btnCloseModalTablaEditar">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="px-6 py-6 lg:px-8">
-                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white text-center">Agregar registro</h3>
-                <form class="flex flex-col justify-between" action="#">
-                    <div id="modalTablaEditarContent"></div>
-                    <button type="submit"
-                        class="w-full bg-blue-500 text-white mx-auto hover:bg-blue-700 mt-8 px-4 py-2 rounded">Agregar</button>
-                </form>
+        <form action="{{ action }}" method="POST" class="formularioModalEditar">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button"
+                    class="w-1/12 absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 rounded-lg text-sm p-1.5 inline-flex items-center justify-center dark:hover:bg-gray-800 dark:hover:text-white btnCloseModalTablaEditar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="px-6 py-6 lg:px-8">
+                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white text-center">Agregar registro</h3>
+                    <form class="flex flex-col justify-between" action="#">
+                        <div id="modalTablaEditarContent"></div>
+                        <button type="button"
+                            class="w-full bg-blue-500 text-white mx-auto hover:bg-blue-700 mt-8 px-4 py-2 rounded btnAdminEditar">Aceptar</button>
+                    </form>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 {% endmacro %}
 
-{% macro ModalTablaEliminar() %}
+{% macro ModalTablaEliminar(eliminarRegistro) %}
 <div id="modalTablaEliminar" tabindex="-1" class="fixed top-0 left-0 right-0 hidden z-50 p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-full max-h-screen bg-gray-600/50 justify-center items-center">
     <div class="w-full sm:w-4/12 max-h-full">
         <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700" id="modalEliminarContent">
-            <button type="button"
-                class="w-1/12 absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 rounded-lg text-sm p-1.5 inline-flex items-center justify-center dark:hover:bg-gray-800 dark:hover:text-white btnCloseModalTablaEliminar">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="p-6 text-center">
+        <form action="{{ eliminarRegistro }}" method="POST" class="formModalEliminar">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="Id" value="" class="inputFormIdRegistro">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700" id="modalEliminarContent">
                 <button type="button"
-                    class="mx-auto mb-4 text-gray-400 w-14 dark:text-gray-200">
-                    <i class="fa-solid fa-circle-exclamation h-12"></i>
+                    class="w-1/12 absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 rounded-lg text-sm p-1.5 inline-flex items-center justify-center dark:hover:bg-gray-800 dark:hover:text-white btnCloseModalTablaEliminar">
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
-                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">¿Estas seguro de eliminar este elemento?</h3>
-                <button data-modal-hide="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 btnCloseModalTablaEliminar">No, cancelar</button>
-                <button data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 btnCloseModalTablaEliminar">
-                    Sí, estoy seguro
-                </button>
+                <div class="p-6 text-center">
+                    <button type="button"
+                        class="mx-auto mb-4 text-gray-400 w-14 dark:text-gray-200">
+                        <i class="fa-solid fa-circle-exclamation h-12"></i>
+                    </button>
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">¿Estas seguro de eliminar este elemento?</h3>
+                    <button data-modal-hide="popup-modal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 btnCloseModalTablaEliminar">No, cancelar</button>
+                    <button data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2 btnAdminEliminar">
+                        Sí, estoy seguro
+                    </button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 {% endmacro %}
 
-{% macro ModalTablaAgregar() %}
+{% macro ModalTablaAgregar(agregarRegistro) %}
 <!-- Main modal -->
 <div id="modalTablaAgregar" tabindex="-1" aria-hidden="true"
     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-screen max-h-full bg-gray-600/50 justify-center items-center">
     <div class="relative mx-auto my-4 w-full md:w-4/12 max-h-full bg-green-600">
         <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <button type="button"
-                class="w-1/12 absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 rounded-lg text-sm p-1.5 inline-flex items-center justify-center dark:hover:bg-gray-800 dark:hover:text-white btnCloseModalTablaAgregar">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="px-6 py-6 lg:px-8">
-                <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white text-center">Agregar registro</h3>
-                <form class="flex flex-col justify-between" action="#">
-                    <div id="modalTablaAgregarContent"></div>
-                    <button type="button"
-                        class="w-full bg-blue-500 text-white mx-auto hover:bg-blue-700 mt-8 px-4 py-2 rounded btnCloseModalTablaAgregar">Agregar</button>
-                </form>
+        <form action="{{ agregarRegistro }}" method="POST" class="formModalEliminar">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="Id" value="" class="inputFormIdRegistro">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button"
+                    class="w-1/12 absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 rounded-lg text-sm p-1.5 inline-flex items-center justify-center dark:hover:bg-gray-800 dark:hover:text-white btnCloseModalTablaAgregar">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="px-6 py-6 lg:px-8">
+                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white text-center">Agregar registro</h3>
+                    <form class="flex flex-col justify-between" action="#">
+                        <div id="modalTablaAgregarContent"></div>
+                        <button type="button"
+                            class="w-full bg-blue-500 text-white mx-auto hover:bg-blue-700 mt-8 px-4 py-2 rounded btnAdminAgregar">Agregar</button>
+                    </form>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 {% endmacro %}

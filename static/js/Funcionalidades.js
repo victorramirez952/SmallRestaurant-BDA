@@ -317,5 +317,10 @@ $(document).ready(function () {
           formulario[0].submit();  // Enviar el formulario si es válido
         }
       });
+
+      $(".btnProductosIngredientes").click(function(){
+        // $(this).closest("form").submit();
+      });
+
   });
   

@@ -17,7 +17,7 @@
 		<h1 class="text-lg text-center font-bold my-4">Enchiladas</h1>
         {% import "macros/Tablas.html" as macroTablas %}
 		<div>
-			{{ macroTablas.TablaIngredientesProductos() }}
+			{{ macroTablas.TablaIngredientesProductos(ingredientes) }}
 			{{ macroBotones.BotonAgregar() }}
 		</div>
 		{{ macroModales.ModalTablaEditar() }}
@@ -26,5 +26,8 @@
 	</body>
 </html>
 </html>
+<script>const csrfToken = "{{ csrf_token() }}";</script>
 <script src="../../static/js/ModalBuilding.js"></script>
+<script src="../../static/js/Fetchs.js"></script>
 <script src="../../static/js/Modales.js"></script>
+<script src="../../static/js/Funcionalidades.js"></script>

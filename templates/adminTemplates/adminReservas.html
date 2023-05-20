@@ -9,6 +9,7 @@
 		<title>Admin - Reservas</title>
 	</head>
 	<body>
+		<input type="hidden" value="" id="idRegistro">
         {% import "macros/Navbar.html" as macroNavbar %}
         {% import "macros/Botones.html" as macroBotones %}
 		{% import "macros/Modales.html" as macroModales %}
@@ -16,12 +17,8 @@
 		<h1 class="text-lg text-center font-bold my-4">Reservas</h1>
         {% import "macros/Tablas.html" as macroTablas %}
 		<div>
-			{{ macroTablas.TablaReservas() }}
-			{{ macroBotones.BotonAgregar() }}
+			{{ macroTablas.TablaReservas(reservas) }}
 		</div>
-		{{ macroModales.ModalTablaEditar() }}
-		{{ macroModales.ModalTablaEliminar() }}
-		{{ macroModales.ModalTablaAgregar() }}
 	</body>
 </html>
 <script src="../../static/js/ModalBuilding.js"></script>

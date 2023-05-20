@@ -97,7 +97,7 @@ CREATE TABLE Chefs (
     ApellidoPaterno VARCHAR(100) NOT NULL,
     ApellidoMaterno VARCHAR(100) NOT NULL,
     Salario DECIMAL(10, 2) NOT NULL,
-    idEspecialidad INT NOT NULL,
+    idEspecialidad INT NULL,
     idUsuario INT NOT NULL,
     UNIQUE(idUsuario),
     FOREIGN KEY (idEspecialidad) REFERENCES Especialidades(idEspecialidad) ON DELETE CASCADE,
@@ -110,7 +110,7 @@ CREATE TABLE Repartidores (
     ApellidoPaterno VARCHAR(100) NOT NULL,
     ApellidoMaterno VARCHAR(100) NOT NULL,
     Salario DECIMAL(10, 2) NOT NULL,
-    MatriculaVehiculo VARCHAR(20) NOT NULL,
+    MatriculaVehiculo VARCHAR(20) NULL,
     idUsuario INT NOT NULL,
     UNIQUE(idUsuario),
     FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario) ON DELETE CASCADE
